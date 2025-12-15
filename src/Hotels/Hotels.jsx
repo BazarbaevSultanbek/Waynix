@@ -3,7 +3,7 @@ import { IconChevronDown, IconCheck, IconSearch } from "@tabler/icons-react";
 import { useEffect, useMemo, useState } from "react";
 import { Group, SimpleGrid } from "@mantine/core";
 import "../utils/styles/Hotels.scss";
-import Banner from "../Main/components/banner";
+import Banner from "../Main/components/Banner";
 import hotels from "../http/hotels";
 import HotelCard from "./HotelCard";
 
