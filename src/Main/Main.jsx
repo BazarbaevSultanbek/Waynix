@@ -3,7 +3,7 @@ import Waynix from "./components/Waynix";
 import Categories from "./components/Categories";
 import Corporate from "./components/Corporate";
 import Footer from "./components/Footer";
-import Banner from "./components/banner";
+import Banner from "./components/Banner";
 
 const Main = () => {
   return (
