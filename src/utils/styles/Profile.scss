@@ -1,0 +1,462 @@
+$main-color: #f54a00;
+$dark-color: #111828;
+$blue-color: #165dfc;
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button,
+input {
+  outline: none;
+  cursor: pointer;
+}
+
+.Profile{
+  .container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 15px;
+}
+}
+
+
+
+.edit-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.avatar-preview img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+
+/* ===========================
+      GLOBAL WRAPPER
+   =========================== */
+
+.profile-wrapper {
+  background: #f7f9fc;
+  min-height: 100vh;
+  padding-bottom: 50px;
+  font-family: "Inter", sans-serif;
+}
+
+/* ===========================
+        HEADER SECTION
+   =========================== */
+
+.profile-header {
+  padding: 40px 0;
+  border-bottom: 1px solid #e6ebf2;
+
+  .profile-header-content {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    .profile-header-avatar {
+      width: 120px;
+      height: 120px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #fff;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    .profile-header-info {
+      h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0;
+        color: #1f1f1f;
+      }
+
+      .profile-location {
+        font-size: 14px;
+        color: #666;
+        margin-top: 5px;
+      }
+
+      .profile-bio {
+        font-size: 15px;
+        color: #444;
+        margin: 10px 0 15px 0;
+        max-width: 600px;
+      }
+
+      .edit-profile-btn {
+        background: #0057ff;
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        i {
+          font-size: 14px;
+        }
+
+        &:hover {
+          background: #0047d6;
+        }
+      }
+    }
+  }
+}
+
+/* ===========================
+           TABS
+   =========================== */
+
+.profile-tabs {
+  padding: 10px 0;
+  border-bottom: 1px solid #e6e9f0;
+
+  ul {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 10px 14px;
+      font-size: 15px;
+      cursor: pointer;
+      color: #444;
+      border-radius: 6px;
+      transition: 0.2s ease;
+
+      &.active,
+      &:hover {
+        background: #eef3ff;
+        color: #0057ff;
+        font-weight: 600;
+      }
+    }
+  }
+
+
+  .m_89d33d6d{
+    background: #f3f2f2;
+    width: 90%;
+    margin: auto;
+    border-radius: 30px;
+
+    .m_c3381914{
+      border-radius: 30px;
+    }
+  }
+}
+
+/* ===========================
+           STATS CARDS
+   =========================== */
+
+.profile-stats {
+  padding: 30px 0;
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 0 15px;
+
+    .stat-card {
+      padding: 20px;
+      border-radius: 16px;
+      color: #fff;
+      text-align: start;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+
+      .fa-calendar,
+      .fa-location-dot,
+      .fa-message,
+      .fa-bookmark {
+        font-size: 35px;
+      }
+
+      h3 {
+        font-size: 32px;
+        margin-bottom: 6px;
+        font-weight: 700;
+      }
+
+      p {
+        font-size: 17px;
+        font-weight: 400;
+      }
+
+      &.blue {
+        background: #155dfc;
+      }
+      &.green {
+        background: #00a63e;
+      }
+      &.orange {
+        background: #f54a00;
+      }
+      &.pink {
+        background: #e60076;
+      }
+    }
+
+    /* Contact card */
+    .contact-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid #e6eaf2;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+
+      h4 {
+        font-size: 16px;
+        margin-bottom: 12px;
+        font-weight: 700;
+        color: #333;
+      }
+
+      p {
+        font-size: 15px;
+        color: #444;
+        margin: 6px 0;
+      }
+    }
+  }
+}
+
+/* ===========================
+      UPCOMING TRAVELS
+   =========================== */
+
+.upcoming-section {
+  margin-top: 20px;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .upcoming-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .upcoming-item {
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border: 1px solid #e6eaf2;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+      position: relative;
+
+      img {
+        width: 120px;
+        height: 90px;
+        border-radius: 12px;
+        object-fit: cover;
+      }
+
+      .travel-info {
+        flex: 1;
+
+        .tag {
+          font-size: 13px;
+          padding: 3px 10px;
+          border-radius: 50px;
+          color: #fff;
+          display: inline-block;
+          margin-bottom: 4px;
+
+          &.mehmonxona {
+            background: #2563eb;
+          }
+          &.gid {
+            background: #0ea5e9;
+          }
+        }
+
+        h4 {
+          font-size: 17px;
+          font-weight: 700;
+          margin: 0;
+        }
+
+        .city {
+          color: #666;
+          margin: 3px 0;
+        }
+
+        .date {
+          font-size: 14px;
+          color: #444;
+        }
+      }
+
+      .price {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .status {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        font-size: 13px;
+        padding: 3px 10px;
+        border-radius: 50px;
+        font-weight: 600;
+
+        &.tasdiqlangan {
+          background: #d1fae5;
+          color: #065f46;
+        }
+        &.kutilyapti {
+          background: #fef3c7;
+          color: #92400e;
+        }
+      }
+    }
+  }
+}
+
+/* ===========================
+         FAVORITE PLACES
+   =========================== */
+
+.favorite-section {
+  margin-top: 40px;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .favorite-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+
+    .favorite-card {
+      background: #fff;
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px solid #e6eaf2;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      position: relative;
+      cursor: pointer;
+      transition: 0.2s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+      }
+
+      img {
+        width: 100%;
+        height: 120px;
+        border-radius: 12px;
+        object-fit: cover;
+        margin-bottom: 8px;
+      }
+
+      p {
+        margin: 0;
+        font-weight: 600;
+      }
+
+      i {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: #e11d48;
+      }
+    }
+  }
+}
+
+
+.settings-section {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+
+/* ===========================
+         RESPONSIVE
+   =========================== */
+
+@media (max-width: 992px) {
+  .profile-stats .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .favorite-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-stats .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .favorite-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upcoming-item {
+    flex-direction: column;
+    text-align: center;
+
+    img {
+      width: 100% !important;
+      height: 160px !important;
+    }
+
+    .status {
+      position: static;
+      margin-top: 10px;
+    }
+  }
+}
