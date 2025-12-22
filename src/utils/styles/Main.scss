@@ -95,15 +95,17 @@ Button {
 // //////////// WAYNIX ///////////////////// WAYNIX ////////////////////
 
 .Waynix {
-  background: #f5f5f5;
   background: linear-gradient(
     177deg,
-    rgba(245, 245, 245, 0.24) 20%,
-    rgba(255, 234, 201, 1) 69%,
-    rgba(255, 234, 201, 0.1) 94%
+    rgba(15, 23, 42, 0.05) 10%,   // very subtle dark-blue at top
+    rgba(37, 99, 235, 0.08) 40%,   // light blue middle
+    rgba(124, 58, 237, 0.05) 70%,  // light purple highlight
+    rgba(255, 255, 255, 1) 100%    // fade fully to white at bottom
   );
   padding: 70px 0 30px 0;
 }
+
+
 
 .Waynix-main-center {
   padding: 80px 0;
