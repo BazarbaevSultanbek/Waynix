@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://https://waynix-server.vercel.app/api";
+const API_URL = "https://waynix-server.vercel.app/api";
 
 const $api = axios.create({
   withCredentials: true, // important for cookies

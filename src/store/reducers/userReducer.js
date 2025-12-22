@@ -7,7 +7,7 @@ export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post("http://https://waynix-server.vercel.app/api/login", {
+      const response = await axios.post("https://waynix-server.vercel.app/api/login", {
         email,
         password,
       });
@@ -23,7 +23,7 @@ export const register = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://https://waynix-server.vercel.app/api/register",
+        "https://waynix-server.vercel.app/api/register",
         formData
       );
       return response.data.user;
@@ -45,7 +45,7 @@ const userSlice = createSlice({
   },
   reducers: {
     logout: (state) => {
-      axios.post("http://https://waynix-server.vercel.app/api/logout");
+      axios.post("https://waynix-server.vercel.app/api/logout");
       state.user = null;
       state.success = "Logged out successfully";
       state.error = null;
