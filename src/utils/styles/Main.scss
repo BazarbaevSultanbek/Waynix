@@ -3,11 +3,10 @@ $dark-color: #111828;
 $blue-color: #165dfc;
 
 input,
-button ,
-Button{
+button,
+Button {
   outline: none;
 }
-
 
 .main-menu-profile img {
   max-width: 40px;
@@ -108,11 +107,23 @@ Button{
 
 .Waynix-main-center {
   padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   h1 {
-    text-align: center;
-    font-size: 70px;
+    font-family: "Inter", sans-serif;
+    font-size: clamp(48px, 6vw, 96px);
+    color: transparent !important;
+    display: inline-block;
+    width: fit-content;
+    margin: auto;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    font-weight: 500;
+    background: linear-gradient(90deg, #0f172a 0%, #2563eb 45%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   p {
@@ -183,21 +194,25 @@ Button{
 }
 
 /* Izlash Button */
+
 .Waynix-main-action button {
-  background: linear-gradient(90deg, #ff7a00, #ff3d00);
-  border: none;
-  border-radius: 8px;
-  color: #fff;
   font-weight: 500;
   font-size: 15px;
   padding: 10px 0;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .Waynix-main-action button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 85, 0, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 18px 42px rgba(124, 58, 237, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25);
 }
 
 .Waynix-main-text {
@@ -206,6 +221,11 @@ Button{
   font-size: 18px;
   color: #4a5565;
 }
+
+
+
+
+
 
 // //////////// CATEGORIES ///////////////////// CATEGORIES ////////////////////
 
@@ -539,9 +559,10 @@ Button{
 }
 
 .Footer-main-below-corp {
-  color: white;
+  color: gray;
   margin: 20px 0;
   text-align: center;
+  font-size: 15px;
 }
 
 .Footer-main-below-list {
@@ -549,7 +570,8 @@ Button{
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
-  color: white;
+  color: gray;
+  font-size: 15px;
   list-style: none;
   line-height: 35px;
 }
@@ -587,7 +609,7 @@ Button{
 
   .Waynix-main-center {
     h1 {
-      font-size: 100px;
+      font-size: 140px;
     }
     p {
       font-size: 22px;

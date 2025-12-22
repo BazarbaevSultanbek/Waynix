@@ -264,10 +264,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/retry/-/retry-0.4.3.tgz#c2b9d2e374ee62c586d3adbea87199b1d7a7a6ba"
   integrity sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==
 
-"@mantine/carousel@^8.3.4":
-  version "8.3.4"
-  resolved "https://registry.yarnpkg.com/@mantine/carousel/-/carousel-8.3.4.tgz#970e4703eae7804c3f30967163b48248dcdd2540"
-  integrity sha512-JspBBVrj4ArvL/ee19k011mSjsk9+pMJ//mbRUSCGSyzT9OT4E4HnfS0KNezy5RlPb+a2d8czRpIu58u4nMGeg==
+"@mantine/carousel@^8.3.10":
+  version "8.3.10"
+  resolved "https://registry.yarnpkg.com/@mantine/carousel/-/carousel-8.3.10.tgz#de5ac90a32ee487510dcb5bc8eba3582c3435b9f"
+  integrity sha512-EyUgsIORa3ZozJNDr3Z4k2Wate5+2Ylmi7G+aF48nwrkl2JxPfqM98SVSlvshY3swQqHRSC+pxQUXz+7mlhybw==
 
 "@mantine/charts@^8.3.4":
   version "8.3.4"
@@ -1266,6 +1266,11 @@ dunder-proto@^1.0.1:
     call-bind-apply-helpers "^1.0.1"
     es-errors "^1.3.0"
     gopd "^1.2.0"
+
+embla-carousel-autoplay@^8.6.0:
+  version "8.6.0"
+  resolved "https://registry.yarnpkg.com/embla-carousel-autoplay/-/embla-carousel-autoplay-8.6.0.tgz#bc86c97de00d52ec34b05058736ef50af6e0d0e4"
+  integrity sha512-OBu5G3nwaSXkZCo1A6LTaFMZ8EpkYbwIaH+bPqdBnDGQ2fh4+NbzjXjs2SktoPNKCtflfVMc75njaDHOYXcrsA==
 
 embla-carousel-react@^8.5.2:
   version "8.6.0"

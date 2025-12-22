@@ -1,4 +1,5 @@
 import { Button, Select } from "@mantine/core";
+import { IconSearch } from "@tabler/icons-react";
 
 const Waynix = () => {
   return (
@@ -19,7 +20,6 @@ const Waynix = () => {
                   data={["React", "Angular", "Vue", "Svelte"]}
                 />
               </section>
-
               <section className="Waynix-main-action-location">
                 <p>Joy</p>
                 <input
@@ -47,22 +47,30 @@ const Waynix = () => {
                   </svg>
                 </label>
               </section>
-
               <section className="Waynix-main-action-rates">
                 <Select
                   label="Reyting"
                   placeholder="Reyting"
-                  data={["React", "Angular", "Vue", "Svelte"]}
+                  data={["5 yulduzli", "4+ yulduzli", "3+ yulduzli", "2+ yulduzli"]}
                 />
               </section>
-
-              <Button variant="filled" color="#f54a00" size="md" radius="md">
+              <Button
+                size="lg"
+                radius="xl"
+                variant="gradient"
+                gradient={{ from: "indigo", via: "violet", to: "pink" }}
+                leftSection={<IconSearch size={18} />}
+                className="waynix-gradient-button"
+              >
                 Izlash
               </Button>
             </nav>
 
             <div className="Waynix-main-text">
-              <p>Qoraqalpog'istonda sayohat <br/>qilishning eng oson yo'li</p>
+              <p>
+                Sayohat <br />
+                qilishning eng oson yo'li
+              </p>
             </div>
           </div>
         </div>

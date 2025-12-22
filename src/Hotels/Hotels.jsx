@@ -61,7 +61,7 @@ const activeLabel =
             <div className="hotels-banner-inner">
               <div className="hotels-banner-inner-sub">
                 <h1>Mehmonxonalar</h1>
-                <p>Qoraqalpog'istondagi eng yaxshi mehmonxonalarni toping</p>
+                <p>Eng yaxshi mehmonxonalarni toping</p>
               </div>
 
               <div className="hotels-banner-search">
