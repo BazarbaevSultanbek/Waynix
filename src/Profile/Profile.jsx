@@ -57,7 +57,7 @@ export default function Profile() {
     try {
       const token = getCookie("accessToken");
       const res = await axios.post(
-        "http://localhost:8001/api/add-avatar",
+        "http://https://waynix-server.vercel.app/api/add-avatar",
         formData,
         {
           headers: {
@@ -95,7 +95,7 @@ export default function Profile() {
 const handleSave = async () => {
   try {
     const { data } = await axios.put(
-      "http://localhost:8001/api/update-profile",
+      "http://https://waynix-server.vercel.app/api/update-profile",
       formData,
       {
         withCredentials: true,
