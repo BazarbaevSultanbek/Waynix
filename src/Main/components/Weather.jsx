@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
-import { Text, Group, Stack, Card, SimpleGrid, ActionIcon, Loader } from "@mantine/core";
+import {
+  Text,
+  Group,
+  Stack,
+  Card,
+  SimpleGrid,
+  ActionIcon,
+  Loader,
+} from "@mantine/core";
 import { IconCloud, IconX, IconMapPin } from "@tabler/icons-react";
-import "../../utils/styles/Weather.scss";
+import "../../utils/styles/weather.scss";
 
 export default function Weather() {
   const [open, setOpen] = useState(false);
@@ -39,7 +47,11 @@ export default function Weather() {
       setLoading(true);
       try {
         const res = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&units=metric&lang=uz&appid=${import.meta.env.VITE_WEATHER_KEY}`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${
+            coords.lat
+          }&lon=${coords.lon}&units=metric&lang=uz&appid=${
+            import.meta.env.VITE_WEATHER_KEY
+          }`
         );
         const json = await res.json();
         if (!res.ok) throw new Error("API error");
@@ -67,7 +79,9 @@ export default function Weather() {
         <IconCloud size={26} />
       </ActionIcon>
 
-      {open && <div className="weather-overlay" onClick={() => setOpen(false)} />}
+      {open && (
+        <div className="weather-overlay" onClick={() => setOpen(false)} />
+      )}
 
       <aside className={`weather-panel ${open ? "open" : ""}`}>
         <ActionIcon
@@ -121,7 +135,9 @@ export default function Weather() {
 function Stat({ label, value }) {
   return (
     <Card radius="lg" className="stat-card">
-      <Text size="xs" c="dimmed">{label}</Text>
+      <Text size="xs" c="dimmed">
+        {label}
+      </Text>
       <Text fw={600}>{value}</Text>
     </Card>
   );
