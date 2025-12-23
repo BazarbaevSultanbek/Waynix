@@ -5,10 +5,12 @@ import Corporate from "./components/Corporate";
 import Footer from "./components/Footer";
 import Banner from "./components/Banner";
 import News from "./components/News";
+import Weather from "./components/Weather";
 
 const Main = () => {
   return (
     <>
+      <Weather />
       <Banner />
       <Waynix />
       <News />

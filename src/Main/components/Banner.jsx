@@ -23,7 +23,7 @@ import {
 } from "@tabler/icons-react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, register, setUser} from "../../store/reducers/userReducer";
+import { loginUser, register, setUser } from "../../store/reducers/userReducer";
 
 import main_logo from "../../images/waynix-logo.png";
 import "../../utils/styles/Main.scss";
@@ -141,16 +141,20 @@ const Banner = () => {
             <div className="main-menu-rev">
               {user ? (
                 <div className="main-menu-profile">
-                  <a href="/profile"><img src={user.avatar} alt={user.name || "avatar"} /></a>
+                  <a href="/profile">
+                    <img src={user.avatar} alt={user.name || "avatar"} />
+                  </a>
                 </div>
               ) : (
                 <div className="main-menu-login">
                   {/* Kirish Button */}
                   <Button
                     onClick={openLogin}
-                    variant="filled"
-                    color="#f54a00"
                     radius="md"
+                    size="md"
+                    variant="gradient"
+                    gradient={{ from: "indigo", via: "violet", to: "pink" }}
+                    className="main-menu-login-btn"
                   >
                     Kirish
                   </Button>

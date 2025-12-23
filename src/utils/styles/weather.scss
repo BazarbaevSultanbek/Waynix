@@ -1,0 +1,47 @@
+.weather-fab {
+  position: fixed;
+  bottom: 5%;
+  left: 50px;
+  // transform: translateY(-20%);
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  z-index: 1000;
+}
+
+.weather-overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 998;
+}
+
+.weather-panel {
+  position: fixed;
+  top: 50%;
+  left: -360px;
+  transform: translateY(-50%);
+  width: 320px;
+  padding: 20px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #2563eb, #1e40af);
+  color: white;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  transition: left 0.35s ease;
+  z-index: 999;
+
+  &.open {
+    left: 20px;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}

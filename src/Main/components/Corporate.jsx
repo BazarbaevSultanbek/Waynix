@@ -32,9 +32,9 @@ export default function Corporate() {
           </div>
           <div className="Corporate-main-text">
             <p>
-              Waynix platformasida o'z biznesingizni ro'yxatga oling va
-              Qoraqalpog'istondagi minglab sayohatchilar bilan bog'laning.
-              Birgalikda turizm sohasini rivojlantiramiz.
+              Waynix platformasida o'z biznesingizni ro'yxatga oling va minglab
+              sayohatchilar bilan bog'laning. Birgalikda turizm sohasini
+              rivojlantiramiz.
             </p>
           </div>
 
@@ -128,13 +128,10 @@ export default function Corporate() {
           <div className="Corporate-main-nav">
             <Group justify="center">
               <Button
-                variant="filled"
-                size="md"
                 radius="md"
-                style={{
-                  background: "#f54a00",
-                  boxShadow: "6px 6px 28px 0px rgba(34, 60, 80, 0.2)",
-                }}
+                size="md"
+                variant="gradient"
+                gradient={{ from: "indigo", via: "violet", to: "pink" }}
               >
                 Hamkorlik qilish
               </Button>
@@ -147,13 +144,15 @@ export default function Corporate() {
 
           <div className="Corporate-main-nav-texts">
             <p>
-              <span style={{background:'#00c951'}}></span>Bepul ro'yxatga olish
+              <span style={{ background: "#00c951" }}></span>Bepul ro'yxatga
+              olish
             </p>
             <p>
-              <span style={{background:'#2b7fff'}}></span>24/7 qo'llab-quvvatlash
+              <span style={{ background: "#2b7fff" }}></span>24/7
+              qo'llab-quvvatlash
             </p>
             <p>
-              <span style={{background:'#ff6900'}}></span>Marketing yordami
+              <span style={{ background: "#ff6900" }}></span>Marketing yordami
             </p>
           </div>
         </div>
