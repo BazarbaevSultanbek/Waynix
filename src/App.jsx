@@ -6,6 +6,7 @@ import "@mantine/notifications/styles.css";
 import { Notifications } from "@mantine/notifications";
 import NotificationListener from "./utils/notifications/Notify";
 import Hotels from "./Hotels/Hotels";
+import Contact from "./Contact/Contact";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/" element={<Main />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<Main />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   );

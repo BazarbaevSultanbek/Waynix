@@ -209,9 +209,10 @@ const Banner = () => {
 
                       <Button
                         fullWidth
-                        color="#f54a00"
                         radius="md"
-                        mb="md"
+                        size="md"
+                        variant="gradient"
+                        gradient={{ from: "indigo", via: "violet", to: "pink" }}
                         onClick={handleLogin}
                       >
                         Kirish
@@ -370,9 +371,14 @@ const Banner = () => {
                         <Button
                           type="submit" // submit the form
                           fullWidth
-                          color="#f54a00"
                           radius="md"
-                          mb="md"
+                          size="md"
+                          variant="gradient"
+                          gradient={{
+                            from: "indigo",
+                            via: "violet",
+                            to: "pink",
+                          }}
                         >
                           Ro‘yxatdan o‘tish
                         </Button>

@@ -13,13 +13,13 @@ export default function Footer() {
             </div>
 
             <div className="Footer-main-text">
-              Qoraqalpog'istonda sayohat qilishning eng oson yo'li. Biz bilan
+              Sayohat qilishning eng oson yo'li. Biz bilan
               eng yaxshi joylarni kashf eting va unutilmas xotiralar yarating.
             </div>
 
             <div className="Footer-main-socials">
               <a
-                href="facebook.com"
+                href="https://facebook.com"
                 style={{
                   background: "#155dfc",
                 }}
@@ -27,7 +27,7 @@ export default function Footer() {
                 <i className="fa-brands fa-facebook-f"></i>
               </a>
               <a
-                href="instagram.com"
+                href="https://instagram.com"
                 style={{
                   background:
                     "radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)",
@@ -35,7 +35,7 @@ export default function Footer() {
               >
                 <i className="fa-brands fa-instagram"></i>
               </a>
-              <a href="messages.com"
+              <a href="https://twitter.com"
               style={{
                 background: '#2b7fff'
               }}>
