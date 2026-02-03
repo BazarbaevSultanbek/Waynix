@@ -51,7 +51,7 @@ const Contact = () => {
           <button>Waynixga qo'shilish</button>
         </div>
         <div className="Contact-social">
-          <div className="contact-social-email">
+          <div className="Contact-social-email">
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ const Contact = () => {
               </svg>
             </span>
 
-            <div className="contact-social-email-text">
+            <div className="Contact-social-email-text">
               <h4>Email</h4>
               <a href="https://waynixtravel@gmail.com">
                 waynixtravel@gmail.com
@@ -79,7 +79,7 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="contact-social-instagram">
+          <div className="Contact-social-instagram">
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -99,13 +99,13 @@ const Contact = () => {
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
               </svg>
             </span>
-            <div className="contact-social-email-text">
+            <div className="Contact-social-instagram-text">
               <h4>Instagram</h4>
               <a href="https://instagram.com/waynixtravel">@waynixtravel</a>
             </div>
           </div>
 
-          <div className="contact-social-telegram">
+          <div className="Contact-social-telegram">
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -124,9 +124,13 @@ const Contact = () => {
                 <path d="m21.854 2.147-10.94 10.939"></path>
               </svg>
             </span>
+            <div className="Contact-social-telegram-text">
+              <h4>Telegram</h4>
+              <a href="https://t.me/waynixtravel">@waynixtravel</a>
+            </div>
           </div>
 
-          <div className="contact-social-phone">
+          <div className="Contact-social-phone">
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -144,6 +148,10 @@ const Contact = () => {
                 <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path>
               </svg>
             </span>
+            <div className="Contact-social-phone-text">
+              <h4>Phone</h4>
+              <a href="tel:+998901234567">+998 90 123 45 67</a>
+            </div>
           </div>
         </div>
         <div className="Contact-text">
