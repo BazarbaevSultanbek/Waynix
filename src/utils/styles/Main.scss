@@ -17,21 +17,24 @@ Button {
   height: 40px;
   border-radius: 50%;
 }
-
 .main-menu {
-  display: flex;
-  justify-content: space-between;
-  height: 100px;
-  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  width: 100%;
-  padding: 0 5px;
-  z-index: 99;
   background: white;
+  z-index: 99;
   box-shadow: 3px 9px 7px -8px rgba(34, 60, 80, 0.2);
+}
+
+.main-menu-emmet {
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  align-items: center;
+  width: 1440px;
+  margin: auto;
+  padding: 0 5px;
 }
 
 .main-menu-logo {
@@ -411,59 +414,49 @@ Button {
 }
 
 /* 1 — Blue */
-.Categories-main-group-card:nth-child(1)
-  .Categories-group-card-icon span {
+.Categories-main-group-card:nth-child(1) .Categories-group-card-icon span {
   box-shadow: 0 8px 22px rgba(43, 127, 255, 0.45);
 }
 
 /* 2 — Orange */
-.Categories-main-group-card:nth-child(2)
-  .Categories-group-card-icon span {
+.Categories-main-group-card:nth-child(2) .Categories-group-card-icon span {
   box-shadow: 0 8px 22px rgba(255, 122, 0, 0.45);
 }
 
 /* 3 — Purple */
-.Categories-main-group-card:nth-child(3)
-  .Categories-group-card-icon span {
+.Categories-main-group-card:nth-child(3) .Categories-group-card-icon span {
   box-shadow: 0 8px 22px rgba(168, 85, 247, 0.45);
 }
 
 /* 4 — Green */
-.Categories-main-group-card:nth-child(4)
-  .Categories-group-card-icon span {
+.Categories-main-group-card:nth-child(4) .Categories-group-card-icon span {
   box-shadow: 0 8px 22px rgba(34, 197, 94, 0.45);
 }
 
 /* 5 — Indigo / Blue */
-.Categories-main-group-card:nth-child(5)
-  .Categories-group-card-icon span {
+.Categories-main-group-card:nth-child(5) .Categories-group-card-icon span {
   box-shadow: 0 8px 22px rgba(99, 102, 241, 0.45);
 }
 
 /* 6 — Pink */
-.Categories-main-group-card:nth-child(6)
-  .Categories-group-card-icon span {
+.Categories-main-group-card:nth-child(6) .Categories-group-card-icon span {
   box-shadow: 0 8px 22px rgba(236, 72, 153, 0.45);
 }
 
 /* 7 — Teal */
-.Categories-main-group-card:nth-child(7)
-  .Categories-group-card-icon span {
+.Categories-main-group-card:nth-child(7) .Categories-group-card-icon span {
   box-shadow: 0 8px 22px rgba(20, 184, 166, 0.45);
 }
 
 /* 8 — Yellow */
-.Categories-main-group-card:nth-child(8)
-  .Categories-group-card-icon span {
+.Categories-main-group-card:nth-child(8) .Categories-group-card-icon span {
   box-shadow: 0 8px 22px rgba(234, 179, 8, 0.45);
 }
 
 /* 9 — Red */
-.Categories-main-group-card:nth-child(9)
-  .Categories-group-card-icon span {
+.Categories-main-group-card:nth-child(9) .Categories-group-card-icon span {
   box-shadow: 0 8px 22px rgba(239, 68, 68, 0.45);
 }
-
 
 .Categories-group-card-icon {
   z-index: 1;
@@ -826,7 +819,7 @@ Button {
     display: inline-flex !important;
   }
 
-  .main-menu {
+  .main-menu-emmet {
     padding: 0 20px;
   }
 
@@ -926,7 +919,7 @@ Button {
     font-size: 15px;
   }
 
-  .main-menu {
+  .main-menu-emmet {
     justify-content: space-around;
   }
   .Footer-main-above {

@@ -7,6 +7,7 @@ import { Notifications } from "@mantine/notifications";
 import NotificationListener from "./utils/notifications/Notify";
 import Hotels from "./Hotels/Hotels";
 import Contact from "./Contact/Contact";
+import TourObj from "./TourObj/TourObj";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<Main />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/tours" element={<TourObj />} />
       </Routes>
     </BrowserRouter>
   );
