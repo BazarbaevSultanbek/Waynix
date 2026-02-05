@@ -100,7 +100,7 @@ export default function Categories() {
               <div className="Categories-group-card-icon">
                 <span
                   style={{
-                    background: "#E60076",
+                    backgroundColor: "#E60076",
                     background:
                       "linear-gradient(177deg,rgba(230, 0, 118, 1) 24%, rgba(173, 70, 255, 0.87) 85%)",
                     color: "white",
@@ -141,7 +141,7 @@ export default function Categories() {
               <div className="Categories-group-card-icon">
                 <span
                   style={{
-                    background: "#00C951",
+                    backgroundColor: "#00C951",
                     background:
                       "linear-gradient(177deg,rgba(0, 201, 81, 1) 24%, rgba(0, 153, 102, 0.87) 85%)",
                     color: "white",
@@ -181,7 +181,7 @@ export default function Categories() {
               <div className="Categories-group-card-icon">
                 <span
                   style={{
-                    background: "#155DFC",
+                    backgroundColor: "#155DFC",
                     background:
                       "linear-gradient(177deg,rgba(21, 93, 252, 1) 24%, rgba(97, 95, 255, 0.87) 85%)",
                     color: "white",
@@ -218,7 +218,7 @@ export default function Categories() {
               <div className="Categories-group-card-icon">
                 <span
                   style={{
-                    background: "#EC003F",
+                    backgroundColor: "#EC003F",
                     background:
                       "linear-gradient(177deg,rgba(236, 0, 63, 1) 24%, rgba(246, 51, 154, 0.87) 85%)",
                     color: "white",
