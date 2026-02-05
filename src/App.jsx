@@ -8,6 +8,7 @@ import NotificationListener from "./utils/notifications/Notify";
 import Hotels from "./Hotels/Hotels";
 import Contact from "./Contact/Contact";
 import TourObj from "./TourObj/TourObj";
+import Object from "./Object/Object";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="*" element={<Main />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/tours" element={<TourObj />} />
+        <Route path="/tours/id" element={<Object />} />
       </Routes>
     </BrowserRouter>
   );

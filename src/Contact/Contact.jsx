@@ -1,5 +1,5 @@
 import Banner from "../Main/components/Banner";
-import Footer from "../Main/components/Footer";
+import Footer from "../utils/footer/Footer";
 import "../utils/styles/Contact.scss";
 
 const Contact = () => {

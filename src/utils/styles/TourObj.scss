@@ -47,9 +47,10 @@
   color: #374151;
   display: inline-flex;
   align-items: center;
+  justify-content: space-between;
   gap: 6px;
   cursor: pointer;
-  min-width: 110px;
+  min-width: 190px;
 }
 
 .filter-menu {
@@ -65,8 +66,13 @@
   padding: 6px;
 }
 
-.filter-group:hover .filter-menu {
+.filter-group.is-open .filter-menu {
   display: block;
+}
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
 }
 
 .filter-item {
@@ -92,7 +98,6 @@
 
 /* View toggle */
 .view-toggle {
-  background: #f3f4f6;
   border-radius: 10px;
   padding: 4px;
   display: inline-flex;
@@ -100,13 +105,25 @@
 }
 
 .view-btn {
-  border: none;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding: 6px 12px;
   font-size: 13px;
   border-radius: 8px;
   background: transparent;
   cursor: pointer;
   color: #6b7280;
+
+  &:hover {
+    background: #f3f4f6;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .view-btn.is-active {
@@ -149,6 +166,10 @@
   border-radius: 12px;
   overflow: hidden;
   height: 120px;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .tour-objects__list.grid .tour-card__media {
@@ -251,8 +272,6 @@
   color: #ffffff;
   border-color: #2563eb;
 }
-
-
 
 .popular-tour {
   background: #f5f9ff;
@@ -407,7 +426,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-    .popular-tour__grid {
+  .popular-tour__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -434,7 +453,7 @@
     grid-template-columns: 1fr;
   }
 
-    .popular-tour__grid {
+  .popular-tour__grid {
     grid-template-columns: 1fr;
   }
 }

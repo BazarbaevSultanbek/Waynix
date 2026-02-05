@@ -47,6 +47,7 @@ Button {
   font-weight: 500;
   font-size: 15px;
   cursor: pointer;
+  border-radius: 13px !important;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 
@@ -647,172 +648,7 @@ Button {
   }
 }
 
-// //////////// FOOTER ///////////////////// FOOTER ////////////////////
 
-.Footer-main {
-  background: #101828;
-  padding: 50px 15px 30px 15px;
-
-  .Footer-main-logo {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 15px;
-    img {
-      max-width: 40px;
-      height: 40px;
-    }
-    h2 {
-      color: white;
-    }
-  }
-
-  .Footer-main-text {
-    color: white;
-    margin: 15px 0;
-  }
-
-  .Footer-main-socials {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 15px;
-
-    a {
-      color: white;
-      font-size: 20px;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  &-links {
-    h3 {
-      color: white;
-    }
-
-    ul {
-      list-style: none;
-      margin: 20px 0;
-      a {
-        text-decoration: none;
-        color: white;
-        line-height: 35px;
-      }
-    }
-  }
-
-  &-contacts {
-    h3 {
-      color: white;
-    }
-  }
-
-  .Footer-main-contacts-list {
-    margin: 20px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 20px;
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      text-decoration: none;
-      color: white;
-      gap: 20px;
-      svg {
-        color: #ff6900;
-        scale: 1;
-      }
-    }
-  }
-
-  .Footer-main-contacts-news {
-    position: relative;
-
-    h3 {
-      margin: 10px 0;
-    }
-    input#email_footer {
-      background: #1e2939;
-      border: 1px solid #364153;
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
-      width: 280px;
-      height: 40px;
-      padding: 0 10px;
-      color: white;
-    }
-
-    label {
-      position: absolute;
-      top: 39px;
-      right: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      background: #f96d00;
-      width: 50px;
-      height: 40px;
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
-    }
-  }
-}
-
-.Footer-main-above {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: start;
-  gap: 30px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-.Footer-main-info,
-.Footer-main-links,
-.Footer-main-contacts {
-  max-width: 340px;
-}
-
-.Footer-main-below {
-  margin: 40px 0 0 0;
-  border-top: 1px solid #1e2939;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.Footer-main-below-corp {
-  color: gray;
-  margin: 20px 0;
-  text-align: center;
-  font-size: 15px;
-}
-
-.Footer-main-below-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  color: gray;
-  font-size: 15px;
-  list-style: none;
-  line-height: 35px;
-}
-
-@media only screen and (min-width: 425px) {
-  .Footer-main-above {
-    justify-content: center;
-  }
-}
 
 @media only screen and (min-width: 768px) {
   .weather-fab {
@@ -888,9 +724,6 @@ Button {
     gap: 50px;
   }
 
-  .Footer-main-links {
-    width: 340px;
-  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -921,11 +754,5 @@ Button {
 
   .main-menu-emmet {
     justify-content: space-around;
-  }
-  .Footer-main-above {
-    justify-content: center;
-  }
-  .Footer-main-links {
-    width: auto;
   }
 }
