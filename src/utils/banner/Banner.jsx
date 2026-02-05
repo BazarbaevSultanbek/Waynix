@@ -26,7 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser, register, setUser } from "../../store/reducers/userReducer";
 
 import main_logo from "../../images/waynix-logo.png";
-import "../styles/Banner.scss";
+import "../styles/banner.scss";
 import getCookie from "../../utils/getCookie";
 
 const Banner = () => {
