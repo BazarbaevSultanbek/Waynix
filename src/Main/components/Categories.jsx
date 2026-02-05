@@ -50,7 +50,7 @@ export default function Categories() {
               <div className="Categories-group-card-text">
                 <h3>Turobektlar</h3>
                 <p>Tarixiy, madaniy, parklar...</p>
-                <a href="#">Batafsil {">"}</a>
+                <Link to="/tours">Batafsil</Link>
               </div>
             </div>
 

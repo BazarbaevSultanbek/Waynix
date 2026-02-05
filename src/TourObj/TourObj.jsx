@@ -379,7 +379,9 @@ const TourObjects = () => {
                 </div>
 
                 <div className="tour-card__action">
-                  <button className="tour-card__btn">Batafsil</button>
+                  <button className="tour-card__btn">
+                    <Link to="/tours/id">Batafsil</Link>
+                  </button>
                 </div>
               </article>
             ))}
