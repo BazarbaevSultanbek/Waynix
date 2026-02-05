@@ -242,11 +242,16 @@
 .tour-card__btn {
   background: #1d4ed8;
   color: #ffffff;
+  text-decoration: none;
   border: none;
   padding: 8px 18px;
   border-radius: 8px;
   font-size: 13px;
   cursor: pointer;
+  a{
+    text-decoration: none;
+    color: white;
+  }
 }
 
 /* Pagination */

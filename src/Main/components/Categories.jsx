@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
+import { Link } from "react-router";
 
 export default function Categories() {
   return (
