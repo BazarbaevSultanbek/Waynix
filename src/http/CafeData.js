@@ -1,0 +1,136 @@
+const eatingPlaces = [
+  {
+    id: 1,
+    name: "Navruz Restaurant",
+    type: "Restaurant",
+    location: "Nukus",
+    rating: 4.8,
+    phone: "+998901112233",
+    hours: "09:00-23:00",
+    description: "Milliy va Yevropa taomlari, oilaviy muhit.",
+    image:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 2,
+    name: "Coffee Corner",
+    type: "Cafe",
+    location: "Beruniy",
+    rating: 4.6,
+    phone: "+998901234567",
+    hours: "08:00-22:00",
+    description: "Qahva, desert va yengil nonushta.",
+    image:
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 3,
+    name: "Burger Lab",
+    type: "Fast Food",
+    location: "Nukus",
+    rating: 4.5,
+    phone: "+998909998877",
+    hours: "10:00-01:00",
+    description: "Burger, fries, combo setlar.",
+    image:
+      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 4,
+    name: "Sultan Kebab",
+    type: "Restaurant",
+    location: "Khodjeyli",
+    rating: 4.4,
+    phone: "+998907771122",
+    hours: "11:00-00:00",
+    description: "Kebab va grill taomlari.",
+    image:
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 5,
+    name: "Green Tea House",
+    type: "Cafe",
+    location: "Nukus",
+    rating: 4.7,
+    phone: "+998901010101",
+    hours: "07:30-21:30",
+    description: "Choy, qahva va shirinliklar.",
+    image:
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 6,
+    name: "Hot Slice Pizza",
+    type: "Fast Food",
+    location: "Turtkul",
+    rating: 4.3,
+    phone: "+998903334455",
+    hours: "10:00-23:30",
+    description: "Pizza va tezkor buyurtmalar.",
+    image:
+      "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200&auto=format&fit=crop",
+  },
+    {
+    id: 7,
+    name: "Coffee Corner",
+    type: "Cafe",
+    location: "Beruniy",
+    rating: 4.6,
+    phone: "+998901234567",
+    hours: "08:00-22:00",
+    description: "Qahva, desert va yengil nonushta.",
+    image:
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 8,
+    name: "Burger Lab",
+    type: "Fast Food",
+    location: "Nukus",
+    rating: 4.5,
+    phone: "+998909998877",
+    hours: "10:00-01:00",
+    description: "Burger, fries, combo setlar.",
+    image:
+      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 9,
+    name: "Sultan Kebab",
+    type: "Restaurant",
+    location: "Khodjeyli",
+    rating: 4.4,
+    phone: "+998907771122",
+    hours: "11:00-00:00",
+    description: "Kebab va grill taomlari.",
+    image:
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 10,
+    name: "Green Tea House",
+    type: "Cafe",
+    location: "Nukus",
+    rating: 4.7,
+    phone: "+998901010101",
+    hours: "07:30-21:30",
+    description: "Choy, qahva va shirinliklar.",
+    image:
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 11,
+    name: "Hot Slice Pizza",
+    type: "Fast Food",
+    location: "Turtkul",
+    rating: 4.3,
+    phone: "+998903334455",
+    hours: "10:00-23:30",
+    description: "Pizza va tezkor buyurtmalar.",
+    image:
+      "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200&auto=format&fit=crop",
+  },
+];
+
+export default eatingPlaces;

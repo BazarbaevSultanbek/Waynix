@@ -27,7 +27,7 @@ const tourList = [
     popularity: 90,
     region: "Qoraqalpog'iston",
     image:
-      "https://images.unsplash.com/photo-1458842727533-7c9053bfea65?q=80&w=1200&auto=format&fit=crop",
+      "https://p4.wallpaperbetter.com/wallpaper/1/317/172/japan-train-railway-wallpaper-preview.jpg",
   },
   {
     id: 3,
@@ -174,8 +174,8 @@ const TourObjects = () => {
   const itemsPerPage = 5;
 
   const toggleFilter = (key) => {
-  setOpenFilter((prev) => (prev === key ? null : key));
-};
+    setOpenFilter((prev) => (prev === key ? null : key));
+  };
 
   const filtered = useMemo(() => {
     if (selectedCategory === "All") return tourList;
@@ -380,6 +380,11 @@ const TourObjects = () => {
                 </div>
 
                 <div className="tour-card__action">
+                  <button className="tour-card__save" type="button">
+                    <span className="save-icon">🔖</span>
+                    Saqlash
+                  </button>
+
                   <button className="tour-card__btn">
                     <Link to="/tours/id">Batafsil</Link>
                   </button>

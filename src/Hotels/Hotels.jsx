@@ -3,9 +3,11 @@ import { IconChevronDown, IconCheck, IconSearch } from "@tabler/icons-react";
 import { useEffect, useMemo, useState } from "react";
 import { Group, SimpleGrid } from "@mantine/core";
 import "../utils/styles/Hotels.scss";
-import Banner from "../Main/components/Banner";
+import Banner from "../utils/banner/Banner";
 import hotels from "../http/hotels";
 import HotelCard from "./HotelCard";
+import Footer from "../utils/footer/Footer";
+
 
 export default function Hotels() {
   const [value, setValue] = useState("default");
@@ -141,6 +143,7 @@ const activeLabel =
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

@@ -3,6 +3,26 @@
   padding: 150px 16px 40px 16px;
 }
 
+.Contact-logo-box {
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 24px auto;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow:
+    0 12px 28px rgba(138, 43, 226, 0.25),
+    0 8px 20px rgba(255, 105, 180, 0.20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.Contact-logo-box img {
+  width: 70px;
+  height: 70px;
+}
+
 .Contact-main-text {
   font-size: 17px;
   color: #333;
@@ -23,160 +43,13 @@
   span {
     font-weight: bold;
   }
-}
 
-.Contact-button {
-  margin: 28px auto 24px auto;
-  display: flex;
-  justify-content: center;
-}
-
-.Contact-button button {
-  background-color: #f64d00;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  height: 40px;
-  width: 100%;
-  max-width: 272px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.Contact-social {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
-  align-items: stretch;
-  max-width: 990px;
-  margin: 0 auto;
-}
-
-.Contact-social > div {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  min-width: 220px;
-  box-sizing: border-box;
-}
-
-.Contact-social span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  border-radius: 50%;
-  flex: 0 0 40px;
-}
-
-.Contact-social-email {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 200px;
-  box-shadow: 4px 4px 20px 0px rgba(34, 60, 80, 0.2);
-
-  span {
-    background-color: #ffe2e2;
-  }
-  .Contact-social-email-text {
-    text-align: center;
-
-    a {
-      text-decoration: none;
-      color: #4a5565;
-    }
+  p:nth-child(3){
+    font-weight: bold;
   }
 }
 
-.Contact-social-instagram {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 200px;
-  justify-content: center;
-  box-shadow: 4px 4px 20px 0px rgba(34, 60, 80, 0.2);
 
-  span {
-    background-color: #f6e7fa;
-    svg {
-      color: #e7000b;
-    }
-  }
-  .Contact-social-instagram-text {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    a {
-      text-decoration: none;
-      color: #4a5565;
-    }
-  }
-}
-
-.Contact-social-telegram {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 200px;
-  justify-content: center;
-  box-shadow: 4px 4px 20px 0px rgba(34, 60, 80, 0.2);
-
-  span {
-    background-color: #dbeaff;
-    svg {
-      color: #165dfc;
-    }
-  }
-
-  .Contact-social-telegram-text {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    span {
-      color: #e60076;
-    }
-
-    a {
-      text-decoration: none;
-      color: #4a5565;
-    }
-  }
-}
-
-.Contact-social-phone {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 200px;
-  justify-content: center;
-  box-shadow: 4px 4px 20px 0px rgba(34, 60, 80, 0.2);
-
-  span {
-    background-color: #dcfce6;
-    svg {
-      color: #00a63d;
-    }
-  }
-
-  .Contact-social-phone-text {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    a {
-      text-decoration: none;
-      color: #4a5565;
-    }
-  }
-}
 
 .Contact-text {
   text-align: center;
@@ -185,21 +58,120 @@
   color: #333;
 }
 
-@media (min-width: 1024px) {
-  .Contact-button button {
-    width: 272px;
-  }
-
-  .Contact-social {
-    flex-wrap: nowrap;
-    margin: 40px auto;
-  }
+/* Team Section */
+.Contact-team {
+  margin: 40px auto 0;
+  text-align: center;
 }
+
+.Contact-team h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.Contact-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.Contact-team-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px 16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.Contact-team-card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.Contact-team-card h4 {
+  margin: 8px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.Contact-team-card p {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.Contact-team-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.Contact-team-links a {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #f5f6f8;
+  color: #6b7280;
+  text-decoration: none;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+
+/* Instagram */
+.Contact-team-links a:nth-child(1) {
+  color: rgba(228, 64, 95, 0.9);
+}
+.Contact-team-links a:nth-child(1):hover {
+  background: rgba(228, 64, 95, 0.9);
+  color: #fff;
+}
+
+/* Telegram */
+.Contact-team-links a:nth-child(2) {
+  color: #229ed9;
+}
+.Contact-team-links a:nth-child(2):hover {
+  background: #229ed9;
+  color: #fff;
+}
+
+/* LinkedIn */
+.Contact-team-links a:nth-child(3) {
+  color: #0a66c2;
+}
+.Contact-team-links a:nth-child(3):hover {
+  background: #0a66c2;
+  color: #fff;
+}
+
 
 @media (max-width: 1023px) {
   .Contact-main-text {
     padding: 28px;
     font-size: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .Contact-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .Contact-team-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -210,9 +182,5 @@
 
   .Contact-main-text {
     padding: 20px;
-  }
-
-  .Contact-social > div {
-    min-width: 100%;
   }
 }

@@ -89,7 +89,7 @@ export default function Categories() {
               <div className="Categories-group-card-text">
                 <h3>Ovqatlanish joylari</h3>
                 <p>Restoranlar, kafelar, fast food...</p>
-                <a href="#">Batafsil {">"}</a>
+                <Link to={'/Cafe'}>Batafsil {">"}</Link>
               </div>
             </div>
 
@@ -130,7 +130,7 @@ export default function Categories() {
               <div className="Categories-group-card-text">
                 <h3>Turar joylar</h3>
                 <p>Mehmonxonalar, hostellar, ijaraga uylar...</p>
-                <a href="#">Batafsil &gt;</a>
+                <Link to={'/hotels'}>Batafsil &gt;</Link>
               </div>
             </div>
 
@@ -170,7 +170,7 @@ export default function Categories() {
               <div className="Categories-group-card-text">
                 <h3>Savdo markazlari</h3>
                 <p>Supermarketlar, do'konlar, bozorlar...</p>
-                <a href="#">Batafsil &gt;</a>
+                <Link to={'/Shop'}>Batafsil &gt;</Link>
               </div>
             </div>
 
@@ -207,7 +207,7 @@ export default function Categories() {
               <div className="Categories-group-card-text">
                 <h3>Xizmatlar</h3>
                 <p>Notarius, advokat, banklar...</p>
-                <a href="#">Batafsil &gt;</a>
+                <Link to={'/services'}>Batafsil &gt;</Link>
               </div>
             </div>
 
@@ -244,7 +244,7 @@ export default function Categories() {
               <div className="Categories-group-card-text">
                 <h3>Ko'ngil ochar va dam olish</h3>
                 <p>Parklar, attraksionlar, kino/teatr...</p>
-                <a href="#">Batafsil &gt;</a>
+                <Link to={'/entertainment'}>Batafsil &gt;</Link>
               </div>
             </div>
 

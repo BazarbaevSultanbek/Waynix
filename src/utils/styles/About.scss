@@ -1,0 +1,261 @@
+.About {
+  background-color: #f3f8ff;
+  padding: 150px 16px 40px 16px;
+}
+
+.About-main-text {
+  font-size: 17px;
+  color: #333;
+  background-color: white;
+  width: 100%;
+  max-width: 990px;
+  height: auto;
+  margin: auto;
+  padding: 48px;
+  box-shadow: 4px 4px 20px 6px rgba(34, 60, 80, 0.2);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+  box-sizing: border-box;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.About-button {
+  margin: 28px auto 24px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.About-button button {
+  background-color: #f64d00;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  height: 40px;
+  width: 100%;
+  max-width: 272px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.About-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 990px;
+  margin: 0 auto;
+}
+
+.About-social > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  min-width: 220px;
+  box-sizing: border-box;
+}
+
+.About-social span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 50%;
+  flex: 0 0 40px;
+}
+
+.About-social-email {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  box-shadow: 4px 4px 20px 0px rgba(34, 60, 80, 0.2);
+
+  span {
+    background-color: #ffe2e2;
+  }
+  .About-social-email-text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    a {
+      text-decoration: none;
+      color: #4a5565;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      svg {
+        color: #99a1af;
+        opacity: 0.8;
+        height: 16px;
+        width: 16px;
+      }
+    }
+  }
+}
+
+.About-social-instagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 200px;
+  justify-content: center;
+  box-shadow: 4px 4px 20px 0px rgba(34, 60, 80, 0.2);
+
+  span {
+    background-color: #f6e7fa;
+    svg {
+      color: #e7000b;
+    }
+  }
+  .About-social-instagram-text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    a {
+      text-decoration: none;
+      color: #4a5565;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      svg {
+        color: #99a1af;
+        opacity: 0.8;
+        height: 16px;
+        width: 16px;
+      }
+    }
+  }
+}
+
+.About-social-telegram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 200px;
+  justify-content: center;
+  box-shadow: 4px 4px 20px 0px rgba(34, 60, 80, 0.2);
+
+  span {
+    background-color: #dbeaff;
+    svg {
+      color: #165dfc;
+    }
+  }
+
+  .About-social-telegram-text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    span {
+      color: #e60076;
+    }
+
+    a {
+      text-decoration: none;
+      color: #4a5565;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      svg {
+        color: #99a1af;
+        opacity: 0.8;
+        height: 16px;
+        width: 16px;
+      }
+    }
+  }
+}
+
+.About-social-phone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 200px;
+  justify-content: center;
+  box-shadow: 4px 4px 20px 0px rgba(34, 60, 80, 0.2);
+
+  span {
+    background-color: #dcfce6;
+    svg {
+      color: #00a63d;
+    }
+  }
+
+  .About-social-phone-text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    a {
+      text-decoration: none;
+      color: #4a5565;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      svg {
+        color: #99a1af;
+        opacity: 0.8;
+        height: 16px;
+        width: 16px;
+      }
+    }
+  }
+}
+
+.About-text {
+  text-align: center;
+  margin: 24px auto 0 auto;
+  max-width: 740px;
+  color: #333;
+}
+
+@media (min-width: 1024px) {
+  .About-button button {
+    width: 272px;
+  }
+
+  .About-social {
+    flex-wrap: nowrap;
+    margin: 40px auto;
+  }
+}
+
+@media (max-width: 1023px) {
+  .About-main-text {
+    padding: 28px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .About {
+    padding: 120px 12px 32px 12px;
+  }
+
+  .About-main-text {
+    padding: 20px;
+  }
+
+  .About-social > div {
+    min-width: 100%;
+  }
+}

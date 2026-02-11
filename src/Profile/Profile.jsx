@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "../utils/styles/Profile.scss";
-import Footer from "./components/Footer";
+import Footer from "../utils/footer/Footer";
 import getCookie from "../utils/getCookie";
 import {
   Button,

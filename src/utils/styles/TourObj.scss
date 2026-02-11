@@ -232,7 +232,32 @@
 
 .tour-card__action {
   display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: flex-start;
+}
+
+
+.tour-card__save {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #1f2937;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.tour-card__save:hover {
+  border-color: #cbd5e1;
+}
+
+.save-icon {
+  font-size: 14px;
 }
 
 .tour-objects__list.grid .tour-card__action {
@@ -244,8 +269,8 @@
   color: #ffffff;
   text-decoration: none;
   border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
+  padding: 6px 23px;
+  border-radius: 50px;
   font-size: 13px;
   cursor: pointer;
   a{
@@ -327,6 +352,8 @@
   overflow: hidden;
   box-shadow: 0 6px 18px rgba(30, 64, 175, 0.08);
 }
+
+
 
 .popular-card__media {
   position: relative;

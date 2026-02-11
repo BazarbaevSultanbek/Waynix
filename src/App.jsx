@@ -9,6 +9,12 @@ import Hotels from "./Hotels/Hotels";
 import Contact from "./Contact/Contact";
 import TourObj from "./TourObj/TourObj";
 import Object from "./Object/Object";
+import About from "./About/About";
+import Shop from "./Shop/Shop";
+import Cafe from "./Cafe/Cafe";
+import Services from "./Services/Services";
+import Entertainment from "./Entertainment/Entertainment";
+
 
 function App() {
   return (
@@ -16,13 +22,19 @@ function App() {
       <Notifications position="top-right" />
       <NotificationListener />
       <Routes>
-        <Route path="/hotels" element={<Hotels />} />
         <Route path="/" element={<Main />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<Main />} />
+        <Route path="/hotels" element={<Hotels />} />
+        <Route path="/Shop" element={<Shop />} />
+        <Route path="/cafe" element={<Cafe />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/entertainment" element={<Entertainment />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/About" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/tours" element={<TourObj />} />
         <Route path="/tours/id" element={<Object />} />
+
       </Routes>
     </BrowserRouter>
   );

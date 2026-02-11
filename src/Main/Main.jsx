@@ -1,11 +1,11 @@
 import "../utils/styles/Main.scss";
+import Banner from "../utils/banner/Banner";
 import Waynix from "./components/Waynix";
+import News from "./components/News";
 import Categories from "./components/Categories";
 import Corporate from "./components/Corporate";
-import Footer from "../utils/footer/Footer";
-import Banner from "./components/Banner";
-import News from "./components/News";
 import Weather from "./components/Weather";
+import Footer from "../utils/footer/Footer";
 
 const Main = () => {
   return (

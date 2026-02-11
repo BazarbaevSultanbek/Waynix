@@ -16,8 +16,6 @@ import {
   IconLock,
   IconUser,
   IconPhone,
-  IconBrandGoogle,
-  IconBrandFacebook,
   IconWorld,
   IconChevronDown,
 } from "@tabler/icons-react";
@@ -28,6 +26,7 @@ import { loginUser, register, setUser } from "../../store/reducers/userReducer";
 import main_logo from "../../images/waynix-logo.png";
 import "../styles/banner.scss";
 import getCookie from "../../utils/getCookie";
+import { Link } from "react-router";
 
 const Banner = () => {
   const dispatch = useDispatch();
@@ -41,7 +40,11 @@ const Banner = () => {
     useDisclosure(false);
 
   const [langOpen, setLangOpen] = useState(false);
+  const [catOpen, setCatOpen] = useState(false);
+  const [mobileCatOpen, setMobileCatOpen] = useState(false);
   const [lang, setLang] = useState({ code: "UZ", label: "O'zbek", flag: "🇺🇿" });
+
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const langs = [
     { code: "UZ", label: "O'zbek", flag: "🇺🇿" },
@@ -49,6 +52,16 @@ const Banner = () => {
     { code: "RU", label: "Русский", flag: "🇷🇺" },
     { code: "DE", label: "Deutsch", flag: "🇩🇪" },
     { code: "FR", label: "Français", flag: "🇫🇷" },
+  ];
+
+  const categories = [
+    { label: "Turobektlar", href: "/tours" },
+    { label: "Savdo markazlari", href: "/Shop" },
+    { label: "Ovqatlanish joylari", href: "/Cafe" },
+    { label: "Mehmonxonalar", href: "/hotels" },
+    { label: "Servislar", href: "/services" },
+    { label: "Entertaiment", href: "/entertainment" },
+    { label: "Gidlar", href: "/" },
   ];
 
   useEffect(() => {
@@ -113,7 +126,7 @@ const Banner = () => {
           password,
           phone_number,
           isGit,
-        })
+        }),
       );
       resetForm();
       closeRegister();
@@ -123,36 +136,144 @@ const Banner = () => {
   };
 
   return (
-    <header className="banner">
-      <div className="banner__wrap">
-        <div className="banner__logo">
-          <img src={main_logo} alt="logo" />
-          <span>Waynix</span>
-        </div>
+    <>
+      <header className="banner">
+        <div className="banner__wrap">
+          <Link to="/" className="logo-link">
+            <div className="banner__logo">
+              <img src={main_logo} alt="logo" />
+              <span>Waynix</span>
+            </div>
+          </Link>
 
-        <nav className="banner__nav">
-          <a href="#">Bosh sahifa</a>
-          <button className="nav-btn">
-            Kategoriyalar <IconChevronDown size={16} />
-          </button>
-          <a href="#">Biz haqimizda</a>
-          <a href="#">Kontakt</a>
-        </nav>
+          <nav className="banner__nav">
+            <Link to="*">Bosh sahifa</Link>
 
-        <div className="banner__actions">
-          <div className="lang">
+            <div className="nav-drop">
+              <button className="nav-btn" onClick={() => setCatOpen((v) => !v)}>
+                Kategoriyalar <IconChevronDown size={16} />
+              </button>
+              {catOpen && (
+                <div className="nav-menu">
+                  {categories.map((c) => (
+                    <Link key={c.label} to={c.href}>
+                      {c.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link to="/About">Biz haqimizda</Link>
+            <Link to="/contact">Kontakt</Link>
+          </nav>
+
+          <div className="banner__actions">
+            <div className="lang">
+              <button
+                className="lang-btn"
+                onClick={() => setLangOpen((v) => !v)}
+              >
+                <IconWorld size={16} />
+                <span>
+                  {lang.flag} {lang.code}
+                </span>
+                <IconChevronDown size={14} />
+              </button>
+              {langOpen && (
+                <div className="lang-menu">
+                  {langs.map((l) => (
+                    <button
+                      key={l.code}
+                      onClick={() => {
+                        setLang(l);
+                        setLangOpen(false);
+                      }}
+                    >
+                      <span>{l.flag}</span>
+                      {l.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {currentUser ? (
+              <a className="avatar" href="/profile">
+                <img src={currentUser.avatar} alt="avatar" />
+              </a>
+            ) : (
+              <div className="auth-btns">
+                <button className="btn-outline" onClick={openLogin}>
+                  Kirish
+                </button>
+                <button className="btn-primary" onClick={openRegister}>
+                  Ro'yxatdan o'tish
+                </button>
+              </div>
+            )}
+
             <button
-              className="lang-btn"
-              onClick={() => setLangOpen((v) => !v)}
+              className="burger"
+              onClick={() => setMobileOpen(true)}
+              aria-label="menu"
             >
-              <IconWorld size={16} />
-              <span>
-                {lang.flag} {lang.code}
-              </span>
-              <IconChevronDown size={14} />
+              ☰
             </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile menu */}
+      <div className={`mobile-menu ${mobileOpen ? "open" : ""}`}>
+        <div className="mobile-panel">
+          <div className="mobile-head">
+            <div className="banner__logo">
+              <img src={main_logo} alt="logo" />
+              <span>Waynix</span>
+            </div>
+            <button
+              className="mobile-close"
+              onClick={() => setMobileOpen(false)}
+            >
+              ✕
+            </button>
+          </div>
+
+          <Link to="*">Bosh sahifa</Link>
+
+          <button
+            className="mobile-cat-btn"
+            onClick={() => setMobileCatOpen((v) => !v)}
+          >
+            Kategoriyalar
+            <span className={mobileCatOpen ? "rot" : ""}>▾</span>
+          </button>
+          <div className={`mobile-cat-list ${mobileCatOpen ? "open" : ""}`}>
+            {categories.map((c) => (
+              <Link key={c.label} to={c.href}>
+                {c.label}
+              </Link>
+            ))}
+          </div>
+
+          <a href="#">Biz haqimizda</a>
+          <Link to="/contact">Kontakt</Link>
+
+          <div className="mobile-lang">
+            <button
+              className="mobile-lang-btn"
+              onClick={() => setLangOpen((v) => !v)}
+              type="button"
+            >
+              <span>
+                {lang.flag} {lang.label}
+              </span>
+              <IconChevronDown size={16} />
+            </button>
+
             {langOpen && (
-              <div className="lang-menu">
+              <div className="mobile-lang-menu">
                 {langs.map((l) => (
                   <button
                     key={l.code}
@@ -160,6 +281,7 @@ const Banner = () => {
                       setLang(l);
                       setLangOpen(false);
                     }}
+                    type="button"
                   >
                     <span>{l.flag}</span>
                     {l.label}
@@ -169,20 +291,26 @@ const Banner = () => {
             )}
           </div>
 
-          {currentUser ? (
-            <a className="avatar" href="/profile">
-              <img src={currentUser.avatar} alt="avatar" />
-            </a>
-          ) : (
-            <div className="auth-btns">
-              <button className="btn-outline" onClick={openLogin}>
-                Kirish
-              </button>
-              <button className="btn-primary" onClick={openRegister}>
-                Ro'yxatdan o'tish
-              </button>
-            </div>
-          )}
+          <div className="auth-btns mobile">
+            <button
+              className="btn-outline"
+              onClick={() => {
+                setMobileOpen(false);
+                openLogin();
+              }}
+            >
+              Kirish
+            </button>
+            <button
+              className="btn-primary"
+              onClick={() => {
+                setMobileOpen(false);
+                openRegister();
+              }}
+            >
+              Ro'yxat
+            </button>
+          </div>
         </div>
       </div>
 
@@ -226,27 +354,15 @@ const Banner = () => {
             Parolni unutdingizmi?
           </Anchor>
 
-          <Button fullWidth radius="md" size="md" onClick={handleLogin} color="#f97316">
+          <Button
+            fullWidth
+            radius="md"
+            size="md"
+            variant="gradient"
+            gradient={{ from: "indigo", via: "violet", to: "pink" }}
+            onClick={handleLogin}
+          >
             Kirish
-          </Button>
-
-          <Divider label="yoki" labelPosition="center" my="md" />
-
-          <Button
-            fullWidth
-            variant="default"
-            leftSection={<IconBrandGoogle size={16} />}
-            mb="xs"
-          >
-            Google bilan kirish
-          </Button>
-
-          <Button
-            fullWidth
-            variant="default"
-            leftSection={<IconBrandFacebook size={16} />}
-          >
-            Facebook bilan kirish
           </Button>
 
           <Text ta="center" mt="lg" fz="sm">
@@ -345,34 +461,22 @@ const Banner = () => {
             <Checkbox
               label="Foydalanish shartlari va maxfiylik siyosatiga roziman"
               checked={policy}
-              onChange={(e) => setPolicy(e.currentTarget.checked)}
+              onChange={(e) => setPolicy(e.target.checked)}
               mb="lg"
               required
             />
 
-            <Button type="submit" fullWidth radius="md" size="md" color="#f97316">
+            <Button
+              type="submit"
+              fullWidth
+              radius="md"
+              size="md"
+              variant="gradient"
+              gradient={{ from: "indigo", via: "violet", to: "pink" }}
+            >
               Ro‘yxatdan o‘tish
             </Button>
           </form>
-
-          <Divider label="yoki" labelPosition="center" my="md" />
-
-          <Button
-            fullWidth
-            variant="default"
-            leftSection={<IconBrandGoogle size={16} />}
-            mb="xs"
-          >
-            Google bilan ro‘yxatdan o‘tish
-          </Button>
-
-          <Button
-            fullWidth
-            variant="default"
-            leftSection={<IconBrandFacebook size={16} />}
-          >
-            Facebook bilan ro‘yxatdan o‘tish
-          </Button>
 
           <Text ta="center" mt="lg" fz="sm">
             Allaqachon hisobingiz bormi?{" "}
@@ -382,7 +486,7 @@ const Banner = () => {
           </Text>
         </Box>
       </Modal>
-    </header>
+    </>
   );
 };
 
