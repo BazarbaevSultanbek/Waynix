@@ -1,201 +1,373 @@
+import { useMemo, useState } from "react";
+import {
+  IconMapPin,
+  IconBookmark,
+  IconBookmarkFilled,
+  IconClock,
+  IconPhone,
+  IconWorld,
+  IconBrandInstagram,
+  IconBrandFacebook,
+  IconBrandYoutube,
+  IconBrandLinkedin,
+  IconBrandTelegram,
+  IconMail,
+  IconStarFilled,
+  IconChevronLeft,
+  IconChevronRight,
+  IconSend,
+} from "@tabler/icons-react";
 import Banner from "../utils/banner/Banner";
 import Footer from "../utils/footer/Footer";
 import "../utils/styles/Object.scss";
 
+const place = {
+  id: 1,
+  title: "Amir Temur maqbarasi (Go'ri Amir)",
+  category: "Tarixiy yodgorlik",
+  rating: 4.8,
+  reviewsCount: 324,
+  location: "Samarqand, O'zbekiston",
+  description:
+    "Go'ri Amir maqbarasi - Amir Temur va uning oila a'zolari dafn etilgan tarixiy yodgorlik. 1404-yilda qurilgan bu arxitektura durdonasi o'z davri me'morchiligining eng yaxshi namunalaridan biri hisoblanadi. Binoning gumbazi va ichki bezagi ajoyib san'at asaridir.",
+  schedule: "09:00 - 18:00",
+  scheduleDays: "Dushanba-Yakshanba",
+  address: "Bibikhonim ko'chasi, 7",
+  phone: "+998 66 235 67 89",
+  author: "Akmal Karimov",
+  authorRole: "Gid va sayohat mutaxassisi",
+};
+
+const gallery = [
+  "https://uzbektour.uz/wp-content/uploads/2018/12/temur-monument.jpg",
+  "https://www.gazeta.uz/media/img/2024/01/ayFRZG17064359363257_l.jpg",
+  "https://uzbek-travel.com/images/uz/Landmarks/Tashkent/Amir_Temur_Square/5085743567_ed4d32c36c_b.jpg",
+  "https://uzbekistan.travel/storage/app/media/wepb/Maqolalar/Shaxrisabzdagi%20Temur%20haykali/cropped-images/shutterstock_2260835259-0-0-0-0-1742816958.webp",
+  "https://lyceum.wiut.uz/images/2025/aprel2025/3/360_F_596856238_dOb5xHzzbo3bJFeXBJACOVFF9RT3VSe3.jpg",
+];
+
+const nearbyPlaces = [
+  {
+    id: 1,
+    name: "Registon maydoni",
+    type: "Tarixiy majmua",
+    rating: 4.9,
+    distance: "2.5 km",
+    image:
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=400&auto=format&fit=crop",
+  },
+  {
+    id: 2,
+    name: "Bibi-Xonim masjidi",
+    type: "Masjid",
+    rating: 4.8,
+    distance: "3.1 km",
+    image:
+      "https://uzbekistan.travel/storage/app/media/Rasmlar/Samarqand/cropped-images/bibi-khanym-mosque-in-samarkand-uzbekistan-0-0-0-0-1738316597.jpg",
+  },
+  {
+    id: 3,
+    name: "Shohizinda maqbarasi",
+    type: "Maqbara",
+    rating: 4.9,
+    distance: "4.2 km",
+    image:
+      "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=400&auto=format&fit=crop",
+  },
+];
+
+const initialComments = [
+  {
+    id: 1,
+    author: "Aziza Karimova",
+    rating: 5,
+    timeAgo: "2 kun oldin",
+    text: "Ajoyib joy! Tarixiy arxitektura va go'zal manzara. Albatta tashrif buyurishni maslahat beraman.",
+  },
+  {
+    id: 2,
+    author: "Sardor Tursunov",
+    rating: 4,
+    timeAgo: "1 hafta oldin",
+    text: "Juda yoqdi, lekin dam olish joylari kam. Umumiy taassurot ijobiy.",
+  },
+  {
+    id: 3,
+    author: "Nilufar Rahimova",
+    rating: 5,
+    timeAgo: "2 hafta oldin",
+    text: "Oilam bilan borgandik, hammaga yoqdi. Fotosuratlar uchun ajoyib joy!",
+  },
+];
+
+function Stars({ value, size = 16 }) {
+  return (
+    <span className="stars-row">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <IconStarFilled
+          key={i}
+          size={size}
+          color={i < value ? "#f6b400" : "#d1d5db"}
+        />
+      ))}
+    </span>
+  );
+}
+
 const Object = () => {
+  const [saved, setSaved] = useState(false);
+  const [activeImage, setActiveImage] = useState(0);
+  const [comments, setComments] = useState(initialComments);
+  const [draft, setDraft] = useState("");
+  const [draftRating, setDraftRating] = useState(0);
+
+  const activeSrc = gallery[activeImage];
+
+  const avgRating = useMemo(() => {
+    if (!comments.length) return 0;
+    const sum = comments.reduce((acc, c) => acc + c.rating, 0);
+    return (sum / comments.length).toFixed(1);
+  }, [comments]);
+
+  const prevImage = () => {
+    setActiveImage((p) => (p === 0 ? gallery.length - 1 : p - 1));
+  };
+
+  const nextImage = () => {
+    setActiveImage((p) => (p === gallery.length - 1 ? 0 : p + 1));
+  };
+
+  const submitComment = () => {
+    if (!draft.trim() || draftRating < 1) return;
+    const newComment = {
+      id: Date.now(),
+      author: "Siz",
+      rating: draftRating,
+      timeAgo: "Hozir",
+      text: draft.trim(),
+    };
+    setComments((prev) => [newComment, ...prev]);
+    setDraft("");
+    setDraftRating(0);
+  };
+
   return (
     <>
       <Banner />
       <section className="object-page">
         <div className="object-page__wrap">
-          <div className="object-main">
-            <div className="object-hero">
-              <div className="object-info">
-                <h1>Ayoz qal'a</h1>
-                <span className="object-type">Tarixiy joylar</span>
+          <header className="header-card">
+            <div>
+              <h1>{place.title}</h1>
+              <div className="header-meta">
+                <span className="pill">{place.category}</span>
+                <span className="meta-item">
+                  <IconStarFilled size={16} color="#f6b400" /> {place.rating} (
+                  {place.reviewsCount} sharh)
+                </span>
+                <span className="meta-item">
+                  <IconMapPin size={16} /> {place.location}
+                </span>
+              </div>
+            </div>
 
-                <div className="object-rating">
-                  <span className="stars">★★★★★</span>
-                  <span className="rating-value">4.9</span>
-                  <span className="rating-count">(25 sharh)</span>
-                </div>
+            <button
+              className={`save-btn ${saved ? "saved" : ""}`}
+              onClick={() => setSaved((s) => !s)}
+              aria-label="Saqlash"
+              title="Saqlash"
+            >
+              {saved ? (
+                <IconBookmarkFilled size={18} />
+              ) : (
+                <IconBookmark size={18} />
+              )}
+            </button>
+          </header>
 
-                <div className="object-meta">
-                  <div className="meta-row">
-                    📍 Ellikqala tumani, Qoraqalpog'iston
+          <section className="gallery-card">
+            <div className="main-image-wrap">
+              <img src={activeSrc} alt={place.title} className="main-image" />
+              <button className="gallery-arrow left" onClick={prevImage}>
+                <IconChevronLeft size={18} />
+              </button>
+              <button className="gallery-arrow right" onClick={nextImage}>
+                <IconChevronRight size={18} />
+              </button>
+            </div>
+
+            <div className="thumbs-col">
+              {gallery.map((src, i) => (
+                <button
+                  key={src}
+                  className={`thumb-btn ${activeImage === i ? "active" : ""}`}
+                  onClick={() => setActiveImage(i)}
+                >
+                  <img src={src} alt={`preview-${i + 1}`} />
+                </button>
+              ))}
+            </div>
+          </section>
+
+          <div className="content-grid">
+            <div className="left-col">
+              <div className="card">
+                <h3>Tavsif</h3>
+                <p>{place.description}</p>
+              </div>
+
+              <div className="card contact-card">
+                <div className="contact-line">
+                  <div>
+                    <div className="line-title">
+                      <IconClock size={16} /> Ish vaqti
+                    </div>
+                    <div>{place.schedule}</div>
+                    <small>{place.scheduleDays}</small>
                   </div>
-                  <div className="meta-row">🔖 Saqlash</div>
+
+                  <div>
+                    <div className="line-title">
+                      <IconMapPin size={16} /> Manzil
+                    </div>
+                    <div>{place.address}</div>
+                    <small>{place.location}</small>
+                  </div>
+                </div>
+
+                <div className="phone-line">
+                  <IconPhone size={16} /> {place.phone}
                 </div>
               </div>
 
-              <div className="object-gallery">
-                <div className="gallery-main">
-                  <img
-                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop"
-                    alt="Ayoz qal'a"
-                  />
-                  <button className="gallery-btn left">‹</button>
-                  <button className="gallery-btn right">›</button>
-                  <span className="gallery-count">1 / 5</span>
-                </div>
-                <div className="gallery-thumbs">
-                  <img
-                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=400&auto=format&fit=crop"
-                    alt=""
-                    className="is-active"
-                  />
-                  <img
-                    src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=400&auto=format&fit=crop"
-                    alt=""
-                  />
-                  <img
-                    src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=400&auto=format&fit=crop"
-                    alt=""
-                  />
-                  <img
-                    src="https://images.unsplash.com/photo-1458842727533-7c9053bfea65?q=80&w=400&auto=format&fit=crop"
-                    alt=""
-                  />
+              <div className="card social-grid-card">
+                <a href="#" className="social-link-card">
+                  <IconWorld size={16} /> <span>Website</span>
+                </a>
+                <a href="#" className="social-link-card">
+                  <IconBrandInstagram size={16} /> <span>Instagram</span>
+                </a>
+                <a href="#" className="social-link-card">
+                  <IconBrandFacebook size={16} /> <span>Facebook</span>
+                </a>
+                <a href="#" className="social-link-card">
+                  <IconBrandYoutube size={16} /> <span>YouTube</span>
+                </a>
+                <a href="#" className="social-link-card">
+                  <IconBrandLinkedin size={16} /> <span>LinkedIn</span>
+                </a>
+                <a href="#" className="social-link-card">
+                  <IconMail size={16} /> <span>Email</span>
+                </a>
+              </div>
+
+              <div className="card author-card">
+                <h3>Avtor</h3>
+                <div className="author-row">
+                  <div className="avatar">AK</div>
+                  <div>
+                    <strong>{place.author}</strong>
+                    <p>{place.authorRole}</p>
+                    <div className="author-links">
+                      <a href="#" style={{ color: "#f6339a" }}>
+                        <i className="fa-brands fa-instagram"></i> Instagram
+                      </a>
+                      <a href="#" style={{ color: "#155dfc" }}>
+                        <i className="fa-brands fa-telegram"></i>Telegram
+                      </a>
+                      <a href="#" style={{color: "#0d41b6"}}>
+                        <i className="fa-brands fa-linkedin-in"></i>LinkedIn
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="card">
-              <h3>Tavsif</h3>
-              <p>
-                Ayoz qal'a — qadimgi Xorazm davlatining go'zal poytaxti bo'lib,
-                miloddan avvalgi IV–III asrlarda qurilgan. Bu noyob arxeologik
-                yodgorlik O'rta Osiyodagi eng qadimgi shaharlardan biri
-                sanaladi.
-              </p>
-            </div>
-
-            <div className="card info-card">
-              <div className="info-item">
-                <div className="icon">🕒</div>
-                <div>
-                  <div className="label">Ish vaqti</div>
-                  <div className="value">09:00 - 22:00</div>
-                  <div className="sub">Dush-Shan</div>
-                </div>
-              </div>
-              <div className="info-item">
-                <div className="icon">📍</div>
-                <div>
-                  <div className="label">Manzil</div>
-                  <div className="value">Ellikqala ko'chasi, 45-uy</div>
-                </div>
-              </div>
-              <div className="info-item">
-                <div className="icon">📞</div>
-                <div>
-                  <div className="label">Telefon</div>
-                  <div className="value link">+998 90 123 45 67</div>
+            <aside className="right-col">
+              <div className="card map-card">
+                <h3>Xarita</h3>
+                <div className="map-box">
+                  <IconMapPin size={28} />
+                  <p>Xarita joylashuvi</p>
                 </div>
               </div>
 
-              <div className="info-links">
-                <span>🌐 Website</span>
-                <span>📷 Instagram</span>
-                <span>📨 Telegram</span>
-                <span>👍 Facebook</span>
-                <span>▶ YouTube</span>
-                <span>✉ Email</span>
-                <span>in LinkedIn</span>
+              <div className="card nearby-card-wrap">
+                <h3>Yaqin atrofdagi joylar</h3>
+                {nearbyPlaces.map((item) => (
+                  <a key={item.id} href="#" className="nearby-card">
+                    <img src={item.image} alt={item.name} />
+                    <div className="nearby-card__body">
+                      <strong>{item.name}</strong>
+                      <p>{item.type}</p>
+                      <div className="nearby-meta">
+                        <span>
+                          <IconStarFilled size={14} color="#f6b400" />{" "}
+                          {item.rating}
+                        </span>
+                        <span>
+                          <IconMapPin size={14} /> {item.distance}
+                        </span>
+                      </div>
+                    </div>
+                  </a>
+                ))}
               </div>
-
-              <div className="info-footer">
-                <span>Qo'shgan:</span>
-                <strong>Aziz Karimov</strong>
-                <div className="social-mini">📷 ✈️ in</div>
-              </div>
-            </div>
-
-            <div className="card map-card">
-              <h3>Xarita</h3>
-              <div className="map-box">
-                <span>📍</span>
-                <p>Xarita bu yerda</p>
-              </div>
-            </div>
-
-            <div className="card review-card">
-              <h3>Baho va sharh</h3>
-              <div className="review-stars">☆☆☆☆☆</div>
-              <textarea placeholder="Fikringizni yozing..."></textarea>
-              <button className="btn">✉ Yuborish</button>
-            </div>
-
-            <div className="card comments-card">
-              <h3>Sharhlar</h3>
-              <div className="comment">
-                <div className="comment-head">
-                  <strong>Jamshid Karimov</strong>
-                  <span>2024-01-20</span>
-                </div>
-                <div className="comment-stars">★★★★★</div>
-                <p>
-                  Hayratlanarli tarixiy joy! Gidning tushuntirishlari juda
-                  qiziqarli.
-                </p>
-              </div>
-
-              <div className="comment">
-                <div className="comment-head">
-                  <strong>Nilufar Yusupova</strong>
-                  <span>2024-01-15</span>
-                </div>
-                <div className="comment-stars">★★★★★</div>
-                <p>O'zbek tarixining qadimiy sahifalarini his qilish mumkin.</p>
-              </div>
-            </div>
+            </aside>
           </div>
 
-          <aside className="object-side">
-            <h3>Yaqin turobeklar</h3>
-
-            <div className="side-card">
-              <img
-                src="https://images.unsplash.com/photo-1458842727533-7c9053bfea65?q=80&w=800&auto=format&fit=crop"
-                alt=""
-              />
-              <span className="side-tag">Muzey</span>
-              <span className="side-rate">★ 4.7</span>
-              <div className="side-body">
-                <strong>Qoraqalpog'iston muzeyi</strong>
-                <p>📍 25 km</p>
+          <section className="card comments-section">
+            <h3>Baho va sharhlar</h3>
+            <div className="review-form">
+              <div className="rate-line">
+                <span>Baho:</span>
+                <div className="rate-stars">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setDraftRating(i + 1)}
+                      className="rate-btn"
+                    >
+                      <IconStarFilled
+                        size={18}
+                        color={i < draftRating ? "#f6b400" : "#d1d5db"}
+                      />
+                    </button>
+                  ))}
+                </div>
               </div>
+
+              <textarea
+                placeholder="Fikr-mulohaza yozing..."
+                value={draft}
+                onChange={(e) => setDraft(e.target.value)}
+              />
+              <button className="send-btn" onClick={submitComment}>
+                <IconSend size={15} /> Yuborish
+              </button>
             </div>
 
-            <div className="side-card">
-              <img
-                src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800&auto=format&fit=crop"
-                alt=""
-              />
-              <span className="side-tag">Arxeologik yodgorlik</span>
-              <span className="side-rate">★ 4.5</span>
-              <div className="side-body">
-                <strong>Guldursun qal'asi</strong>
-                <p>📍 18 km</p>
-              </div>
+            <div className="comments-head">
+              <h4>Sharhlar ({comments.length})</h4>
+              <span>O'rtacha baho: {avgRating}</span>
             </div>
 
-            <div className="side-card">
-              <img
-                src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=800&auto=format&fit=crop"
-                alt=""
-              />
-              <span className="side-tag">Ekotur joyi</span>
-              <span className="side-rate">★ 4.6</span>
-              <div className="side-body">
-                <strong>Orol dengizi</strong>
-                <p>📍 45 km</p>
-              </div>
+            <div className="comments-list">
+              {comments.map((c) => (
+                <div key={c.id} className="comment-item">
+                  <div className="comment-head">
+                    <strong>{c.author}</strong>
+                    <span>{c.timeAgo}</span>
+                  </div>
+                  <Stars value={c.rating} />
+                  <p>{c.text}</p>
+                </div>
+              ))}
             </div>
-          </aside>
+          </section>
         </div>
       </section>
-
       <Footer />
     </>
   );
