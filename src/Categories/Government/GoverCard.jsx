@@ -7,7 +7,7 @@ import {
   IconClock,
 } from "@tabler/icons-react";
 import { Card, Image, Group, Button, Text, Anchor, Badge } from "@mantine/core";
-import "../utils/styles/Entertainment.scss";
+import "../../utils/styles/Gover.scss";
 
 function getIsOpen(hours) {
   const [start, end] = hours.split("-");
@@ -37,14 +37,14 @@ function renderStars(rating) {
   });
 }
 
-export default function EntertainmentCard({ item }) {
+export default function GovernmentCard({ item }) {
   const isOpen = getIsOpen(item.hours);
 
   return (
-    <Card radius="lg" withBorder shadow="sm" className="ent-card">
-      <Card.Section className="ent-card__media">
+    <Card radius="lg" withBorder shadow="sm" className="gov-card">
+      <Card.Section className="gov-card__media">
         <Image src={item.image} height={220} alt={item.name} />
-        <Group className="ent-card__stars" gap={5}>
+        <Group className="gov-card__stars" gap={5}>
           {renderStars(item.rating)}
         </Group>
       </Card.Section>
@@ -78,7 +78,7 @@ export default function EntertainmentCard({ item }) {
         📍 {item.location}
       </Anchor>
 
-      <Group mt="md" justify="space-between">
+      <Group mt="md">
         <Group gap={5}>
           <IconStarFilled size={16} color="#FFC107" />
           <Text fw={500}>{item.rating}</Text>
@@ -92,7 +92,7 @@ export default function EntertainmentCard({ item }) {
           variant="outline"
           color="dark"
           leftSection={<IconPhone size={16} />}
-          className="ent-card__call-btn"
+          className="gov-card__call-btn"
         >
           Qo'ng'iroq
         </Button>

@@ -280,8 +280,8 @@ export default function Categories() {
               </div>
               <div className="Categories-group-card-text">
                 <h3>Ta'lim</h3>
-                <p>Maktablar, bog'chalar, litseylar...</p>
-                <a href="#">Batafsil &gt;</a>
+                <p>Maktablar, bog'chalar, litseylar...</p>  
+                <Link to="/education">Batafsil &gt;</Link>
               </div>
             </div>
 
@@ -321,7 +321,7 @@ export default function Categories() {
               <div className="Categories-group-card-text">
                 <h3>Davlat binolari</h3>
                 <p>Hokimiyat, vazirliklar, sud, prokuratura...</p>
-                <a href="#">Batafsil &gt;</a>
+                <Link to="/government">Batafsil &gt;</Link>
               </div>
             </div>
 
@@ -360,7 +360,7 @@ export default function Categories() {
               <div className="Categories-group-card-text">
                 <h3>Tibbiyot</h3>
                 <p>Shifoxona, poliklinika, stomatologiya...</p>
-                <a href="#">Batafsil &gt;</a>
+                <Link to="/medical">Batafsil &gt;</Link>
               </div>
             </div>
           </section>

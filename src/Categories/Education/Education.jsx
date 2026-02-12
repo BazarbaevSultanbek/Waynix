@@ -1,20 +1,13 @@
-import {
-  Menu,
-  Button,
-  TextInput,
-  Group,
-  SimpleGrid,
-  Text,
-} from "@mantine/core";
+import { Menu, Button, TextInput, Group, SimpleGrid, Text } from "@mantine/core";
 import { IconChevronDown, IconCheck, IconSearch } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
-import "../utils/styles/Entertainment.scss";
-import Banner from "../utils/banner/Banner";
-import Footer from "../utils/footer/Footer";
-import entertainment from "../http/entertainment";
-import EntertainmentCard from "./EntertainmentCard";
+import "../../utils/styles/Education.scss";
+import Banner from "../../utils/banner/Banner";
+import Footer from "../../utils/footer/Footer";
+import education from "../../http/education";
+import EducationCard from "./EduCard";
 
-export default function Entertainment() {
+export default function Education() {
   const [sortValue, setSortValue] = useState("default");
   const [search, setSearch] = useState("");
   const [visibleCount, setVisibleCount] = useState(6);
@@ -30,15 +23,15 @@ export default function Entertainment() {
     sortOptions.find((opt) => opt.value === sortValue)?.label || "Saralash";
 
   const processed = useMemo(() => {
-    let list = [...entertainment];
+    let list = [...education];
 
     if (search.trim()) {
       const q = search.toLowerCase();
       list = list.filter(
-        (x) =>
-          x.name.toLowerCase().includes(q) ||
-          x.location.toLowerCase().includes(q) ||
-          x.type.toLowerCase().includes(q),
+        (e) =>
+          e.name.toLowerCase().includes(q) ||
+          e.location.toLowerCase().includes(q) ||
+          e.type.toLowerCase().includes(q)
       );
     }
 
@@ -56,41 +49,32 @@ export default function Entertainment() {
   return (
     <>
       <Banner />
-      <div className="ent-page">
+      <div className="education-page">
         <div className="container">
-          <div className="ent-banner">
-            <div className="ent-banner-inner">
-              <div className="ent-banner-inner-sub">
-                <h1>Ko'ngil ochar va dam olish</h1>
-                <p>Parklar, attraksionlar, kino va teatr joylarini toping</p>
+          <div className="education-banner">
+            <div className="education-banner-inner">
+              <div className="education-banner-inner-sub">
+                <h1>Ta'lim</h1>
+                <p>Maktablar, bog'chalar va litseylar ro'yxati</p>
               </div>
 
-              <div className="ent-banner-search">
+              <div className="education-banner-search">
                 <TextInput
                   placeholder="Qidirish..."
                   value={search}
                   onChange={(e) => {
                     setSearch(e.target.value);
-                    setVisibleCount(9);
+                    setVisibleCount(6);
                   }}
                   leftSection={<IconSearch size={18} />}
                   radius="md"
                 />
               </div>
 
-              <div className="ent-banner-filter">
-                <Menu
-                  width={240}
-                  position="bottom-start"
-                  shadow="md"
-                  radius="md"
-                >
+              <div className="education-banner-filter">
+                <Menu width={240} position="bottom-start" shadow="md" radius="md">
                   <Menu.Target>
-                    <Button
-                      variant="default"
-                      radius="md"
-                      rightSection={<IconChevronDown size={16} />}
-                    >
+                    <Button variant="default" radius="md" rightSection={<IconChevronDown size={16} />}>
                       {activeLabel}
                     </Button>
                   </Menu.Target>
@@ -101,17 +85,11 @@ export default function Entertainment() {
                         key={item.value}
                         onClick={() => {
                           setSortValue(item.value);
-                          setVisibleCount(9);
+                          setVisibleCount(6);
                         }}
-                        rightSection={
-                          sortValue === item.value ? (
-                            <IconCheck size={16} />
-                          ) : null
-                        }
+                        rightSection={sortValue === item.value ? <IconCheck size={16} /> : null}
                       >
-                        <Text fw={sortValue === item.value ? 600 : 400}>
-                          {item.label}
-                        </Text>
+                        <Text fw={sortValue === item.value ? 600 : 400}>{item.label}</Text>
                       </Menu.Item>
                     ))}
                   </Menu.Dropdown>
@@ -120,29 +98,21 @@ export default function Entertainment() {
             </div>
           </div>
 
-          <div className="ent-list">
+          <div className="education-list">
             <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="lg">
               {processed.slice(0, visibleCount).map((item) => (
-                <EntertainmentCard key={item.id} item={item} />
+                <EducationCard key={item.id} item={item} />
               ))}
             </SimpleGrid>
 
             {processed.length > 6 && (
               <Group justify="center" mt="xl">
                 {visibleCount < processed.length ? (
-                  <Button
-                    variant="outline"
-                    radius="md"
-                    onClick={() => setVisibleCount((v) => v + 6)}
-                  >
+                  <Button variant="outline" radius="md" onClick={() => setVisibleCount((v) => v + 6)}>
                     Ko'proq ko'rsatish
                   </Button>
                 ) : (
-                  <Button
-                    variant="outline"
-                    radius="md"
-                    onClick={() => setVisibleCount(6)}
-                  >
+                  <Button variant="outline" radius="md" onClick={() => setVisibleCount(6)}>
                     Kamroq ko'rsatish
                   </Button>
                 )}

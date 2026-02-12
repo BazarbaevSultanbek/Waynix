@@ -7,7 +7,7 @@ import {
 } from "@tabler/icons-react";
 import { Card, Image, Group } from "@mantine/core";
 import { Button, Text, Anchor } from "@mantine/core";
-import "../utils/styles/Hotels.scss";
+import "../../utils/styles/Hotels.scss";
 
 export default function HotelCard({hotel}) {
 

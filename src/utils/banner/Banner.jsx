@@ -61,6 +61,9 @@ const Banner = () => {
     { label: "Mehmonxonalar", href: "/hotels" },
     { label: "Servislar", href: "/services" },
     { label: "Entertaiment", href: "/entertainment" },
+    { label: "Tibbiyot", href: "/medical" },
+    { label: "Davlat idoralari", href: "/government" },
+    { label: "Ta'lim", href: "/education" },
     { label: "Gidlar", href: "/" },
   ];
 

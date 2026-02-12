@@ -6,7 +6,7 @@ import {
   IconStar,
 } from "@tabler/icons-react";
 import { Card, Image, Group, Button, Text, Anchor } from "@mantine/core";
-import "../utils/styles/Shop.scss";
+import "../../utils/styles/Shop.scss";
 
 const shopImages = [
   "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?q=80&w=1200&auto=format&fit=crop",

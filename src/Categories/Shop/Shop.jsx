@@ -1,11 +1,11 @@
 import { Menu, Button, TextInput, Group, SimpleGrid, Text } from "@mantine/core";
 import { IconChevronDown, IconCheck, IconSearch } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
-import "../utils/styles/Shop.scss";
-import Banner from "../utils/banner/Banner";
-import shopsData from "../http/hotels";
+import "../../utils/styles/Shop.scss";
+import Banner from "../../utils/banner/Banner";
+import shopsData from "../../http/hotels";
 import ShopCard from "./ShopCard";
-import Footer from "../utils/footer/Footer";
+import Footer from "../../utils/footer/Footer";
 
 export default function Shop() {
   const [sortValue, setSortValue] = useState("default");

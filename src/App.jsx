@@ -5,15 +5,18 @@ import Profile from "./Profile/Profile";
 import "@mantine/notifications/styles.css";
 import { Notifications } from "@mantine/notifications";
 import NotificationListener from "./utils/notifications/Notify";
-import Hotels from "./Hotels/Hotels";
+import Hotels from "./Categories/Hotels/Hotels";
 import Contact from "./Contact/Contact";
 import TourObj from "./TourObj/TourObj";
 import Object from "./Object/Object";
 import About from "./About/About";
-import Shop from "./Shop/Shop";
-import Cafe from "./Cafe/Cafe";
-import Services from "./Services/Services";
-import Entertainment from "./Entertainment/Entertainment";
+import Shop from "./Categories/Shop/Shop";
+import Cafe from "./Categories/Cafe/Cafe";
+import Services from "./Categories/Services/Services";
+import Entertainment from "./Categories/Entertainment/Entertainment";
+import Medical from "./Categories/Medical/Medical";
+import Government from "./Categories/Government/Gover";
+import Education from "./Categories/Education/Education";
 
 
 function App() {
@@ -29,6 +32,9 @@ function App() {
         <Route path="/cafe" element={<Cafe />} />
         <Route path="/services" element={<Services />} />
         <Route path="/entertainment" element={<Entertainment />} />
+        <Route path="/medical" element={<Medical />} />
+        <Route path="/government" element={<Government />} />
+        <Route path="/education" element={<Education />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/About" element={<About />} />
         <Route path="/contact" element={<Contact />} />

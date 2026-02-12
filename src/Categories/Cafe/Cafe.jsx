@@ -1,13 +1,13 @@
 import { Menu, Button, TextInput, Group, SimpleGrid, Text } from "@mantine/core";
 import { IconChevronDown, IconCheck, IconSearch } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
-import "../utils/styles/Services.scss";
-import Banner from "../utils/banner/Banner";
-import Footer from "../utils/footer/Footer";
-import services from "../http/ServicesData";
-import ServiceCard from "./ServiceCard";
+import "../../utils/styles/Cafe.scss";
+import Banner from "../../utils/banner/Banner";
+import Footer from "../../utils/footer/Footer";
+import eatingPlaces from "../../http/CafeData";
+import CafeCard from "./CafeCard";
 
-export default function Services() {
+export default function Cafe() {
   const [sortValue, setSortValue] = useState("default");
   const [search, setSearch] = useState("");
   const [visibleCount, setVisibleCount] = useState(9);
@@ -22,16 +22,16 @@ export default function Services() {
   const activeLabel =
     sortOptions.find((opt) => opt.value === sortValue)?.label || "Saralash";
 
-  const processedServices = useMemo(() => {
-    let list = [...services];
+  const processedPlaces = useMemo(() => {
+    let list = [...eatingPlaces];
 
     if (search.trim()) {
       const q = search.toLowerCase();
       list = list.filter(
-        (s) =>
-          s.name.toLowerCase().includes(q) ||
-          s.location.toLowerCase().includes(q) ||
-          s.type.toLowerCase().includes(q)
+        (p) =>
+          p.name.toLowerCase().includes(q) ||
+          p.location.toLowerCase().includes(q) ||
+          p.type.toLowerCase().includes(q)
       );
     }
 
@@ -49,16 +49,16 @@ export default function Services() {
   return (
     <>
       <Banner />
-      <div className="services-page">
+      <div className="eating-places">
         <div className="container">
-          <div className="services-banner">
-            <div className="services-banner-inner">
-              <div className="services-banner-inner-sub">
-                <h1>Servislar</h1>
-                <p>Notarius, advokat va bank xizmatlarini toping</p>
+          <div className="eating-banner">
+            <div className="eating-banner-inner">
+              <div className="eating-banner-inner-sub">
+                <h1>Ovqatlanish joylari</h1>
+                <p>Restoran, kafe va fast food joylarini toping</p>
               </div>
 
-              <div className="services-banner-search">
+              <div className="eating-banner-search">
                 <TextInput
                   placeholder="Qidirish..."
                   value={search}
@@ -71,14 +71,10 @@ export default function Services() {
                 />
               </div>
 
-              <div className="services-banner-filter">
+              <div className="eating-banner-filter">
                 <Menu width={240} position="bottom-start" shadow="md" radius="md">
                   <Menu.Target>
-                    <Button
-                      variant="default"
-                      radius="md"
-                      rightSection={<IconChevronDown size={16} />}
-                    >
+                    <Button variant="default" radius="md" rightSection={<IconChevronDown size={16} />}>
                       {activeLabel}
                     </Button>
                   </Menu.Target>
@@ -102,16 +98,16 @@ export default function Services() {
             </div>
           </div>
 
-          <div className="services-list">
+          <div className="eating-list">
             <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="lg">
-              {processedServices.slice(0, visibleCount).map((service) => (
-                <ServiceCard key={service.id} service={service} />
+              {processedPlaces.slice(0, visibleCount).map((place) => (
+                <CafeCard key={place.id} place={place} />
               ))}
             </SimpleGrid>
 
-            {processedServices.length > 9 && (
+            {processedPlaces.length > 9 && (
               <Group justify="center" mt="xl">
-                {visibleCount < processedServices.length ? (
+                {visibleCount < processedPlaces.length ? (
                   <Button variant="outline" radius="md" onClick={() => setVisibleCount((prev) => prev + 6)}>
                     Ko'proq ko'rsatish
                   </Button>

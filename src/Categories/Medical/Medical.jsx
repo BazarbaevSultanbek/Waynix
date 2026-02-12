@@ -1,16 +1,16 @@
 import { Menu, Button, TextInput, Group, SimpleGrid, Text } from "@mantine/core";
 import { IconChevronDown, IconCheck, IconSearch } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
-import "../utils/styles/Cafe.scss";
-import Banner from "../utils/banner/Banner";
-import Footer from "../utils/footer/Footer";
-import eatingPlaces from "../http/CafeData";
-import CafeCard from "./CafeCard";
+import "../../utils/styles/Medical.scss";
+import Banner from "../../utils/banner/Banner";
+import Footer from "../../utils/footer/Footer";
+import medical from "../../http/medicalData";
+import MedicalCard from "./MedicalCard";
 
-export default function Cafe() {
+export default function Medical() {
   const [sortValue, setSortValue] = useState("default");
   const [search, setSearch] = useState("");
-  const [visibleCount, setVisibleCount] = useState(9);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   const sortOptions = [
     { label: "Saralashsiz", value: "default" },
@@ -22,16 +22,16 @@ export default function Cafe() {
   const activeLabel =
     sortOptions.find((opt) => opt.value === sortValue)?.label || "Saralash";
 
-  const processedPlaces = useMemo(() => {
-    let list = [...eatingPlaces];
+  const processed = useMemo(() => {
+    let list = [...medical];
 
     if (search.trim()) {
       const q = search.toLowerCase();
       list = list.filter(
-        (p) =>
-          p.name.toLowerCase().includes(q) ||
-          p.location.toLowerCase().includes(q) ||
-          p.type.toLowerCase().includes(q)
+        (m) =>
+          m.name.toLowerCase().includes(q) ||
+          m.location.toLowerCase().includes(q) ||
+          m.type.toLowerCase().includes(q)
       );
     }
 
@@ -49,29 +49,29 @@ export default function Cafe() {
   return (
     <>
       <Banner />
-      <div className="eating-places">
+      <div className="medical-page">
         <div className="container">
-          <div className="eating-banner">
-            <div className="eating-banner-inner">
-              <div className="eating-banner-inner-sub">
-                <h1>Ovqatlanish joylari</h1>
-                <p>Restoran, kafe va fast food joylarini toping</p>
+          <div className="medical-banner">
+            <div className="medical-banner-inner">
+              <div className="medical-banner-inner-sub">
+                <h1>Tibbiyot</h1>
+                <p>Shifoxona, poliklinika, stomatologiya</p>
               </div>
 
-              <div className="eating-banner-search">
+              <div className="medical-banner-search">
                 <TextInput
                   placeholder="Qidirish..."
                   value={search}
                   onChange={(e) => {
                     setSearch(e.target.value);
-                    setVisibleCount(9);
+                    setVisibleCount(6);
                   }}
                   leftSection={<IconSearch size={18} />}
                   radius="md"
                 />
               </div>
 
-              <div className="eating-banner-filter">
+              <div className="medical-banner-filter">
                 <Menu width={240} position="bottom-start" shadow="md" radius="md">
                   <Menu.Target>
                     <Button variant="default" radius="md" rightSection={<IconChevronDown size={16} />}>
@@ -85,7 +85,7 @@ export default function Cafe() {
                         key={item.value}
                         onClick={() => {
                           setSortValue(item.value);
-                          setVisibleCount(9);
+                          setVisibleCount(6);
                         }}
                         rightSection={sortValue === item.value ? <IconCheck size={16} /> : null}
                       >
@@ -98,21 +98,21 @@ export default function Cafe() {
             </div>
           </div>
 
-          <div className="eating-list">
+          <div className="medical-list">
             <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="lg">
-              {processedPlaces.slice(0, visibleCount).map((place) => (
-                <CafeCard key={place.id} place={place} />
+              {processed.slice(0, visibleCount).map((item) => (
+                <MedicalCard key={item.id} item={item} />
               ))}
             </SimpleGrid>
 
-            {processedPlaces.length > 9 && (
+            {processed.length > 6 && (
               <Group justify="center" mt="xl">
-                {visibleCount < processedPlaces.length ? (
-                  <Button variant="outline" radius="md" onClick={() => setVisibleCount((prev) => prev + 6)}>
+                {visibleCount < processed.length ? (
+                  <Button variant="outline" radius="md" onClick={() => setVisibleCount((v) => v + 6)}>
                     Ko'proq ko'rsatish
                   </Button>
                 ) : (
-                  <Button variant="outline" radius="md" onClick={() => setVisibleCount(9)}>
+                  <Button variant="outline" radius="md" onClick={() => setVisibleCount(6)}>
                     Kamroq ko'rsatish
                   </Button>
                 )}
