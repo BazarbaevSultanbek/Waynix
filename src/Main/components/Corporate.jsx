@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
+import { Link } from "react-router";
 
 export default function Corporate() {
   return (
@@ -137,7 +138,7 @@ export default function Corporate() {
               </Button>
 
               <Button variant="outline" color="#2b7fff" size="md" radius="md">
-                Batafsil ma'lumot
+                <Link to="/contact">Batafsil ma'lumot</Link>
               </Button>
             </Group>
           </div>
