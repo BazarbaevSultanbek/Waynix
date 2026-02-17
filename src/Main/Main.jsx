@@ -1,4 +1,4 @@
-import "../utils/styles/main.scss";
+import "@/utils/styles/main.scss";
 import Banner from "../utils/banner/Banner";
 import Waynix from "./components/Waynix";
 import News from "./components/News";
