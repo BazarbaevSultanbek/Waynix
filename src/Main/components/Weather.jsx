@@ -9,7 +9,7 @@ import {
   Loader,
 } from "@mantine/core";
 import { IconCloud, IconX, IconMapPin } from "@tabler/icons-react";
-import "../../utils/styles/weather.scss";
+import "../../utils/styles/Weather.scss";
 
 export default function Weather() {
   const [open, setOpen] = useState(false);

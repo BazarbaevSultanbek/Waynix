@@ -5,7 +5,6 @@ import {
   Button,
   TextInput,
   PasswordInput,
-  Divider,
   Text,
   Anchor,
   Box,
@@ -19,10 +18,8 @@ import {
   IconWorld,
   IconChevronDown,
 } from "@tabler/icons-react";
-
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, register, setUser } from "../../store/reducers/userReducer";
-
 import main_logo from "../../images/waynix-logo.png";
 import "../styles/banner.scss";
 import getCookie from "../../utils/getCookie";
@@ -42,9 +39,14 @@ const Banner = () => {
   const [langOpen, setLangOpen] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
   const [mobileCatOpen, setMobileCatOpen] = useState(false);
-  const [lang, setLang] = useState({ code: "UZ", label: "O'zbek", flag: "🇺🇿" });
-
+  const [mobileLangOpen, setMobileLangOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const [lang, setLang] = useState({
+    code: "UZ",
+    label: "O'zbek",
+    flag: "🇺🇿",
+  });
 
   const langs = [
     { code: "UZ", label: "O'zbek", flag: "🇺🇿" },
@@ -56,15 +58,14 @@ const Banner = () => {
 
   const categories = [
     { label: "Turobektlar", href: "/tours" },
-    { label: "Savdo markazlari", href: "/Shop" },
+    { label: "Savdo markazlari", href: "/shop" },
     { label: "Ovqatlanish joylari", href: "/Cafe" },
     { label: "Mehmonxonalar", href: "/hotels" },
     { label: "Servislar", href: "/services" },
-    { label: "Entertaiment", href: "/entertainment" },
+    { label: "Entertainment", href: "/entertainment" },
     { label: "Tibbiyot", href: "/medical" },
     { label: "Davlat idoralari", href: "/government" },
     { label: "Ta'lim", href: "/education" },
-    { label: "Gidlar", href: "/" },
   ];
 
   useEffect(() => {
@@ -92,11 +93,9 @@ const Banner = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone_number, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [conf_password, setConfPass] = useState("");
-  const [policy, setPolicy] = useState(false);
-  const [isGit, setIsGit] = useState(false);
+
 
   const handleLogin = () => {
     if (!email || !password) return alert("Email va parolni kiriting");
@@ -107,30 +106,17 @@ const Banner = () => {
   const resetForm = () => {
     setName("");
     setEmail("");
-    setPhoneNumber("");
     setPassword("");
     setConfPass("");
-    setPolicy(false);
-    setIsGit(false);
   };
 
   const handleRegister = () => {
     if (
       password === conf_password &&
-      phone_number.length >= 9 &&
       email !== "" &&
-      name !== "" &&
-      policy === true
+      name !== ""
     ) {
-      dispatch(
-        register({
-          name,
-          email,
-          password,
-          phone_number,
-          isGit,
-        }),
-      );
+      dispatch(register({ name, email, password }))
       resetForm();
       closeRegister();
     } else {
@@ -150,32 +136,42 @@ const Banner = () => {
           </Link>
 
           <nav className="banner__nav">
-            <Link to="*">Bosh sahifa</Link>
+            <Link to="/">Bosh sahifa</Link>
 
-            <div className="nav-drop">
-              <button className="nav-btn" onClick={() => setCatOpen((v) => !v)}>
+            <div className={`nav-drop ${catOpen ? "open" : ""}`}>
+              <button
+                className="nav-btn"
+                type="button"
+                onClick={() => {
+                  setCatOpen((v) => !v);
+                  setLangOpen(false);
+                }}
+              >
                 Kategoriyalar <IconChevronDown size={16} />
               </button>
-              {catOpen && (
-                <div className="nav-menu">
-                  {categories.map((c) => (
-                    <Link key={c.label} to={c.href}>
-                      {c.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
+
+              <div className={`nav-menu ${catOpen ? "open" : ""}`}>
+                {categories.map((c) => (
+                  <Link key={c.label} to={c.href} onClick={() => setCatOpen(false)}>
+                    {c.label}
+                  </Link>
+                ))}
+              </div>
             </div>
 
-            <Link to="/About">Biz haqimizda</Link>
+            <Link to="/about">Biz haqimizda</Link>
             <Link to="/contact">Kontakt</Link>
           </nav>
 
           <div className="banner__actions">
-            <div className="lang">
+            <div className={`lang ${langOpen ? "open" : ""}`}>
               <button
                 className="lang-btn"
-                onClick={() => setLangOpen((v) => !v)}
+                type="button"
+                onClick={() => {
+                  setLangOpen((v) => !v);
+                  setCatOpen(false);
+                }}
               >
                 <IconWorld size={16} />
                 <span>
@@ -183,22 +179,22 @@ const Banner = () => {
                 </span>
                 <IconChevronDown size={14} />
               </button>
-              {langOpen && (
-                <div className="lang-menu">
-                  {langs.map((l) => (
-                    <button
-                      key={l.code}
-                      onClick={() => {
-                        setLang(l);
-                        setLangOpen(false);
-                      }}
-                    >
-                      <span>{l.flag}</span>
-                      {l.label}
-                    </button>
-                  ))}
-                </div>
-              )}
+
+              <div className={`lang-menu ${langOpen ? "open" : ""}`}>
+                {langs.map((l) => (
+                  <button
+                    key={l.code}
+                    type="button"
+                    onClick={() => {
+                      setLang(l);
+                      setLangOpen(false);
+                    }}
+                  >
+                    <span>{l.flag}</span>
+                    {l.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {currentUser ? (
@@ -207,10 +203,10 @@ const Banner = () => {
               </a>
             ) : (
               <div className="auth-btns">
-                <button className="btn-outline" onClick={openLogin}>
+                <button className="btn-outline" onClick={openLogin} type="button">
                   Kirish
                 </button>
-                <button className="btn-primary" onClick={openRegister}>
+                <button className="btn-primary" onClick={openRegister} type="button">
                   Ro'yxatdan o'tish
                 </button>
               </div>
@@ -220,6 +216,7 @@ const Banner = () => {
               className="burger"
               onClick={() => setMobileOpen(true)}
               aria-label="menu"
+              type="button"
             >
               ☰
             </button>
@@ -227,7 +224,6 @@ const Banner = () => {
         </div>
       </header>
 
-      {/* Mobile menu */}
       <div className={`mobile-menu ${mobileOpen ? "open" : ""}`}>
         <div className="mobile-panel">
           <div className="mobile-head">
@@ -235,38 +231,43 @@ const Banner = () => {
               <img src={main_logo} alt="logo" />
               <span>Waynix</span>
             </div>
-            <button
-              className="mobile-close"
-              onClick={() => setMobileOpen(false)}
-            >
+            <button className="mobile-close" onClick={() => setMobileOpen(false)} type="button">
               ✕
             </button>
           </div>
 
-          <Link to="*">Bosh sahifa</Link>
+          <Link to="/" onClick={() => setMobileOpen(false)}>
+            Bosh sahifa
+          </Link>
 
           <button
             className="mobile-cat-btn"
             onClick={() => setMobileCatOpen((v) => !v)}
+            type="button"
           >
             Kategoriyalar
             <span className={mobileCatOpen ? "rot" : ""}>▾</span>
           </button>
+
           <div className={`mobile-cat-list ${mobileCatOpen ? "open" : ""}`}>
             {categories.map((c) => (
-              <Link key={c.label} to={c.href}>
+              <Link key={c.label} to={c.href} onClick={() => setMobileOpen(false)}>
                 {c.label}
               </Link>
             ))}
           </div>
 
-          <a href="#">Biz haqimizda</a>
-          <Link to="/contact">Kontakt</Link>
+          <Link to="/about" onClick={() => setMobileOpen(false)}>
+            Biz haqimizda
+          </Link>
+          <Link to="/contact" onClick={() => setMobileOpen(false)}>
+            Kontakt
+          </Link>
 
-          <div className="mobile-lang">
+          <div className={`mobile-lang ${mobileLangOpen ? "open" : ""}`}>
             <button
               className="mobile-lang-btn"
-              onClick={() => setLangOpen((v) => !v)}
+              onClick={() => setMobileLangOpen((v) => !v)}
               type="button"
             >
               <span>
@@ -275,23 +276,21 @@ const Banner = () => {
               <IconChevronDown size={16} />
             </button>
 
-            {langOpen && (
-              <div className="mobile-lang-menu">
-                {langs.map((l) => (
-                  <button
-                    key={l.code}
-                    onClick={() => {
-                      setLang(l);
-                      setLangOpen(false);
-                    }}
-                    type="button"
-                  >
-                    <span>{l.flag}</span>
-                    {l.label}
-                  </button>
-                ))}
-              </div>
-            )}
+            <div className="mobile-lang-menu">
+              {langs.map((l) => (
+                <button
+                  key={l.code}
+                  onClick={() => {
+                    setLang(l);
+                    setMobileLangOpen(false);
+                  }}
+                  type="button"
+                >
+                  <span>{l.flag}</span>
+                  {l.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="auth-btns mobile">
@@ -301,6 +300,7 @@ const Banner = () => {
                 setMobileOpen(false);
                 openLogin();
               }}
+              type="button"
             >
               Kirish
             </button>
@@ -310,6 +310,7 @@ const Banner = () => {
                 setMobileOpen(false);
                 openRegister();
               }}
+              type="button"
             >
               Ro'yxat
             </button>
@@ -317,7 +318,6 @@ const Banner = () => {
         </div>
       </div>
 
-      {/* LOGIN MODAL */}
       <Modal
         opened={loginOpened}
         onClose={closeLogin}
@@ -338,7 +338,7 @@ const Banner = () => {
           <TextInput
             label="Email manzil"
             placeholder="email@example.com"
-            icon={<IconMail size={16} />}
+            leftSection={<IconMail size={16} />}
             mb="sm"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -347,7 +347,7 @@ const Banner = () => {
           <PasswordInput
             label="Parol"
             placeholder="••••••••"
-            icon={<IconLock size={16} />}
+            leftSection={<IconLock size={16} />}
             mb="xs"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -377,7 +377,6 @@ const Banner = () => {
         </Box>
       </Modal>
 
-      {/* REGISTER MODAL */}
       <Modal
         opened={registerOpened}
         onClose={closeRegister}
@@ -404,7 +403,7 @@ const Banner = () => {
             <TextInput
               label="To‘liq ism"
               placeholder="Ism Familiya"
-              icon={<IconUser size={16} />}
+              leftSection={<IconUser size={16} />}
               mb="sm"
               required
               value={name}
@@ -414,7 +413,7 @@ const Banner = () => {
             <TextInput
               label="Email manzil"
               placeholder="email@example.com"
-              icon={<IconMail size={16} />}
+              leftSection={<IconMail size={16} />}
               mb="sm"
               required
               type="email"
@@ -422,22 +421,12 @@ const Banner = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
 
-            <TextInput
-              label="Telefon raqam"
-              placeholder="90 123 45 67"
-              icon={<IconPhone size={16} />}
-              mb="sm"
-              required
-              minLength={9}
-              maxLength={15}
-              value={phone_number}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-            />
+
 
             <PasswordInput
               label="Parol"
               placeholder="••••••••"
-              icon={<IconLock size={16} />}
+              leftSection={<IconLock size={16} />}
               mb="sm"
               required
               value={password}
@@ -447,27 +436,13 @@ const Banner = () => {
             <PasswordInput
               label="Parolni tasdiqlang"
               placeholder="••••••••"
-              icon={<IconLock size={16} />}
+              leftSection={<IconLock size={16} />}
               mb="md"
               required
               value={conf_password}
               onChange={(e) => setConfPass(e.target.value)}
             />
 
-            <Checkbox
-              label="Git sifatida ro'yxatdan o'tish"
-              checked={isGit}
-              onChange={(event) => setIsGit(event.currentTarget.checked)}
-              mb="md"
-            />
-
-            <Checkbox
-              label="Foydalanish shartlari va maxfiylik siyosatiga roziman"
-              checked={policy}
-              onChange={(e) => setPolicy(e.target.checked)}
-              mb="lg"
-              required
-            />
 
             <Button
               type="submit"

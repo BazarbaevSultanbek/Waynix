@@ -164,12 +164,14 @@ const popularList = [
 ];
 
 const sortOptions = ["Default", "Hudud", "Mashhurlik", "Nomi"];
+
 const TourObjects = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedSort, setSelectedSort] = useState("Default");
   const [viewMode, setViewMode] = useState("list");
   const [openFilter, setOpenFilter] = useState(null);
   const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
 
   const itemsPerPage = 5;
 
@@ -177,10 +179,21 @@ const TourObjects = () => {
     setOpenFilter((prev) => (prev === key ? null : key));
   };
 
+  const searched = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return tourList;
+    return tourList.filter(
+      (item) =>
+        item.name.toLowerCase().includes(q) ||
+        item.location.toLowerCase().includes(q) ||
+        item.type.toLowerCase().includes(q),
+    );
+  }, [search]);
+
   const filtered = useMemo(() => {
-    if (selectedCategory === "All") return tourList;
-    return tourList.filter((item) => item.type === selectedCategory);
-  }, [selectedCategory]);
+    if (selectedCategory === "All") return searched;
+    return searched.filter((item) => item.type === selectedCategory);
+  }, [selectedCategory, searched]);
 
   const sorted = useMemo(() => {
     const data = [...filtered];
@@ -209,37 +222,45 @@ const TourObjects = () => {
   return (
     <>
       <Banner />
+
       <section className="tour-objects">
         <div className="tour-objects__wrap">
           <div className="tour-objects__header">
             <h2 className="tour-objects__title">Turobyektlar</h2>
 
             <div className="tour-objects__filters">
-              <div
-                className={`filter-group ${openFilter === "category" ? "is-open" : ""}`}
-              >
+              <div className="search-wrap">
+                <input
+                  type="text"
+                  placeholder="Qidirish..."
+                  value={search}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                    setPage(1);
+                  }}
+                />
+              </div>
+
+              <div className={`filter-group ${openFilter === "category" ? "is-open" : ""}`}>
                 <button
-                  className="filter-pill"
+                  className="icon-pill"
                   onClick={() => toggleFilter("category")}
                   type="button"
+                  aria-label="Filter by category"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-funnel w-4 h-4 mr-2"
-                    aria-hidden="true"
                   >
                     <path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"></path>
                   </svg>
-                  <span>{selectedCategory}</span>
-                  <span className="caret">▾</span>
                 </button>
                 <div className="filter-menu">
                   {categories.map((cat) => (
@@ -259,34 +280,29 @@ const TourObjects = () => {
                 </div>
               </div>
 
-              <div
-                className={`filter-group ${openFilter === "sort" ? "is-open" : ""}`}
-              >
+              <div className={`filter-group ${openFilter === "sort" ? "is-open" : ""}`}>
                 <button
-                  className="filter-pill"
+                  className="icon-pill"
                   onClick={() => toggleFilter("sort")}
                   type="button"
+                  aria-label="Sort"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-arrow-up-down w-4 h-4 mr-2"
-                    aria-hidden="true"
                   >
                     <path d="m21 16-4 4-4-4"></path>
                     <path d="M17 20V4"></path>
                     <path d="m3 8 4-4 4 4"></path>
                     <path d="M7 4v16"></path>
                   </svg>
-                  <span>{selectedSort}</span>
-                  <span className="caret">▾</span>
                 </button>
                 <div className="filter-menu">
                   {sortOptions.map((opt) => (
@@ -312,53 +328,14 @@ const TourObjects = () => {
                   onClick={() => setViewMode("list")}
                   type="button"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-list h-4 w-4 sm:mr-2"
-                    aria-hidden="true"
-                  >
-                    <path d="M3 5h.01"></path>
-                    <path d="M3 12h.01"></path>
-                    <path d="M3 19h.01"></path>
-                    <path d="M8 5h13"></path>
-                    <path d="M8 12h13"></path>
-                    <path d="M8 19h13"></path>
-                  </svg>
-                  <span>List</span>
+                  List
                 </button>
                 <button
                   className={`view-btn ${viewMode === "grid" ? "is-active" : ""}`}
                   onClick={() => setViewMode("grid")}
                   type="button"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-grid3x3 lucide-grid-3x3 h-4 w-4 sm:mr-2"
-                    aria-hidden="true"
-                  >
-                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                    <path d="M3 9h18"></path>
-                    <path d="M3 15h18"></path>
-                    <path d="M9 3v18"></path>
-                    <path d="M15 3v18"></path>
-                  </svg>
-                  <span>Grid</span>
+                  Grid
                 </button>
               </div>
             </div>
@@ -381,11 +358,9 @@ const TourObjects = () => {
 
                 <div className="tour-card__action">
                   <button className="tour-card__save" type="button">
-                    <span className="save-icon">🔖</span>
-                    Saqlash
+                    🔖 Saqlash
                   </button>
-
-                  <button className="tour-card__btn">
+                  <button className="tour-card__btn" type="button">
                     <Link to="/tours/id">Batafsil</Link>
                   </button>
                 </div>
@@ -415,18 +390,15 @@ const TourObjects = () => {
           </div>
         </div>
       </section>
+
       <section className="popular-tour">
         <div className="popular-tour__wrap">
           <div className="popular-tour__head">
             <h3 className="popular-tour__title">Mashhur turobeklar</h3>
-            <div className="popular-tour__nav">
-              <button className="round-btn">‹</button>
-              <button className="round-btn">›</button>
-            </div>
           </div>
 
           <div className="popular-tour__grid">
-            {popularList.map((item) => (
+            {popularList.slice(0, 4).map((item) => (
               <article className="popular-card" key={item.id}>
                 <div className="popular-card__media">
                   <img src={item.image} alt={item.name} />
@@ -446,6 +418,7 @@ const TourObjects = () => {
           </div>
         </div>
       </section>
+
       <Footer />
     </>
   );

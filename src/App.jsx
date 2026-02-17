@@ -28,7 +28,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="*" element={<Main />} />
         <Route path="/hotels" element={<Hotels />} />
-        <Route path="/Shop" element={<Shop />} />
+        <Route path="/shop" element={<Shop />} />
         <Route path="/cafe" element={<Cafe />} />
         <Route path="/services" element={<Services />} />
         <Route path="/entertainment" element={<Entertainment />} />
@@ -36,7 +36,7 @@ function App() {
         <Route path="/government" element={<Government />} />
         <Route path="/education" element={<Education />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/About" element={<About />} />
+        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/tours" element={<TourObj />} />
         <Route path="/tours/id" element={<Object />} />

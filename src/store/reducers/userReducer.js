@@ -1,16 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
-axios.defaults.withCredentials = true;
+import $api from "../../http/axios";
 
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post("https://waynix-server.vercel.app/api/login", {
-        email,
-        password,
-      });
+      const response = await $api.post("/login", { email, password });
       return response.data.user;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || "Login failed");
@@ -22,18 +17,17 @@ export const register = createAsyncThunk(
   "user/registerUser",
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        "https://waynix-server.vercel.app/api/register",
-        formData
-      );
+      const response = await $api.post("/register", formData);
       return response.data.user;
     } catch (err) {
-      return rejectWithValue(
-        err.response?.data?.message || "Registration failed"
-      );
+      return rejectWithValue(err.response?.data?.message || "Registration failed");
     }
   }
 );
+
+// in logout reducer:
+$api.post("/logout");
+
 
 const userSlice = createSlice({
   name: "user",

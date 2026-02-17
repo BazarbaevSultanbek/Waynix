@@ -5,7 +5,7 @@
   right: 0;
   background: #fff;
   z-index: 1000;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .banner__wrap {
@@ -17,12 +17,11 @@
   justify-content: space-between;
 }
 
-
-.logo-link{
+.logo-link {
   text-decoration: none;
 }
 
-.banner__logo  {
+.banner__logo {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -67,21 +66,38 @@
 
 .nav-menu {
   position: absolute;
-  top: 120%;
+  top: calc(100% + 6px);
   left: 0;
   background: #fff;
-  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
-  border-radius: 12px;
-  padding: 10px;
-  min-width: 220px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+  border-radius: 14px;
+  min-width: 280px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 12px;
+  pointer-events: none;
+  transition: all 0.28s ease;
+}
+
+.nav-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  max-height: 560px;
+  padding: 12px;
+  pointer-events: auto;
 }
 
 .nav-menu a {
-  padding: 6px 8px;
-  border-radius: 8px;
+  padding: 9px 10px;
+  border-radius: 10px;
 }
 
 .nav-menu a:hover {
@@ -122,10 +138,11 @@
   border-radius: 999px;
   cursor: pointer;
   transition: 0.2s ease;
+  box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.35);
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
+  opacity: 0.93;
 }
 
 .avatar img {
@@ -156,28 +173,47 @@
 
 .lang-menu {
   position: absolute;
-  top: 110%;
+  top: calc(100% + 6px);
   right: 0;
   background: #fff;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
-  border-radius: 10px;
-  padding: 6px;
-  min-width: 160px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  min-width: 190px;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 8px;
+  pointer-events: none;
+  transition: all 0.28s ease;
+}
+
+.lang-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  max-height: 320px;
+  padding: 8px;
+  pointer-events: auto;
 }
 
 .lang-menu button {
   display: flex;
   gap: 8px;
   width: 100%;
-  padding: 6px 10px;
+  padding: 8px 10px;
   background: none;
   border: none;
   text-align: left;
   cursor: pointer;
+  border-radius: 8px;
   transition: color 0.2s ease;
 }
 
 .lang-menu button:hover {
+  background: #f3f4f6;
   color: #2563eb;
 }
 
@@ -189,11 +225,10 @@
   cursor: pointer;
 }
 
-/* Mobile menu (top sheet) */
 .mobile-menu {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 1200;
   opacity: 0;
   pointer-events: none;
@@ -212,7 +247,7 @@
   margin: 12px auto 0;
   border-radius: 26px;
   padding: 20px 20px 24px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
   transform: translateY(-30px);
   transition: transform 0.25s ease;
 }
@@ -250,7 +285,6 @@
   color: #2563eb;
 }
 
-/* Mobile categories dropdown */
 .mobile-cat-btn {
   display: flex;
   align-items: center;
@@ -275,20 +309,19 @@
 .mobile-cat-list {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease;
+  transition: max-height 0.32s ease;
   padding-left: 6px;
 }
 
 .mobile-cat-list.open {
-  max-height: 260px;
+  max-height: 340px;
 }
 
 .mobile-cat-list a {
   font-size: 16px;
-  padding: 6px 0;
+  padding: 7px 0;
 }
 
-/* Mobile language */
 .mobile-lang {
   margin: 14px 0 18px;
   position: relative;
@@ -305,24 +338,26 @@
   justify-content: space-between;
   font-size: 16px;
   cursor: pointer;
-  outline: none;
-}
-
-.mobile-lang-btn:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
 }
 
 .mobile-lang-menu {
-  position: absolute;
-  top: 110%;
-  left: 0;
-  right: 0;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+  margin-top: 8px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: all 0.28s ease;
+  padding: 0 6px;
+}
+
+.mobile-lang.open .mobile-lang-menu {
+  max-height: 260px;
+  opacity: 1;
+  transform: translateY(0);
   padding: 6px;
-  z-index: 10;
 }
 
 .mobile-lang-menu button {
@@ -352,9 +387,11 @@
   .banner__nav {
     display: none;
   }
+
   .auth-btns {
     display: none;
   }
+
   .burger {
     display: block;
   }
