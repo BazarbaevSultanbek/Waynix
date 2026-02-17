@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import "../utils/styles/Profile.scss";
+import "../utils/styles/profile.scss";
 import Footer from "../utils/footer/Footer";
 import getCookie from "../utils/getCookie";
 import { Button, FileButton, Modal, Select, Switch, TextInput } from "@mantine/core";

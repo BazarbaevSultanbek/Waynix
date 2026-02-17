@@ -2,7 +2,7 @@ import { Menu, Button, Text, TextInput, Anchor } from "@mantine/core";
 import { IconChevronDown, IconCheck, IconSearch } from "@tabler/icons-react";
 import { useEffect, useMemo, useState } from "react";
 import { Group, SimpleGrid } from "@mantine/core";
-import "../../utils/styles/Hotels.scss";
+import "../../utils/styles/hotels.scss";
 import Banner from "../../utils/banner/Banner";
 import hotels from "../../http/hotels";
 import HotelCard from "./HotelCard";

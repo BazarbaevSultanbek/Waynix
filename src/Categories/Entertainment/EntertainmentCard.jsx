@@ -7,7 +7,7 @@ import {
   IconClock,
 } from "@tabler/icons-react";
 import { Card, Image, Group, Button, Text, Anchor, Badge } from "@mantine/core";
-import "../../utils/styles/Entertainment.scss";
+import "../../utils/styles/entertainment.scss";
 
 function getIsOpen(hours) {
   const [start, end] = hours.split("-");

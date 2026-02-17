@@ -1,4 +1,4 @@
-import "./Footer.scss";
+import "../styles/footer.scss";
 import main_logo from "../../images/waynix-logo.png";
 
 
