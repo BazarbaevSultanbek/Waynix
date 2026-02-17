@@ -1,4 +1,6 @@
-import "../../styles/Footer.scss";
+import "../styles/Footer.scss";
+import main_logo from "../../images/waynix-logo.png";
+
 
 const Footer = () => {
   return (
@@ -6,7 +8,7 @@ const Footer = () => {
       <div className="footer-wrap">
         <div className="footer-col brand">
           <div className="logo">
-            <img src="../../images/waynix-logo.png" alt="Waynix Logo" />
+            <img src={main_logo} alt="Waynix Logo" />
             <span className="logo-text">Waynix</span>
           </div>
           <p>
