@@ -1,6 +1,6 @@
 import Banner from "../utils/banner/Banner";
 import Footer from "../utils/footer/Footer";
-import "../utils/styles/About.scss";
+import "@/utils/styles/About.scss";
 
 const About = () => {
   return (
