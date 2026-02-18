@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import Banner from "../utils/banner/Banner";
-import "../utils/styles/tourObj.scss";
+import "@/utils/styles/tourObj.scss";
 import Footer from "../utils/footer/Footer";
 import { Link } from "react-router";
 
