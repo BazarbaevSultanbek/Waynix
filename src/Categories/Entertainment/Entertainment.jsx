@@ -8,7 +8,7 @@ import {
 } from "@mantine/core";
 import { IconChevronDown, IconCheck, IconSearch } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
-import "../../utils/styles/entertainment.scss";
+import "@/utils/styles/entertainment.scss";
 import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import entertainment from "../../http/entertainment";
