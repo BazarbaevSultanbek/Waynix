@@ -5,7 +5,7 @@ import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import education from "../../http/education";
 import EducationCard from "./EduCard";
-import "./styles/education.scss";
+import "./education.scss";
 
 export default function Education() {
   const [sortValue, setSortValue] = useState("default");
