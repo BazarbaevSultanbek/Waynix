@@ -1,10 +1,9 @@
 import { useMemo, useState } from "react";
 import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
-import "@/utils/styles/cafe.scss";
 import { Link } from "react-router";
 import eatingPlaces from "../../http/CafeData";
-
+import "../../utils/styles/cafe.scss";
 const categories = ["All", "Restaurant", "Cafe", "Fast Food"];
 const sortOptions = ["Default", "Hudud", "Mashhurlik", "Nomi"];
 

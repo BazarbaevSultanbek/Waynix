@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import Banner from "../utils/banner/Banner";
 import Footer from "../utils/footer/Footer";
 import { Link } from "react-router";
-import "@/utils/styles/tourObj.scss";
+import "../utils/styles/tourObj.scss";
 
 const tourList = [
   {

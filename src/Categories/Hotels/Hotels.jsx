@@ -6,7 +6,7 @@ import Banner from "../../utils/banner/Banner";
 import hotels from "../../http/hotels";
 import HotelCard from "./HotelCard";
 import Footer from "../../utils/footer/Footer";
-import "@/utils/styles/hotels.scss";
+import "../../utils/styles/hotels.scss";
 
 
 export default function Hotels() {
