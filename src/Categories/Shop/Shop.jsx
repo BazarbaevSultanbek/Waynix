@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
-import "@/utils/styles/shop.scss";
 import { Link } from "react-router";
 import shopsData from "../../http/hotels"; // replace with real shops data file later
+import "@/utils/styles/shop.scss";
 
 const categories = ["All", "Mall", "Supermarket", "Bozor", "Do'kon"];
 const sortOptions = ["Default", "Hudud", "Mashhurlik", "Nomi"];

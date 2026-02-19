@@ -1,11 +1,11 @@
 import { Menu, Button, TextInput, Group, SimpleGrid, Text } from "@mantine/core";
 import { IconChevronDown, IconCheck, IconSearch } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
-import "@/utils/styles/Education.scss";
 import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import education from "../../http/education";
 import EducationCard from "./EduCard";
+import "@/utils/styles/education.scss";
 
 export default function Education() {
   const [sortValue, setSortValue] = useState("default");

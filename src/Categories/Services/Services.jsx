@@ -1,11 +1,11 @@
 import { Menu, Button, TextInput, Group, SimpleGrid, Text } from "@mantine/core";
 import { IconChevronDown, IconCheck, IconSearch } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
-import "@/utils/styles/services.scss";
 import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import services from "../../http/ServicesData";
 import ServiceCard from "./ServiceCard";
+import "@/utils/styles/services.scss";
 
 export default function Services() {
   const [sortValue, setSortValue] = useState("default");

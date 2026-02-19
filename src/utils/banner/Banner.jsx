@@ -21,9 +21,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, register, setUser } from "../../store/reducers/userReducer";
 import main_logo from "../../images/waynix-logo.png";
-import "../styles/banner.scss";
 import getCookie from "../../utils/getCookie";
 import { Link } from "react-router";
+import "../styles/banner.scss";
 
 const Banner = () => {
   const dispatch = useDispatch();

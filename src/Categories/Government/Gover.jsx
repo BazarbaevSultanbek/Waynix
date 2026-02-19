@@ -1,11 +1,11 @@
 import { Menu, Button, TextInput, Group, SimpleGrid, Text } from "@mantine/core";
 import { IconChevronDown, IconCheck, IconSearch } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
-import "@/utils/styles/gover.scss";
 import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import government from "../../http/government";
 import GovernmentCard from "./GoverCard";
+import "@/utils/styles/gover.scss";
 
 export default function Government() {
   const [sortValue, setSortValue] = useState("default");

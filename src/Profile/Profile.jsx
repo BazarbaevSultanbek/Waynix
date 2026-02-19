@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import "@/utils/styles/profile.scss";
 import Footer from "../utils/footer/Footer";
 import getCookie from "../utils/getCookie";
 import { Button, FileButton, Modal, Select, Switch, TextInput } from "@mantine/core";
@@ -30,6 +29,7 @@ import {
   IconLock,
 } from "@tabler/icons-react";
 import { profileMock, mockPlaces, mockSaved, mockComments } from "../http/profileMock";
+import "@/utils/styles/profile.scss";
 
 const tabs = [
   { key: "profile", label: "Profil", icon: <IconUser size={18} /> },

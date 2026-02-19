@@ -1,11 +1,11 @@
 import { Menu, Button, TextInput, Group, SimpleGrid, Text } from "@mantine/core";
 import { IconChevronDown, IconCheck, IconSearch } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
-import "@/utils/styles/medical.scss";
 import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import medical from "../../http/medicalData";
 import MedicalCard from "./MedicalCard";
+import "@/utils/styles/medical.scss";
 
 export default function Medical() {
   const [sortValue, setSortValue] = useState("default");
