@@ -23,7 +23,7 @@ import { loginUser, register, setUser } from "../../store/reducers/userReducer";
 import main_logo from "../../images/waynix-logo.png";
 import getCookie from "../../utils/getCookie";
 import { Link } from "react-router";
-import "../styles/banner.scss";
+import "./banner.scss";
 
 const Banner = () => {
   const dispatch = useDispatch();

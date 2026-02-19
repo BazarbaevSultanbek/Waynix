@@ -29,7 +29,7 @@ import {
   IconLock,
 } from "@tabler/icons-react";
 import { profileMock, mockPlaces, mockSaved, mockComments } from "../http/profileMock";
-import "../utils/styles/profile.scss";
+import "./profile.scss";
 
 const tabs = [
   { key: "profile", label: "Profil", icon: <IconUser size={18} /> },

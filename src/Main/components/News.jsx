@@ -1,9 +1,9 @@
 import { Carousel } from "@mantine/carousel";
 import { Title, Text } from "@mantine/core";
 import Autoplay from "embla-carousel-autoplay";
-import classes from "../../utils/styles/New.module.scss";
 import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
+import classes from "../../utils/styles/New.module.scss";
 
 const slides = [
   {

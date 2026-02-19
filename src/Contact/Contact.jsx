@@ -1,7 +1,7 @@
 import Banner from "../utils/banner/Banner";
 import Footer from "../utils/footer/Footer";
 import main_logo from "../images/waynix-logo.png";
-import "../utils/styles/contact.scss";
+import "./contact.scss";
 
 const Contact = () => {
   return (

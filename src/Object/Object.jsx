@@ -19,7 +19,7 @@ import {
 } from "@tabler/icons-react";
 import Banner from "../utils/banner/Banner";
 import Footer from "../utils/footer/Footer";
-import "../utils/styles/object.scss";
+import "./object.scss";
 
 const place = {
   id: 1,

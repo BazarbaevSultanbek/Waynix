@@ -12,7 +12,7 @@ import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import entertainment from "../../http/entertainment";
 import EntertainmentCard from "./EntertainmentCard";
-import "../../utils/styles/entertainment.scss";
+import "./entertainment.scss";
 
 export default function Entertainment() {
   const [sortValue, setSortValue] = useState("default");

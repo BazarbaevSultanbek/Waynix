@@ -5,7 +5,7 @@ import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import services from "../../http/ServicesData";
 import ServiceCard from "./ServiceCard";
-import "../../utils/styles/services.scss";
+import "./services.scss";
 
 export default function Services() {
   const [sortValue, setSortValue] = useState("default");

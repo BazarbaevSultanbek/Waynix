@@ -5,7 +5,7 @@ import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import medical from "../../http/medicalData";
 import MedicalCard from "./MedicalCard";
-import "../../utils/styles/medical.scss";
+import "./medical.scss";
 
 export default function Medical() {
   const [sortValue, setSortValue] = useState("default");

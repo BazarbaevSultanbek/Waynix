@@ -10,7 +10,7 @@ import {
   IconBuildingBank,
   IconStethoscope,
 } from "@tabler/icons-react";
-import "../../utils/styles/main.scss";
+import "../main.scss";
 
 const categories = [
   {

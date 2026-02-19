@@ -1,5 +1,5 @@
 import main_logo from "../../images/waynix-logo.png";
-import "../styles/footer.scss";
+import "./footer.scss";
 
 
 const Footer = () => {

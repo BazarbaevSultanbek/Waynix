@@ -5,7 +5,7 @@ import Categories from "./components/Categories";
 import Corporate from "./components/Corporate";
 import Weather from "./components/Weather";
 import Footer from "../utils/footer/Footer";
-import "../utils/styles/main.scss";
+import "./main.scss";
 
 const Main = () => {
   return (
