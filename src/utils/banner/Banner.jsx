@@ -159,8 +159,8 @@ const Banner = () => {
               </div>
             </div>
 
-            <Link to="/about">Biz haqimizda</Link>
-            <Link to="/contact">Kontakt</Link>
+            <Link to="/contact">Biz haqimizda</Link>
+            <Link to="/about">Kontakt</Link>
           </nav>
 
           <div className="banner__actions">

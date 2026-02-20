@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import Banner from "../../Main/components/Banner";
-import Footer from "../../Main/components/Footer";
+import Banner from "../../utils/banner/Banner";
+import Footer from "../../utils/footer/Footer";
 import "../../utils/styles/Catalog.scss";
 
 const sortOptions = ["Default", "Hudud", "Mashhurlik", "Nomi"];

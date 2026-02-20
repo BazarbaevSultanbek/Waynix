@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Banner from "../../Main/components/Banner";
-import Footer from "../../Main/components/Footer";
+import Banner from "../../utils/banner/Banner";
+import Footer from "../../utils/footer/Footer";
 import "../../utils/styles/DetailPage.scss";
 
 function StarLine({ rating }) {
