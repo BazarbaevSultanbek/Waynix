@@ -151,7 +151,7 @@ export default function Corporate() {
               </Button>
 
               <Button variant="outline" color="#2b7fff" size="md" radius="md">
-                <Link to="/about">Batafsil ma'lumot</Link>
+                <Link to="/contact">Batafsil ma'lumot</Link>
               </Button>
             </Group>
           </div>
