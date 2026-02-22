@@ -20,4 +20,24 @@ $api.interceptors.response.use(
   }
 );
 
+$api.interceptors.response.use(
+  (config) => config,
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (originalRequest?.url?.includes("/refresh")) {
+      throw error;
+    }
+
+    if (error.response?.status === 401 && !originalRequest?._retry) {
+      originalRequest._retry = true;
+      await axios.get(`${API_URL}/refresh`, { withCredentials: true });
+      return $api(originalRequest);
+    }
+
+    throw error;
+  }
+);
+
+
 export default $api;

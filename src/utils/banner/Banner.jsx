@@ -22,7 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser, register, setUser } from "../../store/reducers/userReducer";
 import main_logo from "../../images/waynix-logo.png";
 import getCookie from "../../utils/getCookie";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import "./banner.scss";
 
 const Banner = () => {

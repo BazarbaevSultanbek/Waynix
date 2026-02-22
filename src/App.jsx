@@ -31,7 +31,7 @@ import EducationDetailPage from "./Catalog/pages/EducationDetailPage";
 function App() {
   return (
     <BrowserRouter>
-      <Notifications position="top-right" />
+      <Notifications position="top-right" zIndex={3000} />
       <NotificationListener />
       <Routes>
         <Route path="/" element={<Main />} />
@@ -54,7 +54,10 @@ function App() {
         <Route path="/cafe/:id" element={<CafesDetailPage />} />
         <Route path="/hotels/:id" element={<HotelsDetailPage />} />
         <Route path="/services/:id" element={<ServicesDetailPage />} />
-        <Route path="/entertainment/:id" element={<EntertainmentDetailPage />} />
+        <Route
+          path="/entertainment/:id"
+          element={<EntertainmentDetailPage />}
+        />
         <Route path="/medical/:id" element={<MedicalDetailPage />} />
         <Route path="/government/:id" element={<GovernmentDetailPage />} />
         <Route path="/education/:id" element={<EducationDetailPage />} />

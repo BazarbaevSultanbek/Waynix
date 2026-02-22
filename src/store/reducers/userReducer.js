@@ -25,9 +25,17 @@ export const register = createAsyncThunk(
   }
 );
 
-// in logout reducer:
-$api.post("/logout");
-
+export const logoutUser = createAsyncThunk(
+  "user/logoutUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      await $api.post("/logout");
+      return true;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || "Logout failed");
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -38,12 +46,6 @@ const userSlice = createSlice({
     error: null,
   },
   reducers: {
-    logout: (state) => {
-      axios.post("https://waynix-server.vercel.app/api/logout");
-      state.user = null;
-      state.success = "Logged out successfully";
-      state.error = null;
-    },
     clearMessages: (state) => {
       state.error = null;
       state.success = null;
@@ -54,8 +56,6 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
-      // LOGIN
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -71,7 +71,6 @@ const userSlice = createSlice({
         state.error = action.payload;
       })
 
-      // REGISTER
       .addCase(register.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -85,9 +84,20 @@ const userSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.user = null;
+        state.loading = false;
+        state.success = "Logged out successfully";
+        state.error = null;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
-export const { logout, clearMessages, setUser } = userSlice.actions;
+export const { clearMessages, setUser } = userSlice.actions;
 export default userSlice.reducer;
