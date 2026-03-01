@@ -7,6 +7,7 @@ export default function CafesPage() {
       title="Ovqatlanish joylari"
       data={data}
       basePath="/cafe"
+      categoryKey="cafe"
       popularTitle="Mashhur ovqatlanish joylari"
     />
   );

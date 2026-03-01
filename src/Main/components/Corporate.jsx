@@ -1,8 +1,10 @@
 import React from "react";
 import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import { useI18n } from "../../i18n/I18nProvider";
 
 export default function Corporate() {
+  const { t } = useI18n();
   return (
     <div className="Corporate">
       <div className="container">
@@ -141,17 +143,12 @@ export default function Corporate() {
 
           <div className="Corporate-main-nav">
             <Group justify="center">
-              <Button
-                radius="md"
-                size="md"
-                variant="gradient"
-                gradient={{ from: "indigo", via: "violet", to: "pink" }}
-              >
-                <Link to="/register">Waynixga qo'shiling</Link>
+              <Button radius="md" size="md" variant="gradient" gradient={{ from: "indigo", via: "violet", to: "pink" }}>
+                <Link to="/add-place">{t("corporate.join")}</Link>
               </Button>
 
               <Button variant="outline" color="#2b7fff" size="md" radius="md">
-                <Link to="/contact">Batafsil ma'lumot</Link>
+                <Link to="/contact">{t("corporate.learnMore")}</Link>
               </Button>
             </Group>
           </div>

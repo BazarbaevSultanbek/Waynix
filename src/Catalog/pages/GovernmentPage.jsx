@@ -7,6 +7,7 @@ export default function GovernmentPage() {
       title="Davlat idoralari"
       data={data}
       basePath="/government"
+      categoryKey="government"
       popularTitle="Davlat idoralari"
     />
   );

@@ -7,6 +7,7 @@ export default function ServicesPage() {
       title="Xizmatlar"
       data={data}
       basePath="/services"
+      categoryKey="services"
       popularTitle="Mashhur xizmat markazlari"
     />
   );

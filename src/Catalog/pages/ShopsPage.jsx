@@ -7,6 +7,7 @@ export default function ShopsPage() {
       title="Savdo markazlari"
       data={data}
       basePath="/shop"
+      categoryKey="shop"
       popularTitle="Mashhur savdo joylari"
     />
   );

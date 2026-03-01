@@ -1,72 +1,89 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import {
-  Modal,
-  Button,
-  TextInput,
-  PasswordInput,
-  Text,
   Anchor,
   Box,
-  Checkbox,
+  Button,
+  Modal,
+  PasswordInput,
+  Text,
+  TextInput,
 } from "@mantine/core";
 import {
-  IconMail,
-  IconLock,
-  IconUser,
-  IconPhone,
-  IconWorld,
   IconChevronDown,
+  IconLock,
+  IconMail,
+  IconUser,
+  IconWorld,
 } from "@tabler/icons-react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, register, setUser } from "../../store/reducers/userReducer";
-import main_logo from "../../images/waynix-logo.png";
-import getCookie from "../../utils/getCookie";
 import { Link } from "react-router-dom";
+import main_logo from "../../images/waynix-logo.png";
+import $api from "../../http/axios";
+import getCookie from "../../utils/getCookie";
+import { loginUser, register, setUser } from "../../store/reducers/userReducer";
+import { useI18n } from "../../i18n/I18nProvider";
 import "./banner.scss";
 
-const Banner = () => {
+const languageOptions = [
+  { code: "uz", label: "O'zbek", flag: "🇺🇿" },
+  { code: "kaa", label: "Qaraqalpaq", flag: "🇺🇿" },
+  { code: "ru", label: "Русский", flag: "🇷🇺" },
+  { code: "en", label: "English", flag: "🇬🇧" },
+];
+
+const categories = [
+  { label: "Turobektlar", href: "/tours" },
+  { label: "Savdo markazlari", href: "/shop" },
+  { label: "Ovqatlanish joylari", href: "/cafe" },
+  { label: "Mehmonxonalar", href: "/hotels" },
+  { label: "Servislar", href: "/services" },
+  { label: "Entertainment", href: "/entertainment" },
+  { label: "Tibbiyot", href: "/medical" },
+  { label: "Davlat idoralari", href: "/government" },
+  { label: "Ta'lim", href: "/education" },
+];
+
+const API_ORIGIN =
+  import.meta.env.VITE_API_ORIGIN || "https://waynix-server.vercel.app";
+
+const resolveAvatarUrl = (avatar) => {
+  if (!avatar) {
+    return "https://api.dicebear.com/7.x/initials/svg?seed=Waynix%20User";
+  }
+  if (avatar.startsWith("http://") || avatar.startsWith("https://")) {
+    return avatar;
+  }
+  return `${API_ORIGIN}${avatar}`;
+};
+
+export default function Banner() {
+  const { t, language, setLanguage } = useI18n();
   const dispatch = useDispatch();
   const reduxUser = useSelector((state) => state.user.user);
 
   const [currentUser, setCurrentUser] = useState(null);
+  const [langOpen, setLangOpen] = useState(false);
+  const [catOpen, setCatOpen] = useState(false);
+  const [mobileCatOpen, setMobileCatOpen] = useState(false);
+  const [mobileLangOpen, setMobileLangOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [lang, setLang] = useState(
+    languageOptions.find((item) => item.code === language) || languageOptions[0]
+  );
 
   const [loginOpened, { open: openLogin, close: closeLogin }] =
     useDisclosure(false);
   const [registerOpened, { open: openRegister, close: closeRegister }] =
     useDisclosure(false);
 
-  const [langOpen, setLangOpen] = useState(false);
-  const [catOpen, setCatOpen] = useState(false);
-  const [mobileCatOpen, setMobileCatOpen] = useState(false);
-  const [mobileLangOpen, setMobileLangOpen] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  const [lang, setLang] = useState({
-    code: "UZ",
-    label: "O'zbek",
-    flag: "🇺🇿",
-  });
-
-  const langs = [
-    { code: "UZ", label: "O'zbek", flag: "🇺🇿" },
-    { code: "EN", label: "English", flag: "🇬🇧" },
-    { code: "RU", label: "Русский", flag: "🇷🇺" },
-    { code: "DE", label: "Deutsch", flag: "🇩🇪" },
-    { code: "FR", label: "Français", flag: "🇫🇷" },
-  ];
-
-  const categories = [
-    { label: "Turobektlar", href: "/tours" },
-    { label: "Savdo markazlari", href: "/shop" },
-    { label: "Ovqatlanish joylari", href: "/Cafe" },
-    { label: "Mehmonxonalar", href: "/hotels" },
-    { label: "Servislar", href: "/services" },
-    { label: "Entertainment", href: "/entertainment" },
-    { label: "Tibbiyot", href: "/medical" },
-    { label: "Davlat idoralari", href: "/government" },
-    { label: "Ta'lim", href: "/education" },
-  ];
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confPassword, setConfPassword] = useState("");
+  const [verifyOpened, setVerifyOpened] = useState(false);
+  const [verifyEmail, setVerifyEmail] = useState("");
+  const [verifyCode, setVerifyCode] = useState("");
 
   useEffect(() => {
     if (reduxUser) {
@@ -74,12 +91,56 @@ const Banner = () => {
       return;
     }
     const cookieValue = getCookie("currentUser");
-    if (cookieValue) {
+    if (!cookieValue) return;
+    try {
       const userObj = JSON.parse(decodeURIComponent(cookieValue));
-      dispatch(setUser(userObj));
       setCurrentUser(userObj);
+      dispatch(setUser(userObj));
+    } catch (err) {
+      console.error("Cookie parse error:", err);
     }
   }, [reduxUser, dispatch]);
+
+  useEffect(() => {
+    const currentLangCode = currentUser?.settings?.language;
+    if (!currentLangCode) return;
+    const found = languageOptions.find((item) => item.code === currentLangCode);
+    if (found) setLang(found);
+  }, [currentUser]);
+
+  useEffect(() => {
+    const found = languageOptions.find((item) => item.code === language);
+    if (found) setLang(found);
+  }, [language]);
+
+  const authHeaders = useMemo(() => {
+    const token = getCookie("accessToken");
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  }, [currentUser]);
+
+  const handleLanguageChange = async (nextLang) => {
+    setLang(nextLang);
+    setLanguage(nextLang.code);
+    setLangOpen(false);
+    setMobileLangOpen(false);
+
+    if (!currentUser) return;
+    try {
+      const payload = {
+        settings: {
+          ...(currentUser.settings || {}),
+          language: nextLang.code,
+        },
+      };
+      const { data } = await $api.put("/update-profile", payload, {
+        headers: authHeaders,
+      });
+      setCurrentUser(data.user);
+      dispatch(setUser(data.user));
+    } catch (err) {
+      console.error("Language update failed:", err?.response?.data || err.message);
+    }
+  };
 
   const switchToRegister = () => {
     closeLogin();
@@ -91,12 +152,6 @@ const Banner = () => {
     setTimeout(() => openLogin(), 200);
   };
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [conf_password, setConfPass] = useState("");
-
-
   const handleLogin = () => {
     if (!email || !password) return alert("Email va parolni kiriting");
     dispatch(loginUser({ email, password }));
@@ -107,20 +162,46 @@ const Banner = () => {
     setName("");
     setEmail("");
     setPassword("");
-    setConfPass("");
+    setConfPassword("");
   };
 
   const handleRegister = () => {
-    if (
-      password === conf_password &&
-      email !== "" &&
-      name !== ""
-    ) {
-      dispatch(register({ name, email, password }))
-      resetForm();
-      closeRegister();
-    } else {
-      alert("Ma'lumotlarni to'g'ri kiriting");
+    if (!name || !email || !password || !confPassword) {
+      return alert("Barcha maydonlarni to'ldiring");
+    }
+    if (password !== confPassword) {
+      return alert("Parollar mos emas");
+    }
+    dispatch(register({ name, email, password }));
+    setVerifyEmail(email);
+    resetForm();
+    closeRegister();
+    setVerifyOpened(true);
+    alert("Tasdiqlash kodi emailingizga yuborildi");
+  };
+
+  const handleVerifyEmail = async () => {
+    if (!verifyEmail || !verifyCode) {
+      return alert("Email va kodni kiriting");
+    }
+    try {
+      await $api.post("/verify-email", { email: verifyEmail, code: verifyCode });
+      setVerifyOpened(false);
+      setVerifyCode("");
+      alert("Email tasdiqlandi. Endi tizimga kirishingiz mumkin.");
+      openLogin();
+    } catch (err) {
+      alert(err?.response?.data?.message || "Kod noto'g'ri yoki eskirgan");
+    }
+  };
+
+  const handleResendCode = async () => {
+    if (!verifyEmail) return alert("Email kiriting");
+    try {
+      await $api.post("/resend-verification", { email: verifyEmail });
+      alert("Yangi kod yuborildi");
+    } catch (err) {
+      alert(err?.response?.data?.message || "Kod yuborishda xatolik");
     }
   };
 
@@ -136,8 +217,7 @@ const Banner = () => {
           </Link>
 
           <nav className="banner__nav">
-            <Link to="/">Bosh sahifa</Link>
-
+            <Link to="/">{t("banner.home")}</Link>
             <div className={`nav-drop ${catOpen ? "open" : ""}`}>
               <button
                 className="nav-btn"
@@ -147,9 +227,8 @@ const Banner = () => {
                   setLangOpen(false);
                 }}
               >
-                Kategoriyalar <IconChevronDown size={16} />
+                {t("banner.categories")} <IconChevronDown size={16} />
               </button>
-
               <div className={`nav-menu ${catOpen ? "open" : ""}`}>
                 {categories.map((c) => (
                   <Link key={c.label} to={c.href} onClick={() => setCatOpen(false)}>
@@ -158,9 +237,8 @@ const Banner = () => {
                 ))}
               </div>
             </div>
-
-            <Link to="/contact">Biz haqimizda</Link>
-            <Link to="/about">Kontakt</Link>
+            <Link to="/about">{t("banner.about")}</Link>
+            <Link to="/contact">{t("banner.contact")}</Link>
           </nav>
 
           <div className="banner__actions">
@@ -175,23 +253,20 @@ const Banner = () => {
               >
                 <IconWorld size={16} />
                 <span>
-                  {lang.flag} {lang.code}
+                  {lang.flag} {lang.code.toUpperCase()}
                 </span>
                 <IconChevronDown size={14} />
               </button>
 
               <div className={`lang-menu ${langOpen ? "open" : ""}`}>
-                {langs.map((l) => (
+                {languageOptions.map((item) => (
                   <button
-                    key={l.code}
+                    key={item.code}
                     type="button"
-                    onClick={() => {
-                      setLang(l);
-                      setLangOpen(false);
-                    }}
+                    onClick={() => handleLanguageChange(item)}
                   >
-                    <span>{l.flag}</span>
-                    {l.label}
+                    <span>{item.flag}</span>
+                    {item.label}
                   </button>
                 ))}
               </div>
@@ -199,15 +274,15 @@ const Banner = () => {
 
             {currentUser ? (
               <a className="avatar" href="/profile">
-                <img src={currentUser.avatar} alt="avatar" />
+                <img src={resolveAvatarUrl(currentUser.avatar)} alt="avatar" />
               </a>
             ) : (
               <div className="auth-btns">
                 <button className="btn-outline" onClick={openLogin} type="button">
-                  Kirish
+                  {t("banner.login")}
                 </button>
                 <button className="btn-primary" onClick={openRegister} type="button">
-                  Ro'yxatdan o'tish
+                  {t("banner.register")}
                 </button>
               </div>
             )}
@@ -237,7 +312,7 @@ const Banner = () => {
           </div>
 
           <Link to="/" onClick={() => setMobileOpen(false)}>
-            Bosh sahifa
+            {t("banner.home")}
           </Link>
 
           <button
@@ -245,10 +320,9 @@ const Banner = () => {
             onClick={() => setMobileCatOpen((v) => !v)}
             type="button"
           >
-            Kategoriyalar
+            {t("banner.categories")}
             <span className={mobileCatOpen ? "rot" : ""}>▾</span>
           </button>
-
           <div className={`mobile-cat-list ${mobileCatOpen ? "open" : ""}`}>
             {categories.map((c) => (
               <Link key={c.label} to={c.href} onClick={() => setMobileOpen(false)}>
@@ -258,10 +332,10 @@ const Banner = () => {
           </div>
 
           <Link to="/about" onClick={() => setMobileOpen(false)}>
-            Biz haqimizda
+            {t("banner.about")}
           </Link>
           <Link to="/contact" onClick={() => setMobileOpen(false)}>
-            Kontakt
+            {t("banner.contact")}
           </Link>
 
           <div className={`mobile-lang ${mobileLangOpen ? "open" : ""}`}>
@@ -277,101 +351,52 @@ const Banner = () => {
             </button>
 
             <div className="mobile-lang-menu">
-              {langs.map((l) => (
-                <button
-                  key={l.code}
-                  onClick={() => {
-                    setLang(l);
-                    setMobileLangOpen(false);
-                  }}
-                  type="button"
-                >
-                  <span>{l.flag}</span>
-                  {l.label}
+              {languageOptions.map((item) => (
+                <button key={item.code} onClick={() => handleLanguageChange(item)} type="button">
+                  <span>{item.flag}</span>
+                  {item.label}
                 </button>
               ))}
             </div>
           </div>
-
-          <div className="auth-btns mobile">
-            <button
-              className="btn-outline"
-              onClick={() => {
-                setMobileOpen(false);
-                openLogin();
-              }}
-              type="button"
-            >
-              Kirish
-            </button>
-            <button
-              className="btn-primary"
-              onClick={() => {
-                setMobileOpen(false);
-                openRegister();
-              }}
-              type="button"
-            >
-              Ro'yxat
-            </button>
-          </div>
         </div>
       </div>
 
-      <Modal
-        opened={loginOpened}
-        onClose={closeLogin}
-        centered
-        radius="md"
-        padding="xl"
-        withCloseButton
-        overlayProps={{ backgroundOpacity: 0.4, blur: 4 }}
-      >
+      <Modal opened={loginOpened} onClose={closeLogin} centered radius="md" padding="xl">
         <Box>
           <Text ta="center" fw={600} fz="xl" mb="xs">
-            Kirish
+            {t("banner.loginTitle")}
           </Text>
           <Text ta="center" c="dimmed" fz="sm" mb="lg">
-            Waynix platformasiga xush kelibsiz
+            {t("banner.loginSubtitle")}
           </Text>
 
           <TextInput
-            label="Email manzil"
+            label={t("banner.email")}
             placeholder="email@example.com"
             leftSection={<IconMail size={16} />}
             mb="sm"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-
           <PasswordInput
-            label="Parol"
+            label={t("banner.password")}
             placeholder="••••••••"
             leftSection={<IconLock size={16} />}
             mb="xs"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
           <Anchor href="#" fz="sm" c="blue" ta="right" display="block" mb="lg">
-            Parolni unutdingizmi?
+            {t("banner.forgotPassword")}
           </Anchor>
-
-          <Button
-            fullWidth
-            radius="md"
-            size="md"
-            variant="gradient"
-            gradient={{ from: "indigo", via: "violet", to: "pink" }}
-            onClick={handleLogin}
-          >
-            Kirish
+          <Button fullWidth radius="md" size="md" onClick={handleLogin}>
+            {t("banner.login")}
           </Button>
-
           <Text ta="center" mt="lg" fz="sm">
-            Hisobingiz yo‘qmi?{" "}
+            {t("banner.noAccount")}{" "}
             <Anchor onClick={switchToRegister} style={{ cursor: "pointer" }}>
-              Ro‘yxatdan o‘ting
+              {t("banner.register")}
             </Anchor>
           </Text>
         </Box>
@@ -383,17 +408,14 @@ const Banner = () => {
         centered
         radius="md"
         padding="xl"
-        withCloseButton
-        overlayProps={{ backgroundOpacity: 0.4, blur: 4 }}
       >
         <Box>
           <Text ta="center" fw={600} fz="xl" mb="xs">
-            Ro‘yxatdan o‘tish
+            {t("banner.registerTitle")}
           </Text>
           <Text ta="center" c="dimmed" fz="sm" mb="lg">
-            Waynix platformasiga qo‘shiling
+            {t("banner.registerSubtitle")}
           </Text>
-
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -401,7 +423,7 @@ const Banner = () => {
             }}
           >
             <TextInput
-              label="To‘liq ism"
+              label={t("banner.fullName")}
               placeholder="Ism Familiya"
               leftSection={<IconUser size={16} />}
               mb="sm"
@@ -409,9 +431,8 @@ const Banner = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-
             <TextInput
-              label="Email manzil"
+              label={t("banner.email")}
               placeholder="email@example.com"
               leftSection={<IconMail size={16} />}
               mb="sm"
@@ -420,52 +441,80 @@ const Banner = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-
-
-
             <PasswordInput
-              label="Parol"
-              placeholder="••••••••"
+              label={t("banner.password")}
+              placeholder="Kamida 8 belgi, harf va raqam"
               leftSection={<IconLock size={16} />}
               mb="sm"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-
             <PasswordInput
-              label="Parolni tasdiqlang"
+              label={t("banner.confirmPassword")}
               placeholder="••••••••"
               leftSection={<IconLock size={16} />}
               mb="md"
               required
-              value={conf_password}
-              onChange={(e) => setConfPass(e.target.value)}
+              value={confPassword}
+              onChange={(e) => setConfPassword(e.target.value)}
             />
-
-
-            <Button
-              type="submit"
-              fullWidth
-              radius="md"
-              size="md"
-              variant="gradient"
-              gradient={{ from: "indigo", via: "violet", to: "pink" }}
-            >
-              Ro‘yxatdan o‘tish
+            <Button type="submit" fullWidth radius="md" size="md">
+              {t("banner.register")}
             </Button>
           </form>
+          <Text ta="center" mt="lg" fz="sm">
+            {t("banner.haveAccount")}{" "}
+            <Anchor onClick={switchToLogin} style={{ cursor: "pointer" }}>
+              {t("banner.login")}
+            </Anchor>
+          </Text>
+        </Box>
+      </Modal>
+
+      <Modal
+        opened={verifyOpened}
+        onClose={() => setVerifyOpened(false)}
+        centered
+        radius="md"
+        padding="xl"
+      >
+        <Box>
+          <Text ta="center" fw={600} fz="xl" mb="xs">
+            {t("banner.verifyTitle")}
+          </Text>
+          <Text ta="center" c="dimmed" fz="sm" mb="lg">
+            Emailga yuborilgan 6 xonali kodni kiriting
+          </Text>
+
+          <TextInput
+            label={t("banner.email")}
+            placeholder="email@example.com"
+            mb="sm"
+            value={verifyEmail}
+            onChange={(e) => setVerifyEmail(e.target.value)}
+          />
+
+          <TextInput
+            label={t("banner.verifyCode")}
+            placeholder="123456"
+            mb="md"
+            value={verifyCode}
+            onChange={(e) => setVerifyCode(e.target.value)}
+          />
+
+          <Button fullWidth radius="md" size="md" onClick={handleVerifyEmail}>
+            {t("banner.verifyBtn")}
+          </Button>
 
           <Text ta="center" mt="lg" fz="sm">
-            Allaqachon hisobingiz bormi?{" "}
-            <Anchor onClick={switchToLogin} style={{ cursor: "pointer" }}>
-              Kirish
+            {t("banner.verifyCode")}{" "}
+            <Anchor onClick={handleResendCode} style={{ cursor: "pointer" }}>
+              {t("banner.resend")}
             </Anchor>
           </Text>
         </Box>
       </Modal>
     </>
   );
-};
-
-export default Banner;
+}

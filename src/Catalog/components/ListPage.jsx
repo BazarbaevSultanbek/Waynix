@@ -1,12 +1,61 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import "../../utils/styles/Catalog.scss";
+import $api from "../../http/axios";
 
 const sortOptions = ["Default", "Hudud", "Mashhurlik", "Nomi"];
 
-export default function ListPage({ title, data, basePath, popularTitle }) {
+const API_ORIGIN =
+  import.meta.env.VITE_API_ORIGIN || "https://waynix-server.vercel.app";
+
+const categoryLabel = {
+  tours: "Turobyektlar",
+  shop: "Savdo markazlari",
+  cafe: "Ovqatlanish joylari",
+  hotels: "Mehmonxonalar",
+  services: "Servislar",
+  entertainment: "Entertainment",
+  medical: "Tibbiyot",
+  government: "Davlat idoralari",
+  education: "Ta'lim",
+};
+
+const toCardShape = (item) => ({
+  id: item._id,
+  name: item.name,
+  type: item.type || categoryLabel[item.category] || item.category,
+  desc: item.description || item.desc || "",
+  fullDescription: item.description || item.fullDescription || "",
+  location: item.location || "",
+  address: item.location || "",
+  region: item.region || "",
+  popularity: item.popularity || 0,
+  rating: Number(item.rating || 4.5),
+  image: item.images?.[0]
+    ? item.images[0].startsWith("http")
+      ? item.images[0]
+      : `${API_ORIGIN}${item.images[0]}`
+    : item.image,
+  images: Array.isArray(item.images)
+    ? item.images.map((img) =>
+        img.startsWith("http") ? img : `${API_ORIGIN}${img}`
+      )
+    : item.images,
+  phone: item.phones?.[0] || item.phone || "",
+  hours: item.workingHours || item.hours || "",
+  socials: item.socialLinks || item.socials || {},
+});
+
+export default function ListPage({
+  title,
+  data,
+  basePath,
+  popularTitle,
+  categoryKey,
+}) {
+  const [submittedPlaces, setSubmittedPlaces] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedSort, setSelectedSort] = useState("Default");
   const [viewMode, setViewMode] = useState("list");
@@ -16,10 +65,34 @@ export default function ListPage({ title, data, basePath, popularTitle }) {
 
   const itemsPerPage = 5;
 
+  useEffect(() => {
+    let isMounted = true;
+    const loadPlaces = async () => {
+      try {
+        const { data: places } = await $api.get("/places/public", {
+          params: { category: categoryKey },
+        });
+        if (!isMounted) return;
+        setSubmittedPlaces((places || []).map(toCardShape));
+      } catch (err) {
+        if (isMounted) setSubmittedPlaces([]);
+      }
+    };
+    loadPlaces();
+    return () => {
+      isMounted = false;
+    };
+  }, [categoryKey]);
+
+  const mergedData = useMemo(
+    () => [...submittedPlaces, ...data].map(toCardShape),
+    [submittedPlaces, data]
+  );
+
   const categories = useMemo(() => {
-    const set = new Set(data.map((item) => item.type));
+    const set = new Set(mergedData.map((item) => item.type));
     return ["All", ...Array.from(set)];
-  }, [data]);
+  }, [mergedData]);
 
   const toggleFilter = (key) => {
     setOpenFilter((prev) => (prev === key ? null : key));
@@ -27,14 +100,14 @@ export default function ListPage({ title, data, basePath, popularTitle }) {
 
   const searched = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return data;
-    return data.filter(
+    if (!q) return mergedData;
+    return mergedData.filter(
       (item) =>
         item.name.toLowerCase().includes(q) ||
         item.location.toLowerCase().includes(q) ||
         item.type.toLowerCase().includes(q)
     );
-  }, [search, data]);
+  }, [search, mergedData]);
 
   const filtered = useMemo(() => {
     if (selectedCategory === "All") return searched;
@@ -61,8 +134,8 @@ export default function ListPage({ title, data, basePath, popularTitle }) {
   }, [sorted, page]);
 
   const popularList = useMemo(
-    () => [...data].sort((a, b) => b.rating - a.rating).slice(0, 4),
-    [data]
+    () => [...mergedData].sort((a, b) => b.rating - a.rating).slice(0, 4),
+    [mergedData]
   );
 
   const goToPage = (p) => {

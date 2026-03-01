@@ -7,6 +7,7 @@ export default function HotelsPage() {
       title="Mehmonxonalar"
       data={data}
       basePath="/hotels"
+      categoryKey="hotels"
       popularTitle="Mashhur mehmonxonalar"
     />
   );

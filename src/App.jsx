@@ -27,6 +27,7 @@ import EntertainmentDetailPage from "./Catalog/pages/EntertainmentDetailPage";
 import MedicalDetailPage from "./Catalog/pages/MedicalDetailPage";
 import GovernmentDetailPage from "./Catalog/pages/GovernmentDetailPage";
 import EducationDetailPage from "./Catalog/pages/EducationDetailPage";
+import AddPlace from "./Place/AddPlace";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/add-place" element={<AddPlace />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
 

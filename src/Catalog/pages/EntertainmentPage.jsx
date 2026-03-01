@@ -7,6 +7,7 @@ export default function EntertainmentPage() {
       title="Ko'ngil ochar va dam olish"
       data={data}
       basePath="/entertainment"
+      categoryKey="entertainment"
       popularTitle="Mashhur dam olish maskanlari"
     />
   );

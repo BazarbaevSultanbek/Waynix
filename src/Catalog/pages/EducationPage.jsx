@@ -7,6 +7,7 @@ export default function EducationPage() {
       title="Ta'lim"
       data={data}
       basePath="/education"
+      categoryKey="education"
       popularTitle="Mashhur ta'lim maskanlari"
     />
   );

@@ -7,6 +7,7 @@ export default function MedicalPage() {
       title="Tibbiyot"
       data={data}
       basePath="/medical"
+      categoryKey="medical"
       popularTitle="Mashhur tibbiyot markazlari"
     />
   );

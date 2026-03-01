@@ -1,23 +1,89 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import "../../utils/styles/DetailPage.scss";
+import $api from "../../http/axios";
+
+const API_ORIGIN =
+  import.meta.env.VITE_API_ORIGIN || "https://waynix-server.vercel.app";
+const categoryLabel = {
+  tours: "Turobyektlar",
+  shop: "Savdo markazlari",
+  cafe: "Ovqatlanish joylari",
+  hotels: "Mehmonxonalar",
+  services: "Servislar",
+  entertainment: "Entertainment",
+  medical: "Tibbiyot",
+  government: "Davlat idoralari",
+  education: "Ta'lim",
+};
+
+const toCardShape = (item) => ({
+  id: item._id || item.id,
+  name: item.name,
+  type: item.type || categoryLabel[item.category] || item.category,
+  desc: item.description || item.desc || "",
+  fullDescription: item.description || item.fullDescription || "",
+  location: item.location || "",
+  address: item.location || item.address || "",
+  region: item.region || "",
+  rating: Number(item.rating || 4.5),
+  image: item.images?.[0]
+    ? item.images[0].startsWith("http")
+      ? item.images[0]
+      : `${API_ORIGIN}${item.images[0]}`
+    : item.image,
+  images: Array.isArray(item.images)
+    ? item.images.map((img) =>
+        img.startsWith("http") ? img : `${API_ORIGIN}${img}`
+      )
+    : item.images,
+  phone: item.phones?.[0] || item.phone || "",
+  hours: item.workingHours || item.hours || "",
+  socials: item.socialLinks || item.socials || {},
+});
 
 function StarLine({ rating }) {
   const full = Math.round(rating);
   return <span className="stars">{"★".repeat(full)}{"☆".repeat(5 - full)}</span>;
 }
 
-export default function DetailPage({ title, data, basePath }) {
+export default function DetailPage({ title, data, basePath, categoryKey }) {
   const { id } = useParams();
-  const current = useMemo(() => data.find((item) => String(item.id) === String(id)), [data, id]);
+  const [submittedPlaces, setSubmittedPlaces] = useState([]);
+  const merged = useMemo(
+    () => [...submittedPlaces, ...data].map(toCardShape),
+    [submittedPlaces, data]
+  );
+  const current = useMemo(
+    () => merged.find((item) => String(item.id) === String(id)),
+    [merged, id]
+  );
   const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    let isMounted = true;
+    const loadPlaces = async () => {
+      try {
+        const { data: places } = await $api.get("/places/public", {
+          params: { category: categoryKey },
+        });
+        if (isMounted) setSubmittedPlaces((places || []).map(toCardShape));
+      } catch {
+        if (isMounted) setSubmittedPlaces([]);
+      }
+    };
+    loadPlaces();
+    return () => {
+      isMounted = false;
+    };
+  }, [categoryKey]);
 
   const nearby = useMemo(() => {
     if (!current) return [];
-    return data.filter((item) => item.id !== current.id).slice(0, 3);
-  }, [data, current]);
+    return merged.filter((item) => item.id !== current.id).slice(0, 3);
+  }, [merged, current]);
 
   if (!current) {
     return (

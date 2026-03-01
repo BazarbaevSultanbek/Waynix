@@ -7,6 +7,7 @@ export default function ToursPage() {
       title="Turobyektlar"
       data={data}
       basePath="/tours"
+      categoryKey="tours"
       popularTitle="Mashhur turobyektlar"
     />
   );
