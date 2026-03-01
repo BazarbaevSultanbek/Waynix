@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import {
   Anchor,
@@ -20,7 +20,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import main_logo from "../../images/waynix-logo.png";
 import $api from "../../http/axios";
-import getCookie from "../../utils/getCookie";
 import { loginUser, register, setUser } from "../../store/reducers/userReducer";
 import { useI18n } from "../../i18n/I18nProvider";
 import "./banner.scss";
@@ -90,15 +89,18 @@ export default function Banner() {
       setCurrentUser(reduxUser);
       return;
     }
-    const cookieValue = getCookie("currentUser");
-    if (!cookieValue) return;
-    try {
-      const userObj = JSON.parse(decodeURIComponent(cookieValue));
-      setCurrentUser(userObj);
-      dispatch(setUser(userObj));
-    } catch (err) {
-      console.error("Cookie parse error:", err);
-    }
+    const loadUser = async () => {
+      try {
+        const { data } = await $api.get("/refresh");
+        if (data?.user) {
+          setCurrentUser(data.user);
+          dispatch(setUser(data.user));
+        }
+      } catch {
+        setCurrentUser(null);
+      }
+    };
+    loadUser();
   }, [reduxUser, dispatch]);
 
   useEffect(() => {
@@ -112,11 +114,6 @@ export default function Banner() {
     const found = languageOptions.find((item) => item.code === language);
     if (found) setLang(found);
   }, [language]);
-
-  const authHeaders = useMemo(() => {
-    const token = getCookie("accessToken");
-    return token ? { Authorization: `Bearer ${token}` } : {};
-  }, [currentUser]);
 
   const handleLanguageChange = async (nextLang) => {
     setLang(nextLang);
@@ -132,9 +129,7 @@ export default function Banner() {
           language: nextLang.code,
         },
       };
-      const { data } = await $api.put("/update-profile", payload, {
-        headers: authHeaders,
-      });
+      const { data } = await $api.put("/update-profile", payload);
       setCurrentUser(data.user);
       dispatch(setUser(data.user));
     } catch (err) {
@@ -165,19 +160,29 @@ export default function Banner() {
     setConfPassword("");
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (!name || !email || !password || !confPassword) {
       return alert("Barcha maydonlarni to'ldiring");
     }
     if (password !== confPassword) {
       return alert("Parollar mos emas");
     }
-    dispatch(register({ name, email, password }));
-    setVerifyEmail(email);
-    resetForm();
-    closeRegister();
-    setVerifyOpened(true);
-    alert("Tasdiqlash kodi emailingizga yuborildi");
+    try {
+      const result = await dispatch(register({ name, email, password })).unwrap();
+      setVerifyEmail(email);
+      resetForm();
+      closeRegister();
+      setVerifyOpened(true);
+      if (result?.verificationCode) {
+        alert(
+          `Email service ishlamadi. Test kodi: ${result.verificationCode}`
+        );
+      } else {
+        alert("Tasdiqlash kodi emailingizga yuborildi");
+      }
+    } catch (err) {
+      alert(err || "Ro'yxatdan o'tishda xatolik");
+    }
   };
 
   const handleVerifyEmail = async () => {
@@ -198,8 +203,14 @@ export default function Banner() {
   const handleResendCode = async () => {
     if (!verifyEmail) return alert("Email kiriting");
     try {
-      await $api.post("/resend-verification", { email: verifyEmail });
-      alert("Yangi kod yuborildi");
+      const { data } = await $api.post("/resend-verification", {
+        email: verifyEmail,
+      });
+      if (data?.verificationCode) {
+        alert(`Yangi test kodi: ${data.verificationCode}`);
+      } else {
+        alert("Yangi kod yuborildi");
+      }
     } catch (err) {
       alert(err?.response?.data?.message || "Kod yuborishda xatolik");
     }

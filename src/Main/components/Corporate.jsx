@@ -32,14 +32,10 @@ export default function Corporate() {
                 <path d="M3 4h8"></path>
               </svg>
             </span>
-            <p>Waynixga qo'shiling</p>
+            <p>{t("corporate.title")}</p>
           </div>
           <div className="Corporate-main-text">
-            <p>
-              Bu yerda har bir ishtirokchi — foydalanuvchi bo'ladimi yoki
-              tadbirkor — platformaning muhim qismiga aylanadi. Bugun Waynix'ga
-              qo'shiling va kelajakdagi imkoniyatlarning bir bo'lagi bo'ling!
-            </p>
+            <p>{t("corporate.description")}</p>
           </div>
 
           <div className="Corporate-main-cards">
@@ -69,11 +65,8 @@ export default function Corporate() {
                   <path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"></path>
                 </svg>
               </span>
-              <h3>Biznes egalari uchun</h3>
-              <p>
-                Mehmonxona, kafe, xizmat yoki turistik joyingizni joylashtiring
-                va mijozlar oqimini oshiring.
-              </p>
+              <h3>{t("corporate.cardBusinessTitle")}</h3>
+              <p>{t("corporate.cardBusinessText")}</p>
             </div>
             <div className="Corporate-main-cards-card">
               <span
@@ -103,11 +96,8 @@ export default function Corporate() {
                 </svg>
               </span>
 
-              <h3>Foydalanuvchilar uchun</h3>
-              <p>
-                Yangi joylar qo'shing, foydali ma'lumot kiriting va platforma
-                o'z nomingizni qoldiring.
-              </p>
+              <h3>{t("corporate.cardUserTitle")}</h3>
+              <p>{t("corporate.cardUserText")}</p>
             </div>
             <div className="Corporate-main-cards-card">
               <span
@@ -133,11 +123,8 @@ export default function Corporate() {
                   <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
                 </svg>
               </span>
-              <h3>Sifat va ishonch</h3>
-              <p>
-                Barcha joylar tekshiruvdan o'tadi va hamjamiyat tomonidan
-                baholanadi.
-              </p>
+              <h3>{t("corporate.cardTrustTitle")}</h3>
+              <p>{t("corporate.cardTrustText")}</p>
             </div>
           </div>
 
@@ -155,12 +142,12 @@ export default function Corporate() {
 
           <div className="Corporate-main-nav-texts">
             <p>
-              <span style={{ background: "#00c951" }}></span>Bepul ro'yxatga
-              olish
+              <span style={{ background: "#00c951" }}></span>
+              {t("corporate.freeRegistration")}
             </p>
             <p>
-              <span style={{ background: "#2b7fff" }}></span>24/7
-              qo'llab-quvvatlash
+              <span style={{ background: "#2b7fff" }}></span>
+              {t("corporate.support")}
             </p>
           </div>
         </div>

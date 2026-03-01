@@ -50,6 +50,20 @@ export const translations = {
     corporate: {
       join: "Waynixga qo'shiling",
       learnMore: "Batafsil ma'lumot",
+      title: "Waynixga qo'shiling",
+      description:
+        "Bu yerda har bir ishtirokchi — foydalanuvchi bo'ladimi yoki tadbirkor — platformaning muhim qismiga aylanadi. Bugun Waynix'ga qo'shiling va kelajakdagi imkoniyatlarning bir bo'lagi bo'ling!",
+      cardBusinessTitle: "Biznes egalari uchun",
+      cardBusinessText:
+        "Mehmonxona, kafe, xizmat yoki turistik joyingizni joylashtiring va mijozlar oqimini oshiring.",
+      cardUserTitle: "Foydalanuvchilar uchun",
+      cardUserText:
+        "Yangi joylar qo'shing, foydali ma'lumot kiriting va platformada o'z nomingizni qoldiring.",
+      cardTrustTitle: "Sifat va ishonch",
+      cardTrustText:
+        "Barcha joylar tekshiruvdan o'tadi va hamjamiyat tomonidan baholanadi.",
+      freeRegistration: "Bepul ro'yxatga olish",
+      support: "24/7 qo'llab-quvvatlash",
     },
   },
   en: {
@@ -102,6 +116,20 @@ export const translations = {
     corporate: {
       join: "Join Waynix",
       learnMore: "Learn more",
+      title: "Join Waynix",
+      description:
+        "Every participant here — user or business owner — becomes an important part of the platform. Join Waynix today and become part of future opportunities.",
+      cardBusinessTitle: "For business owners",
+      cardBusinessText:
+        "Publish your hotel, cafe, service, or tourist location and grow your customer flow.",
+      cardUserTitle: "For users",
+      cardUserText:
+        "Add new places, share useful information, and leave your mark on the platform.",
+      cardTrustTitle: "Quality and trust",
+      cardTrustText:
+        "All places are reviewed and rated by the community.",
+      freeRegistration: "Free registration",
+      support: "24/7 support",
     },
   },
   ru: {
@@ -155,8 +183,21 @@ export const translations = {
     corporate: {
       join: "Присоединиться к Waynix",
       learnMore: "Подробнее",
+      title: "Присоединяйтесь к Waynix",
+      description:
+        "Здесь каждый участник — пользователь или предприниматель — становится важной частью платформы. Присоединяйтесь к Waynix сегодня и станьте частью будущих возможностей.",
+      cardBusinessTitle: "Для владельцев бизнеса",
+      cardBusinessText:
+        "Разместите ваш отель, кафе, сервис или туристическую локацию и увеличьте поток клиентов.",
+      cardUserTitle: "Для пользователей",
+      cardUserText:
+        "Добавляйте новые места, делитесь полезной информацией и оставляйте свой след на платформе.",
+      cardTrustTitle: "Качество и доверие",
+      cardTrustText:
+        "Все места проходят проверку и оцениваются сообществом.",
+      freeRegistration: "Бесплатная регистрация",
+      support: "Поддержка 24/7",
     },
   },
   kaa: {},
 };
-

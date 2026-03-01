@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import "./App.scss";
 import Main from "./Main/Main";
 import Profile from "./Profile/Profile";
@@ -28,8 +30,15 @@ import MedicalDetailPage from "./Catalog/pages/MedicalDetailPage";
 import GovernmentDetailPage from "./Catalog/pages/GovernmentDetailPage";
 import EducationDetailPage from "./Catalog/pages/EducationDetailPage";
 import AddPlace from "./Place/AddPlace";
+import { fetchCurrentUser } from "./store/reducers/userReducer";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Notifications position="top-right" zIndex={3000} />

@@ -34,7 +34,6 @@ import {
 } from "@tabler/icons-react";
 import Footer from "../utils/footer/Footer";
 import $api from "../http/axios";
-import getCookie from "../utils/getCookie";
 import { logoutUser, setUser } from "../store/reducers/userReducer";
 import { useI18n } from "../i18n/I18nProvider";
 import "./profile.scss";
@@ -112,19 +111,6 @@ export default function Profile() {
   });
   const [myPlaces, setMyPlaces] = useState([]);
 
-  const token = getCookie("accessToken");
-  const authHeaders = token ? { Authorization: `Bearer ${token}` } : {};
-
-  useEffect(() => {
-    const cookieValue = getCookie("currentUser");
-    if (!cookieValue) return;
-    try {
-      setCurrentUser(JSON.parse(decodeURIComponent(cookieValue)));
-    } catch (err) {
-      console.error("Cookie parse error:", err);
-    }
-  }, []);
-
   useEffect(() => {
     const loadFreshUser = async () => {
       try {
@@ -141,16 +127,17 @@ export default function Profile() {
   }, [dispatch]);
 
   useEffect(() => {
+    if (!currentUser?.id) return;
     const loadMyPlaces = async () => {
       try {
-        const { data } = await $api.get("/places/mine", { headers: authHeaders });
+        const { data } = await $api.get("/places/mine");
         setMyPlaces(Array.isArray(data) ? data : []);
       } catch {
         setMyPlaces([]);
       }
     };
-    if (token) loadMyPlaces();
-  }, [token]);
+    loadMyPlaces();
+  }, [currentUser?.id]);
 
   useEffect(() => {
     if (!currentUser) return;
@@ -186,7 +173,7 @@ export default function Profile() {
 
     try {
       const { data } = await $api.post("/add-avatar", fd, {
-        headers: { "Content-Type": "multipart/form-data", ...authHeaders },
+        headers: { "Content-Type": "multipart/form-data" },
       });
       setCurrentUser(data.user);
       dispatch(setUser(data.user));
@@ -198,9 +185,7 @@ export default function Profile() {
 
   const handleSaveProfile = async () => {
     try {
-      const { data } = await $api.put("/update-profile", formData, {
-        headers: authHeaders,
-      });
+      const { data } = await $api.put("/update-profile", formData);
       setCurrentUser(data.user);
       dispatch(setUser(data.user));
       if (data.user?.settings?.language) {
@@ -231,8 +216,7 @@ export default function Profile() {
         {
           oldPassword: passwordData.oldPassword,
           newPassword: passwordData.newPassword,
-        },
-        { headers: authHeaders }
+        }
       );
       setPasswordData({ oldPassword: "", newPassword: "", confirmPassword: "" });
       alert("Parol muvaffaqiyatli yangilandi");

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Button, Notification, Select, TextInput, Textarea } from "@mantine/core";
+import { useSelector } from "react-redux";
 import Banner from "../utils/banner/Banner";
 import Footer from "../utils/footer/Footer";
 import $api from "../http/axios";
@@ -20,6 +21,7 @@ const categoryOptions = [
 
 export default function AddPlace() {
   const { t } = useI18n();
+  const currentUser = useSelector((state) => state.user.user);
   const [form, setForm] = useState({
     name: "",
     category: "",
@@ -40,7 +42,7 @@ export default function AddPlace() {
   const [state, setState] = useState({ type: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
 
-  const isAuth = useMemo(() => document.cookie.includes("accessToken="), []);
+  const isAuth = useMemo(() => Boolean(currentUser), [currentUser]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -211,4 +213,3 @@ export default function AddPlace() {
     </>
   );
 }
-

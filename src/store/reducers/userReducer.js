@@ -1,6 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import $api from "../../http/axios";
 
+export const fetchCurrentUser = createAsyncThunk(
+  "user/fetchCurrentUser",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await $api.get("/refresh");
+      return response.data.user;
+    } catch (err) {
+      return rejectWithValue(err.response?.data?.message || "Not authenticated");
+    }
+  }
+);
+
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
@@ -18,7 +30,7 @@ export const register = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await $api.post("/register", formData);
-      return response.data.user;
+      return response.data;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || "Registration failed");
     }
@@ -78,12 +90,18 @@ const userSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
-        state.success = "Registration successful";
+        state.user = action.payload?.user || null;
+        state.success = action.payload?.message || "Registration successful";
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+      .addCase(fetchCurrentUser.rejected, (state) => {
+        state.user = null;
       })
 
       .addCase(logoutUser.fulfilled, (state) => {
