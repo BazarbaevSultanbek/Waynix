@@ -114,7 +114,7 @@ export default function Profile() {
   useEffect(() => {
     const loadFreshUser = async () => {
       try {
-        const { data } = await $api.get("/refresh");
+        const { data } = await $api.get("/me");
         if (data?.user) {
           setCurrentUser(data.user);
           dispatch(setUser(data.user));

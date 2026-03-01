@@ -91,7 +91,7 @@ export default function Banner() {
     }
     const loadUser = async () => {
       try {
-        const { data } = await $api.get("/refresh");
+        const { data } = await $api.get("/me");
         if (data?.user) {
           setCurrentUser(data.user);
           dispatch(setUser(data.user));

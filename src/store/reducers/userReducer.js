@@ -1,11 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import $api from "../../http/axios";
 
+const setSession = (payload) => {
+  if (payload?.accessToken) {
+    localStorage.setItem("waynix_access_token", payload.accessToken);
+  }
+  if (payload?.refreshToken) {
+    localStorage.setItem("waynix_refresh_token", payload.refreshToken);
+  }
+  if (payload?.user) {
+    localStorage.setItem("waynix_user", JSON.stringify(payload.user));
+  }
+};
+
+const clearSession = () => {
+  localStorage.removeItem("waynix_access_token");
+  localStorage.removeItem("waynix_refresh_token");
+  localStorage.removeItem("waynix_user");
+};
+
 export const fetchCurrentUser = createAsyncThunk(
   "user/fetchCurrentUser",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await $api.get("/refresh");
+      const response = await $api.get("/me");
       return response.data.user;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || "Not authenticated");
@@ -18,6 +36,7 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await $api.post("/login", { email, password });
+      setSession(response.data);
       return response.data.user;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || "Login failed");
@@ -30,6 +49,7 @@ export const register = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await $api.post("/register", formData);
+      setSession(response.data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || "Registration failed");
@@ -42,6 +62,7 @@ export const logoutUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await $api.post("/logout");
+      clearSession();
       return true;
     } catch (err) {
       return rejectWithValue(err.response?.data?.message || "Logout failed");
@@ -99,9 +120,21 @@ const userSlice = createSlice({
       })
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         state.user = action.payload;
+        if (action.payload) {
+          localStorage.setItem("waynix_user", JSON.stringify(action.payload));
+        }
       })
       .addCase(fetchCurrentUser.rejected, (state) => {
-        state.user = null;
+        const cached = localStorage.getItem("waynix_user");
+        if (cached) {
+          try {
+            state.user = JSON.parse(cached);
+          } catch {
+            state.user = null;
+          }
+        } else {
+          state.user = null;
+        }
       })
 
       .addCase(logoutUser.fulfilled, (state) => {

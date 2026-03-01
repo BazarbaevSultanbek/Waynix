@@ -8,37 +8,13 @@ const $api = axios.create({
   baseURL: API_URL,
 });
 
-$api.interceptors.response.use(
-  (config) => config,
-  async (error) => {
-    const originalRequest = error.config;
-    if (error.response?.status === 401 && !originalRequest?._retry) {
-      originalRequest._retry = true;
-      await axios.get(`${API_URL}/refresh`, { withCredentials: true });
-      return $api(originalRequest);
-    }
-    throw error;
+$api.interceptors.request.use((config) => {
+  const accessToken = localStorage.getItem("waynix_access_token");
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
   }
-);
-
-$api.interceptors.response.use(
-  (config) => config,
-  async (error) => {
-    const originalRequest = error.config;
-
-    if (originalRequest?.url?.includes("/refresh")) {
-      throw error;
-    }
-
-    if (error.response?.status === 401 && !originalRequest?._retry) {
-      originalRequest._retry = true;
-      await axios.get(`${API_URL}/refresh`, { withCredentials: true });
-      return $api(originalRequest);
-    }
-
-    throw error;
-  }
-);
-
+  return config;
+});
 
 export default $api;
+
