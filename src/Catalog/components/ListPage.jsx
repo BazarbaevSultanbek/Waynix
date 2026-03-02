@@ -25,7 +25,7 @@ const categoryLabel = {
 };
 
 const toCardShape = (item) => ({
-  id: item._id,
+  id: item._id || item.id,
   name: item.name,
   type: item.type || categoryLabel[item.category] || item.category,
   desc: item.description || item.desc || "",

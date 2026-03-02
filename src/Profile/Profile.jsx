@@ -44,7 +44,13 @@ const API_ORIGIN =
 
 const resolveAvatarUrl = (avatar) => {
   if (!avatar) return "https://api.dicebear.com/7.x/initials/svg?seed=Waynix%20User";
-  if (avatar.startsWith("http://") || avatar.startsWith("https://")) return avatar;
+  if (
+    avatar.startsWith("http://") ||
+    avatar.startsWith("https://") ||
+    avatar.startsWith("data:image/")
+  ) {
+    return avatar;
+  }
   return `${API_ORIGIN}${avatar}`;
 };
 
