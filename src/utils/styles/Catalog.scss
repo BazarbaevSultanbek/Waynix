@@ -238,24 +238,36 @@
   background: #ffffff;
   border: 1px solid #e5e7eb;
   color: #1f2937;
-  padding: 6px 12px;
+  width: 100px;
+  height: 36px;
+  padding: 0 10px;
   border-radius: 8px;
   font-size: 13px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .catalog-card__btn {
   background: #1d4ed8;
   border: none;
-  padding: 6px 14px;
+  width: 100px;
+  height: 36px;
+  padding: 0 10px;
   border-radius: 8px;
   font-size: 13px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .catalog-card__btn a {
   color: #fff;
   text-decoration: none;
+  width: 100%;
+  text-align: center;
 }
 
 .catalog-list.grid .catalog-card__action {

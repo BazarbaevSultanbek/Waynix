@@ -88,6 +88,11 @@ export default function Banner() {
       setCurrentUser(reduxUser);
       return;
     }
+    const accessToken = localStorage.getItem("waynix_access_token");
+    if (!accessToken) {
+      setCurrentUser(null);
+      return;
+    }
     const loadUser = async () => {
       try {
         const { data } = await $api.get("/me");

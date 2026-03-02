@@ -118,6 +118,10 @@ export default function Profile() {
   };
 
   useEffect(() => {
+    const accessToken = localStorage.getItem("waynix_access_token");
+    if (!accessToken) {
+      return;
+    }
     const loadFreshUser = async () => {
       try {
         const { data } = await $api.get("/me");
@@ -134,6 +138,8 @@ export default function Profile() {
 
   useEffect(() => {
     if (!currentUser?.id) return;
+    const accessToken = localStorage.getItem("waynix_access_token");
+    if (!accessToken) return;
     const loadMyPlaces = async () => {
       try {
         const { data } = await $api.get("/places/mine");

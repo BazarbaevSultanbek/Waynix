@@ -23,6 +23,10 @@ export const fetchCurrentUser = createAsyncThunk(
   "user/fetchCurrentUser",
   async (_, { rejectWithValue }) => {
     try {
+      const accessToken = localStorage.getItem("waynix_access_token");
+      if (!accessToken) {
+        return null;
+      }
       const response = await $api.get("/me");
       return response.data.user;
     } catch (err) {
@@ -122,10 +126,15 @@ const userSlice = createSlice({
         state.user = action.payload;
         if (action.payload) {
           localStorage.setItem("waynix_user", JSON.stringify(action.payload));
+          return;
         }
+        localStorage.removeItem("waynix_user");
       })
-      .addCase(fetchCurrentUser.rejected, (state) => {
+      .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.user = null;
+        if (action.payload === "Not authenticated") {
+          clearSession();
+        }
       })
 
       .addCase(logoutUser.fulfilled, (state) => {
