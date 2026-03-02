@@ -10,8 +10,10 @@ import {
 } from "@mantine/core";
 import { IconCloud, IconX, IconMapPin } from "@tabler/icons-react";
 import "../weather.scss";
+import { useI18n } from "../../i18n/I18nProvider";
 
 export default function Weather() {
+  const { t, language } = useI18n();
   const [open, setOpen] = useState(false);
   const [coords, setCoords] = useState(null);
   const [city, setCity] = useState("");
@@ -49,7 +51,7 @@ export default function Weather() {
         const res = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?lat=${
             coords.lat
-          }&lon=${coords.lon}&units=metric&lang=uz&appid=${
+          }&lon=${coords.lon}&units=metric&lang=${language === "ru" ? "ru" : language === "en" ? "en" : "uz"}&appid=${
             import.meta.env.VITE_WEATHER_KEY
           }`
         );
@@ -114,18 +116,18 @@ export default function Weather() {
             </Group>
 
             <SimpleGrid cols={2} spacing="sm">
-              <Stat label="Namlik" value={`${data.main.humidity}%`} />
-              <Stat label="Shamol" value={`${data.wind.speed} m/s`} />
-              <Stat label="Bosim" value={`${data.main.pressure} hPa`} />
-              <Stat label="Ko‘rinish" value={`${data.visibility / 1000} km`} />
+              <Stat label={t("weather.humidity")} value={`${data.main.humidity}%`} />
+              <Stat label={t("weather.wind")} value={`${data.wind.speed} m/s`} />
+              <Stat label={t("weather.pressure")} value={`${data.main.pressure} hPa`} />
+              <Stat label={t("weather.visibility")} value={`${data.visibility / 1000} km`} />
             </SimpleGrid>
 
             <Text size="xs" ta="center" c="dimmed">
-              🟢 Joylashuv bo‘yicha
+              🟢 {t("weather.locationBased")}
             </Text>
           </Stack>
         ) : (
-          <Text c="red">Location not available</Text>
+          <Text c="red">{t("weather.notAvailable")}</Text>
         )}
       </aside>
     </>

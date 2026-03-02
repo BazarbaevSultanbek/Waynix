@@ -4,32 +4,34 @@ import Autoplay from "embla-carousel-autoplay";
 import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
 import classes from "../../utils/styles/New.module.scss";
+import { useI18n } from "../../i18n/I18nProvider";
 
 const slides = [
   {
-    title: "Yangi Fashion Center ochildi",
-    subtitle: "Katta ochilish marosimi",
+    titleKey: "news.item1Title",
+    subtitleKey: "news.item1Subtitle",
     image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c",
   },
   {
-    title: "Yangi chegirmalar boshlandi",
-    subtitle: "50% gacha aksiyalar",
+    titleKey: "news.item2Title",
+    subtitleKey: "news.item2Subtitle",
     image: "https://images.unsplash.com/photo-1521334884684-d80222895322",
   },
   {
-    title: "Shaharning eng mashhur joylari",
-    subtitle: "Top restoranlar va dam olish maskanlari",
+    titleKey: "news.item3Title",
+    subtitleKey: "news.item3Subtitle",
     image: "https://images.unsplash.com/photo-1498654896293-37aacf113fd9",
   },
 ];
 
 export default function News() {
+  const { t } = useI18n();
   const autoplay = Autoplay({ delay: 3000 });
 
   return (
     <section className={classes.newsSection}>
       <Title order={2} className={classes.sectionTitle}>
-        Yangiliklar va Aksiyalar
+        {t("news.title")}
       </Title>
 
       <Carousel
@@ -56,8 +58,8 @@ export default function News() {
             >
               <div className={classes.overlay} />
               <div className={classes.content}>
-                <Title order={1}>{slide.title}</Title>
-                <Text>{slide.subtitle}</Text>
+                <Title order={1}>{t(slide.titleKey)}</Title>
+                <Text>{t(slide.subtitleKey)}</Text>
               </div>
             </div>
           </Carousel.Slide>

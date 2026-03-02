@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import { Button, Select } from "@mantine/core";
 import { IconSearch, IconMapPin, IconX } from "@tabler/icons-react";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
+import { useI18n } from "../../i18n/I18nProvider";
 
 const places = [
   {
@@ -156,6 +157,7 @@ const ratingOptions = [
 ];
 
 const Waynix = () => {
+  const { t } = useI18n();
   const navigate = useNavigate();
 
   const [category, setCategory] = useState("all");
@@ -213,15 +215,19 @@ const Waynix = () => {
         <div className="Waynix-main">
           <div className="Waynix-main-center">
             <h1>Waynix</h1>
-            <p>One easy way...</p>
+            <p>{t("waynix.slogan")}</p>
           </div>
 
           <nav className="Waynix-main-action">
             <section className="Waynix-main-action-categories">
               <Select
-                label="Kategoriya"
-                placeholder="Kategoriya tanlang"
-                data={categoryOptions}
+                label={t("waynix.category")}
+                placeholder={t("waynix.selectCategory")}
+                data={categoryOptions.map((o) =>
+                  o.value === "all"
+                    ? { ...o, label: t("waynix.allCategories") }
+                    : o
+                )}
                 value={category}
                 onChange={(v) => {
                   setCategory(v || "all");
@@ -231,11 +237,11 @@ const Waynix = () => {
             </section>
 
             <section className="Waynix-main-action-location">
-              <p>Joy</p>
+              <p>{t("waynix.place")}</p>
               <input
                 type="text"
                 id="location_search"
-                placeholder="Joy yoki nom kiriting..."
+                placeholder={t("waynix.searchPlaceholder")}
                 value={location}
                 onChange={(e) => {
                   setLocation(e.target.value);
@@ -250,9 +256,11 @@ const Waynix = () => {
 
             <section className="Waynix-main-action-rates">
               <Select
-                label="Reyting"
-                placeholder="Reyting"
-                data={ratingOptions}
+                label={t("waynix.rating")}
+                placeholder={t("waynix.rating")}
+                data={ratingOptions.map((o) =>
+                  o.value === "0" ? { ...o, label: t("waynix.ratingAll") } : o
+                )}
                 value={rating}
                 onChange={(v) => {
                   setRating(v || "0");
@@ -271,7 +279,7 @@ const Waynix = () => {
               onClick={handleSearch}
               disabled={!isSearchReady}
             >
-              Izlash
+              {t("waynix.search")}
             </Button>
           </nav>
 
@@ -284,7 +292,7 @@ const Waynix = () => {
                   onClick={() => setSearched(false)}
                 >
                   <IconX size={16} />
-                  Yopish
+                  {t("waynix.close")}
                 </button>
               </div>
 
@@ -302,15 +310,14 @@ const Waynix = () => {
                   </Link>
                 ))
               ) : (
-                <div className="Waynix-empty">Mos joy topilmadi.</div>
+                <div className="Waynix-empty">{t("waynix.notFound")}</div>
               )}
             </div>
           )}
 
           <div className="Waynix-main-text">
             <p>
-              Sayohat <br />
-              qilishning eng oson yo'li
+              {t("waynix.easyTravel")}
             </p>
           </div>
         </div>

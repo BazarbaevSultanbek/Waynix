@@ -1,13 +1,15 @@
 import { useMemo, useState } from "react";
 import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import eatingPlaces from "../../http/CafeData";
+import { useI18n } from "../../i18n/I18nProvider";
 import "./cafe.scss";
 const categories = ["All", "Restaurant", "Cafe", "Fast Food"];
 const sortOptions = ["Default", "Hudud", "Mashhurlik", "Nomi"];
 
 export default function Cafe() {
+  const { t } = useI18n();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedSort, setSelectedSort] = useState("Default");
   const [viewMode, setViewMode] = useState("list");
@@ -90,13 +92,13 @@ export default function Cafe() {
       <section className="cafe-objects">
         <div className="cafe-objects__wrap">
           <div className="cafe-objects__header">
-            <h2 className="cafe-objects__title">Ovqatlanish joylari</h2>
+            <h2 className="cafe-objects__title">{t("cafe.title")}</h2>
 
             <div className="cafe-objects__filters">
               <div className="search-wrap">
                 <input
                   type="text"
-                  placeholder="Qidirish..."
+                  placeholder={t("cafe.search")}
                   value={search}
                   onChange={(e) => {
                     setSearch(e.target.value);
@@ -172,14 +174,14 @@ export default function Cafe() {
                   onClick={() => setViewMode("list")}
                   type="button"
                 >
-                  List
+                  {t("catalog.list")}
                 </button>
                 <button
                   className={`view-btn ${viewMode === "grid" ? "is-active" : ""}`}
                   onClick={() => setViewMode("grid")}
                   type="button"
                 >
-                  Grid
+                  {t("catalog.grid")}
                 </button>
               </div>
             </div>
@@ -197,13 +199,13 @@ export default function Cafe() {
                   <h3 className="cafe-card__name">{item.name}</h3>
                   <p className="cafe-card__tag">{item.type}</p>
                   <p className="cafe-card__desc">{item.desc}</p>
-                  <p className="cafe-card__place">Joylashuv: {item.location}</p>
+                  <p className="cafe-card__place">{t("catalog.location")}: {item.location}</p>
                 </div>
 
                 <div className="cafe-card__action">
-                  <button className="cafe-card__save" type="button">🔖 Saqlash</button>
+                  <button className="cafe-card__save" type="button">🔖 {t("catalog.save")}</button>
                   <button className="cafe-card__btn" type="button">
-                    <Link to="/cafe/id">Batafsil</Link>
+                    <Link to={`/cafe/${item.id}`}>{t("catalog.detail")}</Link>
                   </button>
                 </div>
               </article>
@@ -232,7 +234,7 @@ export default function Cafe() {
       <section className="popular-cafe">
         <div className="popular-cafe__wrap">
           <div className="popular-cafe__head">
-            <h3 className="popular-cafe__title">Mashhur ovqatlanish joylari</h3>
+            <h3 className="popular-cafe__title">{t("cafe.popular")}</h3>
           </div>
 
           <div className="popular-cafe__grid">
@@ -248,7 +250,7 @@ export default function Cafe() {
                   <p className="popular-card__desc">{item.desc}</p>
                   <div className="popular-card__bottom">
                     <span className="popular-card__place">{item.location}</span>
-                    <button className="popular-card__link">Batafsil →</button>
+                    <button className="popular-card__link">{t("catalog.detail")} →</button>
                   </div>
                 </div>
               </article>
