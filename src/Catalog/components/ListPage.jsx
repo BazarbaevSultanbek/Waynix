@@ -4,6 +4,7 @@ import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import "../../utils/styles/Catalog.scss";
 import $api from "../../http/axios";
+import { useI18n } from "../../i18n/I18nProvider";
 
 const sortOptions = ["Default", "Hudud", "Mashhurlik", "Nomi"];
 
@@ -55,6 +56,7 @@ export default function ListPage({
   popularTitle,
   categoryKey,
 }) {
+  const { t } = useI18n();
   const [submittedPlaces, setSubmittedPlaces] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedSort, setSelectedSort] = useState("Default");
@@ -91,8 +93,8 @@ export default function ListPage({
 
   const categories = useMemo(() => {
     const set = new Set(mergedData.map((item) => item.type));
-    return ["All", ...Array.from(set)];
-  }, [mergedData]);
+    return [t("catalog.all"), ...Array.from(set)];
+  }, [mergedData, t]);
 
   const toggleFilter = (key) => {
     setOpenFilter((prev) => (prev === key ? null : key));
@@ -110,7 +112,7 @@ export default function ListPage({
   }, [search, mergedData]);
 
   const filtered = useMemo(() => {
-    if (selectedCategory === "All") return searched;
+    if (selectedCategory === t("catalog.all")) return searched;
     return searched.filter((item) => item.type === selectedCategory);
   }, [selectedCategory, searched]);
 
@@ -143,6 +145,22 @@ export default function ListPage({
     setPage(p);
   };
 
+  const localizedTitle = title || `${t("catalog.popular")} ${categoryLabel[categoryKey] || ""}`;
+  const localizedPopularTitle = popularTitle || `${t("catalog.popular")} ${categoryLabel[categoryKey] || ""}`;
+  const categoryTitleMap = {
+    tours: t("banner.catTours"),
+    shop: t("banner.catShop"),
+    cafe: t("banner.catCafe"),
+    hotels: t("banner.catHotels"),
+    services: t("banner.catServices"),
+    entertainment: t("banner.catEntertainment"),
+    medical: t("banner.catMedical"),
+    government: t("banner.catGovernment"),
+    education: t("banner.catEducation"),
+  };
+  const resolvedTitle = categoryTitleMap[categoryKey] || localizedTitle;
+  const resolvedPopularTitle = `${t("catalog.popular")} ${categoryTitleMap[categoryKey] || ""}`.trim();
+
   return (
     <>
       <Banner />
@@ -150,13 +168,13 @@ export default function ListPage({
       <section className="catalog-page">
         <div className="catalog-wrap">
           <div className="catalog-header">
-            <h2 className="catalog-title">{title}</h2>
+            <h2 className="catalog-title">{resolvedTitle}</h2>
 
             <div className="catalog-filters">
               <div className="search-wrap">
                 <input
                   type="text"
-                  placeholder="Qidirish..."
+                  placeholder={t("catalog.search")}
                   value={search}
                   onChange={(e) => {
                     setSearch(e.target.value);
@@ -232,14 +250,14 @@ export default function ListPage({
                   onClick={() => setViewMode("list")}
                   type="button"
                 >
-                  List
+                  {t("catalog.list")}
                 </button>
                 <button
                   className={`view-btn ${viewMode === "grid" ? "is-active" : ""}`}
                   onClick={() => setViewMode("grid")}
                   type="button"
                 >
-                  Grid
+                  {t("catalog.grid")}
                 </button>
               </div>
             </div>
@@ -257,15 +275,15 @@ export default function ListPage({
                   <h3 className="catalog-card__name">{item.name}</h3>
                   <p className="catalog-card__tag">{item.type}</p>
                   <p className="catalog-card__desc">{item.desc}</p>
-                  <p className="catalog-card__place">Joylashuv: {item.location}</p>
+                  <p className="catalog-card__place">{t("catalog.location")}: {item.location}</p>
                 </div>
 
                 <div className="catalog-card__action">
                   <button className="catalog-card__save" type="button">
-                    🔖 Saqlash
+                    🔖 {t("catalog.save")}
                   </button>
                   <button className="catalog-card__btn" type="button">
-                    <Link to={`${basePath}/${item.id}`}>Batafsil</Link>
+                    <Link to={`${basePath}/${item.id}`}>{t("catalog.detail")}</Link>
                   </button>
                 </div>
               </article>
@@ -298,7 +316,7 @@ export default function ListPage({
       <section className="popular-catalog">
         <div className="popular-catalog__wrap">
           <div className="popular-catalog__head">
-            <h3 className="popular-catalog__title">{popularTitle}</h3>
+            <h3 className="popular-catalog__title">{resolvedPopularTitle || localizedPopularTitle}</h3>
           </div>
 
           <div className="popular-catalog__grid">
@@ -315,7 +333,7 @@ export default function ListPage({
                   <div className="popular-card__bottom">
                     <span className="popular-card__place">{item.location}</span>
                     <Link className="popular-card__link" to={`${basePath}/${item.id}`}>
-                      Batafsil →
+                      {t("catalog.detail")} →
                     </Link>
                   </div>
                 </div>

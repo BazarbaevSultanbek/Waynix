@@ -4,6 +4,7 @@ import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import "../../utils/styles/DetailPage.scss";
 import $api from "../../http/axios";
+import { useI18n } from "../../i18n/I18nProvider";
 
 const API_ORIGIN =
   import.meta.env.VITE_API_ORIGIN || "https://waynix-server.vercel.app";
@@ -50,6 +51,7 @@ function StarLine({ rating }) {
 }
 
 export default function DetailPage({ title, data, basePath, categoryKey }) {
+  const { t } = useI18n();
   const { id } = useParams();
   const [submittedPlaces, setSubmittedPlaces] = useState([]);
   const merged = useMemo(
@@ -92,8 +94,8 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
         <section className="detail-page">
           <div className="detail-wrap">
             <div className="detail-not-found">
-              <h2>Obyekt topilmadi</h2>
-              <Link to={basePath}>Orqaga qaytish</Link>
+              <h2>{t("catalog.notFound")}</h2>
+              <Link to={basePath}>{t("catalog.back")}</Link>
             </div>
           </div>
         </section>
@@ -137,7 +139,7 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
             </div>
 
             <div className="card">
-              <h3>Tavsif</h3>
+              <h3>{t("catalog.description")}</h3>
               <p>{current.fullDescription}</p>
             </div>
 
@@ -145,21 +147,21 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
               <div className="info-item">
                 <span className="icon">🕒</span>
                 <div>
-                  <div className="label">Ish vaqti</div>
+                  <div className="label">{t("catalog.hours")}</div>
                   <div className="value">{current.hours}</div>
                 </div>
               </div>
               <div className="info-item">
                 <span className="icon">📍</span>
                 <div>
-                  <div className="label">Manzil</div>
+                  <div className="label">{t("catalog.address")}</div>
                   <div className="value">{current.address}</div>
                 </div>
               </div>
               <div className="info-item">
                 <span className="icon">📞</span>
                 <div>
-                  <div className="label">Telefon</div>
+                  <div className="label">{t("catalog.phone")}</div>
                   <div className="value link">{current.phone}</div>
                 </div>
               </div>
@@ -173,13 +175,13 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
             </div>
 
             <div className="card review-card">
-              <h3>Baho va sharhlar</h3>
+              <h3>{t("catalog.ratingComments")}</h3>
               <div className="review-stars"><StarLine rating={current.rating} /></div>
-              <textarea placeholder="Fikringizni yozing..." />
-              <button className="send-btn" type="button">Yuborish</button>
+              <textarea placeholder={t("catalog.writeComment")} />
+              <button className="send-btn" type="button">{t("catalog.send")}</button>
 
               <div className="comments">
-                <h4>Sharhlar (3)</h4>
+                <h4>{t("catalog.comments")} (3)</h4>
                 <div className="comment">
                   <div className="comment-head"><strong>Aziza Karimova</strong><span>2 kun oldin</span></div>
                   <StarLine rating={5} />
@@ -201,7 +203,7 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
 
           <aside className="detail-side">
             <div className="card">
-              <h3>Yaqin atrofdagi joylar</h3>
+              <h3>{t("catalog.nearby")}</h3>
               <div className="nearby-list">
                 {nearby.map((item) => (
                   <Link key={item.id} to={`${basePath}/${item.id}`} className="nearby-item">

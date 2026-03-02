@@ -1,8 +1,10 @@
 import main_logo from "../../images/waynix-logo.png";
 import "./footer.scss";
+import { useI18n } from "../../i18n/I18nProvider";
 
 
 const Footer = () => {
+  const { t } = useI18n();
   return (
     <footer className="waynix-footer">
       <div className="footer-wrap">
@@ -12,8 +14,7 @@ const Footer = () => {
             <span className="logo-text">Waynix</span>
           </div>
           <p>
-            Biz bilan eng yaxshi joylarni kashf eting va unutilmas xotiralar
-            yarating.
+            {t("footer.desc")}
           </p>
           <div className="socials">
             <a href="#" className="social fb">
@@ -73,49 +74,49 @@ const Footer = () => {
         </div>
 
         <div className="footer-col">
-          <h4>Tezkor havolalar</h4>
+          <h4>{t("footer.quickLinks")}</h4>
           <ul>
             <li>
-              <a href="#">Bosh sahifa</a>
+              <a href="#">{t("footer.home")}</a>
             </li>
             <li>
-              <a href="#">Biz haqimizda</a>
+              <a href="#">{t("footer.about")}</a>
             </li>
             <li>
-              <a href="#">Kategoriyalar</a>
+              <a href="#">{t("footer.categories")}</a>
             </li>
             <li>
-              <a href="#">Hamkorlik</a>
+              <a href="#">{t("footer.partnership")}</a>
             </li>
             <li>
-              <a href="#">Kontakt</a>
+              <a href="#">{t("footer.contact")}</a>
             </li>
           </ul>
         </div>
 
         <div className="footer-col">
-          <h4>Kategoriyalar</h4>
+          <h4>{t("footer.catTitle")}</h4>
           <ul>
             <li>
-              <a href="#">Turobeklar</a>
+              <a href="#">{t("footer.tours")}</a>
             </li>
             <li>
-              <a href="#">Mehmonxonalar</a>
+              <a href="#">{t("footer.hotels")}</a>
             </li>
             <li>
-              <a href="#">Ovqatlanish joylari</a>
+              <a href="#">{t("footer.cafes")}</a>
             </li>
             <li>
-              <a href="#">Savdo markazlari</a>
+              <a href="#">{t("footer.shops")}</a>
             </li>
             <li>
-              <a href="#">Gidlar</a>
+              <a href="#">{t("footer.guides")}</a>
             </li>
           </ul>
         </div>
 
         <div className="footer-col contact">
-          <h4>Aloqa</h4>
+          <h4>{t("footer.contactTitle")}</h4>
           <p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -173,9 +174,9 @@ const Footer = () => {
             info@waynix.uz
           </p>
 
-          <h4 className="news-title">Yangiliklar</h4>
+          <h4 className="news-title">{t("footer.news")}</h4>
           <div className="newsletter">
-            <input type="email" placeholder="Email manzilingiz" />
+            <input type="email" placeholder={t("footer.emailPlaceholder")} />
             <button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -199,12 +200,12 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <span>© 2024 Waynix. Barcha huquqlar himoyalangan.</span>
+        <span>{t("footer.rights")}</span>
         <div className="footer-links">
-          <a href="#">Shartlar va qoidalar</a>
-          <a href="#">Maxfiylik siyosati</a>
-          <a href="#">Cookie-lar</a>
-          <a href="#">Yordam</a>
+          <a href="#">{t("footer.terms")}</a>
+          <a href="#">{t("footer.privacy")}</a>
+          <a href="#">{t("footer.cookies")}</a>
+          <a href="#">{t("footer.help")}</a>
         </div>
       </div>
     </footer>

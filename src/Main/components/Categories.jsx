@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import {
   IconBuildingCommunity,
   IconToolsKitchen2,
@@ -11,11 +11,12 @@ import {
   IconStethoscope,
 } from "@tabler/icons-react";
 import "../main.scss";
+import { useI18n } from "../../i18n/I18nProvider";
 
 const categories = [
   {
-    title: "Turobektlar",
-    desc: "Tarixiy, madaniy, parklar...",
+    titleKey: "categories.toursTitle",
+    descKey: "categories.toursDesc",
     to: "/tours",
     bg: "#eef6ff",
     iconBg: "#2b7fff",
@@ -23,8 +24,8 @@ const categories = [
     icon: <IconBuildingCommunity size={26} />,
   },
   {
-    title: "Ovqatlanish joylari",
-    desc: "Restoranlar, kafelar, fast food...",
+    titleKey: "categories.cafeTitle",
+    descKey: "categories.cafeDesc",
     to: "/cafe",
     bg: "#fff8ed",
     iconBg: "#ff6900",
@@ -32,8 +33,8 @@ const categories = [
     icon: <IconToolsKitchen2 size={26} />,
   },
   {
-    title: "Turar joylar",
-    desc: "Mehmonxonalar, hostellar, ijaraga uylar...",
+    titleKey: "categories.hotelsTitle",
+    descKey: "categories.hotelsDesc",
     to: "/hotels",
     bg: "#faf5ff",
     iconBg: "#a855f7",
@@ -41,8 +42,8 @@ const categories = [
     icon: <IconBed size={26} />,
   },
   {
-    title: "Savdo markazlari",
-    desc: "Supermarketlar, do'konlar, bozorlar...",
+    titleKey: "categories.shopTitle",
+    descKey: "categories.shopDesc",
     to: "/shop",
     bg: "#f0fdf4",
     iconBg: "#00c951",
@@ -50,8 +51,8 @@ const categories = [
     icon: <IconShoppingBag size={26} />,
   },
   {
-    title: "Xizmatlar",
-    desc: "Notarius, advokat, banklar...",
+    titleKey: "categories.servicesTitle",
+    descKey: "categories.servicesDesc",
     to: "/services",
     bg: "#eef2ff",
     iconBg: "#155dfc",
@@ -59,8 +60,8 @@ const categories = [
     icon: <IconTool size={26} />,
   },
   {
-    title: "Ko'ngil ochar va dam olish",
-    desc: "Parklar, attraksionlar, kino/teatr...",
+    titleKey: "categories.entertainmentTitle",
+    descKey: "categories.entertainmentDesc",
     to: "/entertainment",
     bg: "#fdf1f8",
     iconBg: "#ec003f",
@@ -68,8 +69,8 @@ const categories = [
     icon: <IconConfetti size={26} />,
   },
   {
-    title: "Ta'lim",
-    desc: "Maktablar, bog'chalar, litseylar...",
+    titleKey: "categories.educationTitle",
+    descKey: "categories.educationDesc",
     to: "/education",
     bg: "#f0fdfa",
     iconBg: "#00abb0",
@@ -77,8 +78,8 @@ const categories = [
     icon: <IconSchool size={26} />,
   },
   {
-    title: "Davlat binolari",
-    desc: "Hokimiyat, vazirliklar, sud, prokuratura...",
+    titleKey: "categories.governmentTitle",
+    descKey: "categories.governmentDesc",
     to: "/government",
     bg: "#fffbea",
     iconBg: "#fc8100",
@@ -86,8 +87,8 @@ const categories = [
     icon: <IconBuildingBank size={26} />,
   },
   {
-    title: "Tibbiyot",
-    desc: "Shifoxona, poliklinika, stomatologiya...",
+    titleKey: "categories.medicalTitle",
+    descKey: "categories.medicalDesc",
     to: "/medical",
     bg: "#fef2f3",
     iconBg: "#f31e55",
@@ -97,19 +98,20 @@ const categories = [
 ];
 
 export default function Categories() {
+  const { t } = useI18n();
   return (
     <div className="Categories">
       <div className="container">
         <div className="Categories-main">
           <div className="Categories-main-head">
-            <h1>Kategoriyalar</h1>
-            <p>Ajoyib joylarni kashf eting</p>
+            <h1>{t("categories.title")}</h1>
+            <p>{t("categories.subtitle")}</p>
           </div>
 
           <section className="Categories-main-group">
             {categories.map((item) => (
               <Link
-                key={item.title}
+                key={item.titleKey}
                 to={item.to}
                 className="Categories-main-group-card"
                 style={{
@@ -122,8 +124,8 @@ export default function Categories() {
                   <span>{item.icon}</span>
                 </div>
                 <div className="Categories-group-card-text">
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
+                  <h3>{t(item.titleKey)}</h3>
+                  <p>{t(item.descKey)}</p>
                 </div>
               </Link>
             ))}
