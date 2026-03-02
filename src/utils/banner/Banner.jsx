@@ -101,6 +101,9 @@ export default function Banner() {
           dispatch(setUser(data.user));
         }
       } catch {
+        localStorage.removeItem("waynix_access_token");
+        localStorage.removeItem("waynix_refresh_token");
+        localStorage.removeItem("waynix_user");
         setCurrentUser(null);
       }
     };

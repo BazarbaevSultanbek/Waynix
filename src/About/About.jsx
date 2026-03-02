@@ -1,8 +1,11 @@
 import Banner from "../utils/banner/Banner";
 import Footer from "../utils/footer/Footer";
+import { Link } from "react-router-dom";
+import { useI18n } from "../i18n/I18nProvider";
 import "./about.scss";
 
 const About = () => {
+  const { t } = useI18n();
   return (
     <>
       <Banner />
@@ -10,46 +13,22 @@ const About = () => {
         <div className="About-main">
           <div className="About-main-text">
             <p>
-              <span>Waynix</span> — bu joylarni topish, ulashish va tanitish
-              uchun yaratilgan ochiq platforma.
+              <span>Waynix</span> — {t("about.p1")}
             </p>
-            <p>
-              Bu yerda nafaqat sayyohlar va turistlar, balki yangi joylar,
-              xizmatlar yoki qiziqarli maskanlar izlayotgan har qanday
-              foydalanuvchi kerakli ma'lumotni topa oladi.
-            </p>
+            <p>{t("about.p2")}</p>
 
-            <p>
-              Platformada foydalanuvchilar faol ishtirok etib, yangi joylar
-              qo'shishi, foydali ma'lumotlar bilan bo'lishishi va platforma
-              rivojiga hissa qo'shishi mumkin. Har bir kiritilgan joy kim
-              tomonidan qo'shilgani bilan birga ko'rsatiladi, bu esa
-              foydalanuvchilarga o'z nomini qoldirish va hamjamiyatda tanilish
-              imkonini beradi. Eng faol ishtirokchilar kelajakda maxsus rag'bat
-              va mukofotlarga ega bo'lishi mumkin.
-            </p>
+            <p>{t("about.p3")}</p>
 
-            <p>
-              Waynix tadbirkorlar va biznes egalari uchun ham qulay imkoniyatlar
-              yaratadi. Siz o'z biznesingizni, xizmatlaringizni yoki
-              loyihalaringizni (onlayn yoki oflayn) platforma orqali keng
-              auditoriyaga tanitishingiz mumkin. Ko'plab mehmonlar va turistlar
-              qayerda qanday xizmatlar borligini bilmaydi — Waynix aynan shu
-              muammoni hal qilib, bizneslarni to'g'ri auditoriya bilan
-              bog'laydi.
-            </p>
+            <p>{t("about.p4")}</p>
 
-            <p>
-              Waynix kelajakda keng ekotizimga aylanishni maqsad qilgan. Bu
-              yerda har bir ishtirokchi — foydalanuvchi bo'ladimi yoki tadbirkor
-              — platformaning muhim qismiga aylanadi. Bugun Waynix'ga qo'shilish
-              esa kelajakdagi imkoniyatlarning bir bo'lagi bo'lish demak.
-            </p>
+            <p>{t("about.p5")}</p>
           </div>
         </div>
 
         <div className="About-button">
-          <button>Waynixga qo'shilish</button>
+          <Link to="/add-place">
+            <button>{t("about.join")}</button>
+          </Link>
         </div>
 
         <div className="About-social">
@@ -211,7 +190,7 @@ const About = () => {
               </svg>
             </span>
             <div className="About-social-phone-text">
-              <h4>Phone</h4>
+              <h4>{t("about.phone")}</h4>
               <a href="tel:+998901234567">
                 <p>+998 90 123 45 67</p>
                 <svg
@@ -238,7 +217,7 @@ const About = () => {
         </div>
 
         <div className="About-text">
-          <p>Biz bilan bog'laning va Waynix jamoasining bir qismi bo'ling!</p>
+          <p>{t("about.contactText")}</p>
         </div>
       </div>
 

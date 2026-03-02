@@ -5,6 +5,7 @@ import Footer from "../../utils/footer/Footer";
 import "../../utils/styles/DetailPage.scss";
 import $api from "../../http/axios";
 import { useI18n } from "../../i18n/I18nProvider";
+import { translateCatalogDesc } from "../../i18n/catalogText";
 
 const API_ORIGIN =
   import.meta.env.VITE_API_ORIGIN || "https://waynix-server.vercel.app";
@@ -51,7 +52,7 @@ function StarLine({ rating }) {
 }
 
 export default function DetailPage({ title, data, basePath, categoryKey }) {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
   const { id } = useParams();
   const [submittedPlaces, setSubmittedPlaces] = useState([]);
   const merged = useMemo(
@@ -106,6 +107,9 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
 
   const images = current.images?.length ? current.images : [current.image];
   const activeImage = images[activeIndex] || current.image;
+  const localizedDesc =
+    current?.translations?.desc?.[language] ||
+    translateCatalogDesc(current.desc, language);
 
   return (
     <>
@@ -140,7 +144,7 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
 
             <div className="card">
               <h3>{t("catalog.description")}</h3>
-              <p>{current.fullDescription}</p>
+              <p>{localizedDesc || current.fullDescription}</p>
             </div>
 
             <div className="card info-card">
@@ -167,10 +171,10 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
               </div>
 
               <div className="social-links">
-                <a href={current.socials.website}>Website</a>
-                <a href={current.socials.instagram}>Instagram</a>
-                <a href={current.socials.telegram}>Telegram</a>
-                <a href={current.socials.facebook}>Facebook</a>
+                <a href={current.socials.website}>{t("catalog.website")}</a>
+                <a href={current.socials.instagram}>{t("catalog.instagram")}</a>
+                <a href={current.socials.telegram}>{t("catalog.telegram")}</a>
+                <a href={current.socials.facebook}>{t("catalog.facebook")}</a>
               </div>
             </div>
 
@@ -183,19 +187,19 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
               <div className="comments">
                 <h4>{t("catalog.comments")} (3)</h4>
                 <div className="comment">
-                  <div className="comment-head"><strong>Aziza Karimova</strong><span>2 kun oldin</span></div>
+                  <div className="comment-head"><strong>Aziza Karimova</strong><span>{t("catalog.commentAgo2d")}</span></div>
                   <StarLine rating={5} />
-                  <p>Ajoyib joy! Tashrif buyurishga arziydi.</p>
+                  <p>{t("catalog.commentText1")}</p>
                 </div>
                 <div className="comment">
-                  <div className="comment-head"><strong>Sardor Tursunov</strong><span>1 hafta oldin</span></div>
+                  <div className="comment-head"><strong>Sardor Tursunov</strong><span>{t("catalog.commentAgo1w")}</span></div>
                   <StarLine rating={4} />
-                  <p>Umumiy taassurot yaxshi, xizmat ham yaxshi.</p>
+                  <p>{t("catalog.commentText2")}</p>
                 </div>
                 <div className="comment">
-                  <div className="comment-head"><strong>Nilufar Rahimova</strong><span>2 hafta oldin</span></div>
+                  <div className="comment-head"><strong>Nilufar Rahimova</strong><span>{t("catalog.commentAgo2w")}</span></div>
                   <StarLine rating={5} />
-                  <p>Fotolar va manzara juda zo'r chiqadi.</p>
+                  <p>{t("catalog.commentText3")}</p>
                 </div>
               </div>
             </div>

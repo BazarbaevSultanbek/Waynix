@@ -131,6 +131,9 @@ export default function Profile() {
         }
       } catch (err) {
         console.error("Refresh failed:", err?.response?.data || err.message);
+        localStorage.removeItem("waynix_access_token");
+        localStorage.removeItem("waynix_refresh_token");
+        localStorage.removeItem("waynix_user");
       }
     };
     loadFreshUser();

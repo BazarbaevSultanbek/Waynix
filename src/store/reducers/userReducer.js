@@ -19,12 +19,26 @@ const clearSession = () => {
   localStorage.removeItem("waynix_user");
 };
 
+const isTokenExpired = (token) => {
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    if (!payload?.exp) return false;
+    return payload.exp * 1000 <= Date.now();
+  } catch {
+    return true;
+  }
+};
+
 export const fetchCurrentUser = createAsyncThunk(
   "user/fetchCurrentUser",
   async (_, { rejectWithValue }) => {
     try {
       const accessToken = localStorage.getItem("waynix_access_token");
       if (!accessToken) {
+        return null;
+      }
+      if (isTokenExpired(accessToken)) {
+        clearSession();
         return null;
       }
       const response = await $api.get("/me");

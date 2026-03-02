@@ -1,9 +1,11 @@
 import Banner from "../utils/banner/Banner";
 import Footer from "../utils/footer/Footer";
 import main_logo from "../images/waynix-logo.png";
+import { useI18n } from "../i18n/I18nProvider";
 import "./contact.scss";
 
 const Contact = () => {
+  const { t } = useI18n();
   return (
     <>
       <Banner />
@@ -15,31 +17,18 @@ const Contact = () => {
         <div className="Contact-main">
           <div className="Contact-main-text">
             <p>
-              <span>Waynix</span> — bu foydalanuvchilar uchun qulay va ishonchli
-              axborot platformasi bo'lib, turli joylar va xizmatlarni bir joyda
-              jamlash maqsadida yaratilgan.
+              <span>Waynix</span> — {t("contactPage.p1")}
             </p>
-            <p>
-              Waynix'ning asosiy maqsadi — odamlar uchun to'g'ri tanlov qilishni
-              osonlashtirish. Biz foydalanuvchilar vaqtini tejash,
-              chalkashliklarni kamaytirish va kerakli joyni tez topishga yordam
-              berishni ustuvor vazifa deb bilamiz.
-            </p>
+            <p>{t("contactPage.p2")}</p>
 
-            <p>
-              Waynix — bu shunchaki platforma emas, balki kundalik hayot uchun
-              qulay yo'lko'rsatkich.
-            </p>
+            <p>{t("contactPage.p3")}</p>
 
-            <p>
-              Biz doim rivojlanamiz va foydalanuvchilar ehtiyojiga qarab
-              platformani yanada mukammallashtirib boramiz.
-            </p>
+            <p>{t("contactPage.p4")}</p>
           </div>
         </div>
 
         <div className="Contact-team">
-          <h3>Bizning jamoa</h3>
+          <h3>{t("contactPage.team")}</h3>
 
           <div className="Contact-team-grid">
             <div className="Contact-team-card">
@@ -48,7 +37,7 @@ const Contact = () => {
                 alt="Islamjan Torejanov"
               />
               <h4>Islamjan Torejanov</h4>
-              <p>Waynix loyiha asoschisi</p>
+              <p>{t("contactPage.founder")}</p>
               <div className="Contact-team-links">
                 <a href="#">
                   <i className="fa-brands fa-instagram"></i>
@@ -105,7 +94,7 @@ const Contact = () => {
         </div>
 
         <div className="Contact-text">
-          <p>Biz bilan bog'laning va Waynix jamoasining bir qismi bo'ling!</p>
+          <p>{t("contactPage.contactText")}</p>
         </div>
       </div>
 
