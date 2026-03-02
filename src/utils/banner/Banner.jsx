@@ -31,18 +31,6 @@ const languageOptions = [
   { code: "en", label: "English", flag: "🇬🇧" },
 ];
 
-const categories = [
-  { label: "Turobektlar", href: "/tours" },
-  { label: "Savdo markazlari", href: "/shop" },
-  { label: "Ovqatlanish joylari", href: "/cafe" },
-  { label: "Mehmonxonalar", href: "/hotels" },
-  { label: "Servislar", href: "/services" },
-  { label: "Entertainment", href: "/entertainment" },
-  { label: "Tibbiyot", href: "/medical" },
-  { label: "Davlat idoralari", href: "/government" },
-  { label: "Ta'lim", href: "/education" },
-];
-
 const API_ORIGIN =
   import.meta.env.VITE_API_ORIGIN || "https://waynix-server.vercel.app";
 
@@ -83,6 +71,17 @@ export default function Banner() {
   const [verifyOpened, setVerifyOpened] = useState(false);
   const [verifyEmail, setVerifyEmail] = useState("");
   const [verifyCode, setVerifyCode] = useState("");
+  const categories = [
+    { label: t("banner.catTours"), href: "/tours" },
+    { label: t("banner.catShop"), href: "/shop" },
+    { label: t("banner.catCafe"), href: "/cafe" },
+    { label: t("banner.catHotels"), href: "/hotels" },
+    { label: t("banner.catServices"), href: "/services" },
+    { label: t("banner.catEntertainment"), href: "/entertainment" },
+    { label: t("banner.catMedical"), href: "/medical" },
+    { label: t("banner.catGovernment"), href: "/government" },
+    { label: t("banner.catEducation"), href: "/education" },
+  ];
 
   useEffect(() => {
     if (reduxUser) {
@@ -173,10 +172,8 @@ export default function Banner() {
       resetForm();
       closeRegister();
       setVerifyOpened(true);
-      if (result?.verificationCode) {
-        alert(
-          `Email service ishlamadi. Test kodi: ${result.verificationCode}`
-        );
+      if (result?.verificationDelivery === "fallback") {
+        alert("Email yuborishda muammo bo'ldi. Iltimos keyinroq urinib ko'ring.");
       } else {
         alert("Tasdiqlash kodi emailingizga yuborildi");
       }
@@ -206,8 +203,8 @@ export default function Banner() {
       const { data } = await $api.post("/resend-verification", {
         email: verifyEmail,
       });
-      if (data?.verificationCode) {
-        alert(`Yangi test kodi: ${data.verificationCode}`);
+      if (data?.verificationDelivery === "fallback") {
+        alert("Email yuborishda muammo bo'ldi. Iltimos keyinroq urinib ko'ring.");
       } else {
         alert("Yangi kod yuborildi");
       }

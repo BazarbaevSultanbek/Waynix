@@ -125,16 +125,7 @@ const userSlice = createSlice({
         }
       })
       .addCase(fetchCurrentUser.rejected, (state) => {
-        const cached = localStorage.getItem("waynix_user");
-        if (cached) {
-          try {
-            state.user = JSON.parse(cached);
-          } catch {
-            state.user = null;
-          }
-        } else {
-          state.user = null;
-        }
+        state.user = null;
       })
 
       .addCase(logoutUser.fulfilled, (state) => {

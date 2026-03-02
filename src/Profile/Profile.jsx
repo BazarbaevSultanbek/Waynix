@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   FileButton,
@@ -47,14 +48,6 @@ const resolveAvatarUrl = (avatar) => {
   return `${API_ORIGIN}${avatar}`;
 };
 
-const tabs = [
-  { key: "profile", label: "Profil", icon: <IconUser size={18} /> },
-  { key: "places", label: "Joylarim", icon: <IconMapPin size={18} /> },
-  { key: "saved", label: "Saqlanganlar", icon: <IconBookmark size={18} /> },
-  { key: "comments", label: "Sharhlar", icon: <IconStar size={18} /> },
-  { key: "settings", label: "Sozlamalar", icon: <IconSettings size={18} /> },
-];
-
 function StarRow({ count }) {
   return (
     <div className="star-row">
@@ -71,8 +64,9 @@ function StarRow({ count }) {
 }
 
 export default function Profile() {
-  const { setLanguage } = useI18n();
+  const { t, setLanguage } = useI18n();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [opened, setOpened] = useState(false);
   const [activeTab, setActiveTab] = useState("profile");
@@ -110,6 +104,18 @@ export default function Profile() {
     confirmPassword: "",
   });
   const [myPlaces, setMyPlaces] = useState([]);
+  const tabs = [
+    { key: "profile", label: t("profile.profile"), icon: <IconUser size={18} /> },
+    { key: "places", label: t("profile.myPlaces"), icon: <IconMapPin size={18} /> },
+    { key: "saved", label: t("profile.saved"), icon: <IconBookmark size={18} /> },
+    { key: "comments", label: t("profile.comments"), icon: <IconStar size={18} /> },
+    { key: "settings", label: t("profile.settings"), icon: <IconSettings size={18} /> },
+  ];
+
+  const handleLogout = async () => {
+    await dispatch(logoutUser());
+    navigate("/");
+  };
 
   useEffect(() => {
     const loadFreshUser = async () => {
@@ -397,10 +403,10 @@ export default function Profile() {
 
           <div className="profile-head-actions">
             <button onClick={() => setOpened(true)}>
-              <IconPencil size={16} /> Tahrirlash
+              <IconPencil size={16} /> {t("profile.edit")}
             </button>
             <button>
-              <IconShare3 size={16} /> Ulashish
+              <IconShare3 size={16} /> {t("profile.share")}
             </button>
           </div>
         </div>
@@ -419,9 +425,9 @@ export default function Profile() {
           ))}
           <button
             className="sidebar-item logout"
-            onClick={() => dispatch(logoutUser())}
+            onClick={handleLogout}
           >
-            <IconLogout size={18} /> Chiqish
+            <IconLogout size={18} /> {t("profile.logout")}
           </button>
         </aside>
 
@@ -429,7 +435,7 @@ export default function Profile() {
           {activeTab === "profile" && (
             <>
               <div className="content-card">
-                <h2>Haqida</h2>
+                <h2>{t("profile.about")}</h2>
                 <p>{currentUser?.bio || "Bio hali qo'shilmagan."}</p>
                 <div className="about-meta">
                   <span>
@@ -446,7 +452,7 @@ export default function Profile() {
               </div>
 
               <div className="content-card">
-                <h2>Statistika</h2>
+                <h2>{t("profile.stats")}</h2>
                 <div className="stats-grid">
                   <div className="stat-box blue">
                     <h3>{stats.places}</h3>
@@ -454,7 +460,7 @@ export default function Profile() {
                   </div>
                   <div className="stat-box purple">
                     <h3>{stats.saved}</h3>
-                    <p>Saqlanganlar</p>
+                    <p>{t("profile.saved")}</p>
                   </div>
                   <div className="stat-box green">
                     <h3>{stats.comments}</h3>
@@ -472,7 +478,7 @@ export default function Profile() {
           {activeTab === "places" && (
             <>
               <div className="content-head">
-                <h2>Joylarim</h2>
+                <h2>{t("profile.myPlaces")}</h2>
                 <div className="head-actions">
                   <div className="search-box">
                     <IconSearch size={16} /> Joylarni qidirish...
@@ -515,7 +521,7 @@ export default function Profile() {
           {activeTab === "saved" && (
             <>
               <div className="content-head">
-                <h2>Saqlanganlar</h2>
+                <h2>{t("profile.saved")}</h2>
                 <div className="head-actions">
                   <div className="search-box">
                     <IconSearch size={16} /> Saqlangan joylarni qidirish...
@@ -553,7 +559,7 @@ export default function Profile() {
           {activeTab === "comments" && (
             <>
               <div className="content-head">
-                <h2>Mening sharhlarim</h2>
+                <h2>{t("profile.myComments")}</h2>
                 <div className="head-actions">
                   <div className="search-box">
                     <IconSearch size={16} /> Sharhlarni qidirish...
@@ -590,7 +596,7 @@ export default function Profile() {
 
           {activeTab === "settings" && (
             <>
-              <h2 className="settings-title">Sozlamalar</h2>
+              <h2 className="settings-title">{t("profile.settings")}</h2>
 
               <div className="setting-card">
                 <div className="setting-row">
@@ -709,7 +715,7 @@ export default function Profile() {
               </div>
 
               <Button color="indigo" onClick={handleSaveProfile}>
-                Sozlamalarni saqlash
+                {t("profile.saveSettings")}
               </Button>
 
               <div className="setting-card">
@@ -752,10 +758,10 @@ export default function Profile() {
 
               <button
                 className="setting-link logout-link"
-                onClick={() => dispatch(logoutUser())}
+                onClick={handleLogout}
               >
                 <span>
-                  <IconLogout size={18} /> Chiqish
+                  <IconLogout size={18} /> {t("profile.logout")}
                 </span>
               </button>
             </>
