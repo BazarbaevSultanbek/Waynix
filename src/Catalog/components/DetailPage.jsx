@@ -63,7 +63,6 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
     () => merged.find((item) => String(item.id) === String(id)),
     [merged, id]
   );
-  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     let isMounted = true;
@@ -105,8 +104,7 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
     );
   }
 
-  const images = current.images?.length ? current.images : [current.image];
-  const activeImage = images[activeIndex] || current.image;
+  const activeImage = current.image;
   const localizedDesc =
     current?.translations?.desc?.[language] ||
     translateCatalogDesc(current.desc, language);
@@ -128,18 +126,6 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
 
             <div className="detail-gallery card">
               <img src={activeImage} alt={current.name} className="detail-main-image" />
-              <div className="detail-thumbs">
-                {images.map((img, index) => (
-                  <button
-                    key={`${img}-${index}`}
-                    type="button"
-                    className={`thumb ${activeIndex === index ? "is-active" : ""}`}
-                    onClick={() => setActiveIndex(index)}
-                  >
-                    <img src={img} alt={`${current.name}-${index}`} />
-                  </button>
-                ))}
-              </div>
             </div>
 
             <div className="card">
@@ -203,10 +189,8 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
                 </div>
               </div>
             </div>
-          </div>
 
-          <aside className="detail-side">
-            <div className="card">
+            <div className="card nearby-card">
               <h3>{t("catalog.nearby")}</h3>
               <div className="nearby-list">
                 {nearby.map((item) => (
@@ -221,7 +205,7 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
                 ))}
               </div>
             </div>
-          </aside>
+          </div>
         </div>
       </section>
       <Footer />
