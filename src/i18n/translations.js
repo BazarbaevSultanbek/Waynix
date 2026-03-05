@@ -55,7 +55,7 @@ export const translations = {
       descriptionPlaceholder: "Joy haqida qisqacha yozing...",
       images: "Rasmlar (maksimal 5 ta)",
       coverHint: "1-tanlagan rasmingiz sarlavhada ko'rsatiladi",
-      dropHint: "Rasmlarni bu yerga sudrab qo'ying yoki bosib tanlang",
+      dropHint: "Rasmlarni bu yerga torting yoki tanlash uchun bosing",
       chooseImages: "Rasmlarni tanlash",
       mapUrl: "Xaritadagi havola",
       mapHint: "Xaritada joylashuvni belgilang",
