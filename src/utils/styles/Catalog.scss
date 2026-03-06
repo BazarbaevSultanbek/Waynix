@@ -131,7 +131,8 @@
 }
 
 .view-btn.is-active {
-  background: #111827;
+  background: #2563eb;
+  border-color: #2563eb;
   color: #ffffff;
 }
 
@@ -155,7 +156,14 @@
   gap: 18px;
   align-items: center;
   padding: 14px;
-  box-shadow: 0 6px 18px rgba(30, 64, 175, 0.08);
+  box-shadow: 0 10px 24px rgba(30, 64, 175, 0.12);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.catalog-card:hover {
+  box-shadow: 0 14px 32px rgba(30, 64, 175, 0.16);
+  transform: translateY(-1px);
 }
 
 .catalog-list.grid .catalog-card {
@@ -238,7 +246,7 @@
   background: #ffffff;
   border: 1px solid #e5e7eb;
   color: #1f2937;
-  width: 100px;
+  min-width: 126px;
   height: 36px;
   padding: 0 10px;
   border-radius: 8px;
@@ -247,12 +255,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
 }
 
 .catalog-card__btn {
   background: #1d4ed8;
   border: none;
-  width: 100px;
+  min-width: 126px;
   height: 36px;
   padding: 0 10px;
   border-radius: 8px;
@@ -263,6 +272,7 @@
   justify-content: center;
   color: #fff;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .catalog-list.grid .catalog-card__action {

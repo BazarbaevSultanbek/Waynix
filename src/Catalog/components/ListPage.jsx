@@ -1,11 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import "../../utils/styles/Catalog.scss";
 import $api from "../../http/axios";
 import { useI18n } from "../../i18n/I18nProvider";
-import { translateCatalogDesc } from "../../i18n/catalogText";
+import {
+  translateCatalogDesc,
+  translateCatalogLocation,
+} from "../../i18n/catalogText";
+import { showNotification } from "@mantine/notifications";
+import getCookie from "../../utils/getCookie";
 
 const sortOptions = ["Default", "Hudud", "Mashhurlik", "Nomi"];
 
@@ -58,6 +63,7 @@ export default function ListPage({
   categoryKey,
 }) {
   const { t, language } = useI18n();
+  const navigate = useNavigate();
   const [submittedPlaces, setSubmittedPlaces] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedSort, setSelectedSort] = useState("Default");
@@ -165,6 +171,22 @@ export default function ListPage({
     if (item?.translations?.desc?.[language]) return item.translations.desc[language];
     return translateCatalogDesc(item.desc, language);
   };
+  const translateLocation = (item) => {
+    if (item?.translations?.location?.[language]) {
+      return item.translations.location[language];
+    }
+    return translateCatalogLocation(item.location, language);
+  };
+  const isLoggedIn = Boolean(getCookie("accessToken") || getCookie("currentUser"));
+  const requireLogin = () => {
+    if (isLoggedIn) return true;
+    showNotification({
+      title: t("banner.login"),
+      message: t("catalog.loginRequired"),
+      color: "orange",
+    });
+    return false;
+  };
 
   return (
     <>
@@ -270,7 +292,19 @@ export default function ListPage({
 
           <div className={`catalog-list ${viewMode}`}>
             {paged.map((item) => (
-              <article className="catalog-card" key={item.id}>
+              <article
+                className="catalog-card"
+                key={item.id}
+                role="button"
+                tabIndex={0}
+                onClick={() => navigate(`${basePath}/${item.id}`)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    navigate(`${basePath}/${item.id}`);
+                  }
+                }}
+              >
                 <div className="catalog-card__media">
                   <img src={item.image} alt={item.name} />
                   <span className="catalog-card__rating">★ {item.rating}</span>
@@ -280,14 +314,27 @@ export default function ListPage({
                   <h3 className="catalog-card__name">{item.name}</h3>
                   <p className="catalog-card__tag">{item.type}</p>
                   <p className="catalog-card__desc">{translateDesc(item)}</p>
-                  <p className="catalog-card__place">{t("catalog.location")}: {item.location}</p>
+                  <p className="catalog-card__place">
+                    {t("catalog.location")}: {translateLocation(item)}
+                  </p>
                 </div>
 
                 <div className="catalog-card__action">
-                  <button className="catalog-card__save" type="button">
+                  <button
+                    className="catalog-card__save"
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (!requireLogin()) return;
+                    }}
+                  >
                     🔖 {t("catalog.save")}
                   </button>
-                  <Link className="catalog-card__btn" to={`${basePath}/${item.id}`}>
+                  <Link
+                    className="catalog-card__btn"
+                    to={`${basePath}/${item.id}`}
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     {t("catalog.detail")}
                   </Link>
                 </div>
@@ -336,7 +383,7 @@ export default function ListPage({
                   <h4 className="popular-card__name">{item.name}</h4>
                   <p className="popular-card__desc">{item.desc}</p>
                   <div className="popular-card__bottom">
-                    <span className="popular-card__place">{item.location}</span>
+                    <span className="popular-card__place">{translateLocation(item)}</span>
                     <Link className="popular-card__link" to={`${basePath}/${item.id}`}>
                       {t("catalog.detail")} →
                     </Link>
