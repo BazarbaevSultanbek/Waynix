@@ -1,11 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Banner from "../../utils/banner/Banner";
 import Footer from "../../utils/footer/Footer";
 import "../../utils/styles/DetailPage.scss";
 import $api from "../../http/axios";
 import { useI18n } from "../../i18n/I18nProvider";
-import { translateCatalogDesc } from "../../i18n/catalogText";
+import {
+  translateCatalogDesc,
+  translateCatalogLocation,
+} from "../../i18n/catalogText";
 
 const API_ORIGIN =
   import.meta.env.VITE_API_ORIGIN || "https://waynix-server.vercel.app";
@@ -54,7 +57,10 @@ function StarLine({ rating }) {
 export default function DetailPage({ title, data, basePath, categoryKey }) {
   const { t, language } = useI18n();
   const { id } = useParams();
+  const navigate = useNavigate();
   const [submittedPlaces, setSubmittedPlaces] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [commentRating, setCommentRating] = useState(5);
   const merged = useMemo(
     () => [...submittedPlaces, ...data].map(toCardShape),
     [submittedPlaces, data]
@@ -82,6 +88,10 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
     };
   }, [categoryKey]);
 
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [id]);
+
   const nearby = useMemo(() => {
     if (!current) return [];
     return merged.filter((item) => item.id !== current.id).slice(0, 3);
@@ -104,10 +114,26 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
     );
   }
 
-  const activeImage = current.image;
+  const galleryImages =
+    Array.isArray(current.images) && current.images.length
+      ? current.images
+      : [current.image];
+  const activeImage = galleryImages[activeIndex] || current.image;
+  const showCarousel = galleryImages.length > 1;
   const localizedDesc =
     current?.translations?.desc?.[language] ||
     translateCatalogDesc(current.desc, language);
+  const localizedLocation = translateCatalogLocation(current.location, language);
+  const localizedAddress = translateCatalogLocation(current.address, language);
+  const prevImage = () =>
+    setActiveIndex((prev) =>
+      prev === 0 ? galleryImages.length - 1 : prev - 1
+    );
+  const nextImage = () =>
+    setActiveIndex((prev) =>
+      prev === galleryImages.length - 1 ? 0 : prev + 1
+    );
+  const dialPhone = `tel:${String(current.phone || "").replace(/\s+/g, "")}`;
 
   return (
     <>
@@ -115,17 +141,41 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
       <section className="detail-page">
         <div className="detail-wrap">
           <div className="detail-main">
+            <div className="detail-top-actions">
+              <button
+                className="back-btn"
+                type="button"
+                onClick={() => (window.history.length > 1 ? navigate(-1) : navigate(basePath))}
+              >
+                ← {t("catalog.back")}
+              </button>
+            </div>
             <div className="detail-title-card">
-              <h1>{current.name}</h1>
+              <div className="detail-title-head">
+                <h1>{current.name}</h1>
+                <button className="catalog-card__save detail-save-btn" type="button">
+                  🔖 {t("catalog.save")}
+                </button>
+              </div>
               <div className="detail-meta-row">
                 <span className="detail-type">{current.type}</span>
                 <span className="detail-rating">★ {current.rating}</span>
-                <span className="detail-location">📍 {current.location}, O'zbekiston</span>
+                <span className="detail-location">📍 {localizedLocation}, O'zbekiston</span>
               </div>
             </div>
 
             <div className="detail-gallery card">
               <img src={activeImage} alt={current.name} className="detail-main-image" />
+              {showCarousel && (
+                <>
+                  <button className="gallery-arrow left" type="button" onClick={prevImage}>
+                    ‹
+                  </button>
+                  <button className="gallery-arrow right" type="button" onClick={nextImage}>
+                    ›
+                  </button>
+                </>
+              )}
             </div>
 
             <div className="card">
@@ -145,28 +195,50 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
                 <span className="icon">📍</span>
                 <div>
                   <div className="label">{t("catalog.address")}</div>
-                  <div className="value">{current.address}</div>
+                  <div className="value">{localizedAddress}</div>
                 </div>
               </div>
               <div className="info-item">
                 <span className="icon">📞</span>
                 <div>
                   <div className="label">{t("catalog.phone")}</div>
-                  <div className="value link">{current.phone}</div>
+                  <a className="value link" href={dialPhone}>
+                    {current.phone}
+                  </a>
                 </div>
               </div>
 
               <div className="social-links">
-                <a href={current.socials.website}>{t("catalog.website")}</a>
-                <a href={current.socials.instagram}>{t("catalog.instagram")}</a>
-                <a href={current.socials.telegram}>{t("catalog.telegram")}</a>
-                <a href={current.socials.facebook}>{t("catalog.facebook")}</a>
+                <a href={current.socials.website || "#"} className="social-link site">
+                  <i className="fa-solid fa-globe"></i> {t("catalog.website")}
+                </a>
+                <a href={current.socials.instagram || "#"} className="social-link ig">
+                  <i className="fa-brands fa-instagram"></i> {t("catalog.instagram")}
+                </a>
+                <a href={current.socials.telegram || "#"} className="social-link tg">
+                  <i className="fa-brands fa-telegram"></i> {t("catalog.telegram")}
+                </a>
+                <a href={current.socials.facebook || "#"} className="social-link fb">
+                  <i className="fa-brands fa-facebook-f"></i> {t("catalog.facebook")}
+                </a>
               </div>
             </div>
 
             <div className="card review-card">
               <h3>{t("catalog.ratingComments")}</h3>
-              <div className="review-stars"><StarLine rating={current.rating} /></div>
+              <div className="review-stars interactive">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    type="button"
+                    className={`star-btn ${star <= commentRating ? "is-active" : ""}`}
+                    onClick={() => setCommentRating(star)}
+                    aria-label={`Rate ${star}`}
+                  >
+                    ★
+                  </button>
+                ))}
+              </div>
               <textarea placeholder={t("catalog.writeComment")} />
               <button className="send-btn" type="button">{t("catalog.send")}</button>
 

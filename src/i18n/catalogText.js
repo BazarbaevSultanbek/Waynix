@@ -218,3 +218,21 @@ export const translateCatalogDesc = (desc, language) => {
   if (language === "uz" || language === "kaa") return desc;
   return DESC_TRANSLATIONS[desc]?.[language] || desc;
 };
+
+export const LOCATION_TRANSLATIONS = {
+  Toshkent: { en: "Tashkent", ru: "Ташкент" },
+  "Toshkent shahri": { en: "Tashkent City", ru: "город Ташкент" },
+  "Tashkent City": { uz: "Toshkent shahri", ru: "город Ташкент" },
+  Samarqand: { en: "Samarkand", ru: "Самарканд" },
+  Nukus: { en: "Nukus", ru: "Нукус" },
+  "Nukus shahri": { en: "Nukus City", ru: "город Нукус" },
+  Buxoro: { en: "Bukhara", ru: "Бухара" },
+  Urganch: { en: "Urgench", ru: "Ургенч" },
+  "Ellikqala tumani": { en: "Ellikkala district", ru: "Элликкалинский район" },
+};
+
+export const translateCatalogLocation = (location, language) => {
+  if (!location) return "";
+  if (language === "kaa") return location;
+  return LOCATION_TRANSLATIONS[location]?.[language] || location;
+};
