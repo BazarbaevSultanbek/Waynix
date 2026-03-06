@@ -5,9 +5,19 @@ const baseSocials = {
   facebook: "#",
 };
 
+const fallbackGallery = [
+  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1470004914212-05527e49370b?q=80&w=1200&auto=format&fit=crop",
+];
+
 function place(data) {
+  const normalizedImages = Array.isArray(data.images) && data.images.length
+    ? data.images
+    : [data.image, ...fallbackGallery].filter(Boolean);
+
   return {
-    images: data.images || [data.image],
+    images: normalizedImages,
     fullDescription:
       data.fullDescription ||
       `${data.name} haqida batafsil ma'lumot. Ushbu joy ${data.location} hududida joylashgan bo'lib, foydalanuvchilar tomonidan yaxshi baholangan.`,
