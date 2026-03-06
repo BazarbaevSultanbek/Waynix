@@ -5,6 +5,8 @@ import Footer from "../../utils/footer/Footer";
 import "../../utils/styles/DetailPage.scss";
 import $api from "../../http/axios";
 import { useI18n } from "../../i18n/I18nProvider";
+import { showNotification } from "@mantine/notifications";
+import getCookie from "../../utils/getCookie";
 import {
   translateCatalogDesc,
   translateCatalogLocation,
@@ -61,6 +63,7 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
   const [submittedPlaces, setSubmittedPlaces] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [commentRating, setCommentRating] = useState(5);
+  const [commentText, setCommentText] = useState("");
   const merged = useMemo(
     () => [...submittedPlaces, ...data].map(toCardShape),
     [submittedPlaces, data]
@@ -134,6 +137,16 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
       prev === galleryImages.length - 1 ? 0 : prev + 1
     );
   const dialPhone = `tel:${String(current.phone || "").replace(/\s+/g, "")}`;
+  const isLoggedIn = Boolean(getCookie("accessToken") || getCookie("currentUser"));
+  const ensureAuth = () => {
+    if (isLoggedIn) return true;
+    showNotification({
+      title: t("banner.login"),
+      message: t("catalog.loginRequired"),
+      color: "orange",
+    });
+    return false;
+  };
 
   return (
     <>
@@ -153,7 +166,13 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
             <div className="detail-title-card">
               <div className="detail-title-head">
                 <h1>{current.name}</h1>
-                <button className="catalog-card__save detail-save-btn" type="button">
+                <button
+                  className="catalog-card__save detail-save-btn"
+                  type="button"
+                  onClick={() => {
+                    if (!ensureAuth()) return;
+                  }}
+                >
                   🔖 {t("catalog.save")}
                 </button>
               </div>
@@ -239,8 +258,24 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
                   </button>
                 ))}
               </div>
-              <textarea placeholder={t("catalog.writeComment")} />
-              <button className="send-btn" type="button">{t("catalog.send")}</button>
+              <textarea
+                placeholder={t("catalog.writeComment")}
+                value={commentText}
+                readOnly={!isLoggedIn}
+                onFocus={() => {
+                  if (!isLoggedIn) ensureAuth();
+                }}
+                onChange={(e) => setCommentText(e.target.value)}
+              />
+              <button
+                className="send-btn"
+                type="button"
+                onClick={() => {
+                  if (!ensureAuth()) return;
+                }}
+              >
+                {t("catalog.send")}
+              </button>
 
               <div className="comments">
                 <h4>{t("catalog.comments")} (3)</h4>
