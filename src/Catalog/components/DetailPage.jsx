@@ -184,17 +184,19 @@ export default function DetailPage({ title, data, basePath, categoryKey }) {
             </div>
 
             <div className="detail-gallery card">
-              <img src={activeImage} alt={current.name} className="detail-main-image" />
-              {showCarousel && (
-                <>
-                  <button className="gallery-arrow left" type="button" onClick={prevImage}>
-                    ‹
-                  </button>
-                  <button className="gallery-arrow right" type="button" onClick={nextImage}>
-                    ›
-                  </button>
-                </>
-              )}
+              <div className="detail-image-frame">
+                <img src={activeImage} alt={current.name} className="detail-main-image" />
+                {showCarousel && (
+                  <>
+                    <button className="gallery-arrow left" type="button" onClick={prevImage}>
+                      ‹
+                    </button>
+                    <button className="gallery-arrow right" type="button" onClick={nextImage}>
+                      ›
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
 
             <div className="card">
