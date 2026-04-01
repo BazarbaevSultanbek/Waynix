@@ -1,0 +1,383 @@
+.places-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.places-title-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.places-back {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(17, 17, 17, 0.8);
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+}
+
+.places-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #3b82f6;
+}
+
+.places-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #3b82f6;
+}
+
+.places-title-row h2 {
+  font-size: 26px;
+  font-weight: 800;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+.places-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.places-filter {
+  min-width: 360px;
+  max-width: 420px;
+  width: 100%;
+}
+
+.places-dropdown button,
+.places-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(17, 17, 17, 0.8);
+  color: #fff;
+}
+
+.places-dropdown {
+  position: relative;
+}
+
+.places-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 8px;
+  z-index: 10;
+  display: grid;
+  gap: 6px;
+}
+
+.places-dropdown-menu button {
+  background: transparent;
+  border: none;
+  padding: 8px 10px;
+  color: #9ca3af;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.places-dropdown-menu button.active {
+  background: #2563eb;
+  color: #fff;
+}
+
+.places-search input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  flex: 1;
+}
+
+.places-search button {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.places-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.places-action-group {
+  display: flex;
+  background: rgba(17, 17, 17, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.places-action-group button {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  display: grid;
+  place-items: center;
+}
+
+.places-action-group button.active {
+  background: #2563eb;
+  color: #fff;
+}
+
+.places-list {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.places-list.is-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.places-card {
+  display: grid;
+  grid-template-columns: 200px 1fr auto;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 26px;
+  background: rgba(17, 17, 17, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.places-card-image {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 140px;
+}
+
+.places-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.places-card-rating {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.places-card-body h3 {
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.places-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
+
+.places-card-body p {
+  font-size: 12px;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+.places-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.places-card-actions button {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(17, 17, 17, 0.8);
+  color: #9ca3af;
+  display: grid;
+  place-items: center;
+}
+
+.places-card-actions button.primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.places-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.places-pagination button {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(17, 17, 17, 0.8);
+  color: #fff;
+}
+
+.places-pagination button.active {
+  background: #2563eb;
+}
+
+.places-popular {
+  margin-bottom: 40px;
+}
+
+.places-popular-head h2 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+.places-popular-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.places-popular-card {
+  background: rgba(17, 17, 17, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.places-popular-image {
+  height: 140px;
+  overflow: hidden;
+}
+
+.places-popular-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.places-popular-rating {
+  position: absolute;
+  margin: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.places-popular-body {
+  padding: 12px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.places-popular-body h3 {
+  color: #fff;
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.places-popular-body div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.places-map {
+  background: rgba(17, 17, 17, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 32px;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.places-map-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background: radial-gradient(circle at 20% 20%, #fff 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.places-map-content {
+  position: relative;
+  text-align: center;
+  color: #9ca3af;
+}
+
+.places-map-content h3 {
+  color: #fff;
+  margin: 8px 0;
+}
+
+.places-map-content button {
+  margin-top: 12px;
+  background: #2563eb;
+  border: none;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 12px;
+}
+
+.places-empty {
+  text-align: center;
+  padding: 40px 0;
+  color: #6b7280;
+}
+
+@media (max-width: 900px) {
+  .places-card {
+    grid-template-columns: 1fr;
+  }
+
+  .places-actions {
+    margin-left: 0;
+  }
+}

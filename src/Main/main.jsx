@@ -25,6 +25,7 @@ import AboutUs from '../pages/AboutUs';
 import { LanguageProvider, useLanguage } from '../LanguageContext';
 import '../utils/styles/main.css';
 import { apiRequest } from '../utils/api';
+import WaynixHero from '../assets/waynix-hero.svg';
 
 const news = [
   {
@@ -261,12 +262,20 @@ function AppContent() {
       {/* Navbar */}
       <nav className="main-nav">
         <div className="main-nav-inner">
-          <div className="nav-brand">
+          <button
+            type="button"
+            onClick={() => {
+              setCurrentPage('home');
+              setIsDetailView(false);
+              setDirectPlaceDetail(null);
+            }}
+            className="nav-brand"
+          >
             <div className="nav-brand-icon">
               <Globe className="icon-sm icon-white" />
             </div>
             <span className="nav-brand-text">Waynix</span>
-          </div>
+          </button>
           
           <div className="nav-links">
             <button 
@@ -463,10 +472,9 @@ function AppContent() {
                     className="hero-image-wrap"
                   >
                     <img 
-                      src="https://storage.googleapis.com/static.antigravity.dev/bekn3r42imguiqkktc36it/input_file_0.png" 
+                      src={WaynixHero} 
                       alt="Waynix Hero" 
                       className="hero-image"
-                      referrerPolicy="no-referrer"
                     />
                     {/* Decorative Glow */}
                     <div className="hero-glow" />

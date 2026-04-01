@@ -1,0 +1,60 @@
+<svg viewBox="-20 -20 240 240" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <!-- Main orange gradient (darker) -->
+    <radialGradient id="mainGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffb347"/>
+      <stop offset="60%" stop-color="#ff8c1a"/>
+      <stop offset="100%" stop-color="#d65a00"/>
+    </radialGradient>
+
+    <!-- Inner soft light -->
+    <radialGradient id="innerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff3d6" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Outer glow -->
+    <filter id="blurGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Soft outer glow -->
+  <g filter="url(#blurGlow)" opacity="0.45">
+    <circle cx="100" cy="100" r="68" fill="#ff6a00"/>
+  </g>
+
+  <!-- DROP SHAPE -->
+  <defs>
+    <g id="drop">
+      <path
+        d="M 0 -60
+           C -38 -60 -60 -32 -60 0
+           C -60 35 -22 64 0 80
+           C 22 64 60 35 60 0
+           C 60 -32 38 -60 0 -60 Z"
+        fill="url(#mainGrad)"
+      />
+      <path
+        d="M 0 -42
+           C -24 -42 -38 -24 -38 -2
+           C -38 18 -16 36 0 46
+           C 16 36 38 18 38 -2
+           C 38 -24 24 -42 0 -42 Z"
+        fill="url(#innerGlow)"
+      />
+    </g>
+  </defs>
+
+  <!-- 4 directions -->
+  <use href="#drop" transform="translate(100 38) scale(0.82)"/>
+  <use href="#drop" transform="translate(100 162) rotate(180) scale(0.82)"/>
+  <use href="#drop" transform="translate(38 100) rotate(-90) scale(0.82)"/>
+  <use href="#drop" transform="translate(162 100) rotate(90) scale(0.82)"/>
+
+</svg>

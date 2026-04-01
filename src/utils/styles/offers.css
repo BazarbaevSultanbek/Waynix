@@ -1,0 +1,230 @@
+.offers-root {
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.offers-hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.offers-subtitle {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.offers-title {
+  font-size: clamp(32px, 6vw, 64px);
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.offers-title span {
+  color: #3b82f6;
+}
+
+.offers-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: rgba(17, 17, 17, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px;
+  border-radius: 18px;
+}
+
+.offers-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 14px;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.offers-tab-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.offers-tab.is-active {
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.3);
+}
+
+.offers-premium {
+  background: rgba(17, 17, 17, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+  padding: 24px;
+}
+
+.offers-premium-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.offers-premium-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.offers-premium-icon {
+  width: 16px;
+  height: 16px;
+  color: #3b82f6;
+}
+
+.offers-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #93c5fd;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.offers-link-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.offers-premium-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.offers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.offers-row {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.offers-row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.offers-row-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(17, 17, 17, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #93c5fd;
+}
+
+.offers-row-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.offers-card {
+  background: rgba(17, 17, 17, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.2s ease, border 0.2s ease;
+}
+
+.offers-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.offers-card-image {
+  height: 120px;
+  overflow: hidden;
+}
+
+.offers-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.offers-card-body {
+  padding: 12px;
+}
+
+.offers-card-title {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.offers-card-meta {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #6b7280;
+  margin: 0;
+}
+
+.offers-empty {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 12px;
+  padding: 16px 0;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .offers-tabs {
+    justify-content: flex-start;
+  }
+
+  .offers-premium {
+    border-radius: 24px;
+  }
+}
