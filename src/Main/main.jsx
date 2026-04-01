@@ -24,6 +24,7 @@ import AuthModal from '../components/AuthModal';
 import AboutUs from '../pages/AboutUs';
 import { LanguageProvider, useLanguage } from '../LanguageContext';
 import '../utils/styles/main.css';
+import { apiRequest } from '../utils/api';
 
 const news = [
   {
@@ -138,6 +139,7 @@ function AppContent() {
   const [currentPage, setCurrentPage] = useState('home');
   const [directPlaceDetail, setDirectPlaceDetail] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const languages = [
@@ -225,11 +227,27 @@ function AppContent() {
     }
   ];
 
+  const refreshSession = () => {
+    apiRequest('/me')
+      .then((res) => {
+        setIsLoggedIn(true);
+        setCurrentUser(res?.user || null);
+      })
+      .catch(() => {
+        setIsLoggedIn(false);
+        setCurrentUser(null);
+      });
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentNews((prev) => (prev + 1) % news.length);
     }, 5000);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    refreshSession();
   }, []);
 
   const currentCategory = categoryExplorerData.find(c => c.id === activeCategory);
@@ -303,7 +321,7 @@ function AppContent() {
                 onClick={() => setCurrentPage('profile')}
                 className="profile-btn"
               >
-                <img src="https://picsum.photos/seed/user123/100/100" alt="Profile" className="profile-img" />
+                <img src={currentUser?.avatar || "https://picsum.photos/seed/user123/100/100"} alt="Profile" className="profile-img" />
               </button>
             ) : (
               <button 
@@ -347,9 +365,15 @@ function AppContent() {
               exit={{ opacity: 0, scale: 0.95 }}
             >
               <Profile 
+                user={currentUser}
                 onLogout={() => {
-                  setIsLoggedIn(false);
-                  setCurrentPage('home');
+                  apiRequest('/logout', { method: 'POST' })
+                    .catch(() => {})
+                    .finally(() => {
+                      setIsLoggedIn(false);
+                      setCurrentUser(null);
+                      setCurrentPage('home');
+                    });
                 }}
                 onBack={() => setCurrentPage('home')}
                 onAddPlace={() => setCurrentPage('add-place')}
@@ -801,7 +825,7 @@ function AppContent() {
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
         onSuccess={() => {
-          setIsLoggedIn(true);
+          refreshSession();
           setIsAuthModalOpen(false);
         }}
       />

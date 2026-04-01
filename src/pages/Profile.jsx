@@ -10,7 +10,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '../LanguageContext'
 
-export default function Profile({ onLogout, onBack, onAddPlace }) {
+export default function Profile({ onLogout, onBack, onAddPlace, user }) {
   const { t } = useLanguage()
   const [role, setRole] = useState('user')
   const [isEditing, setIsEditing] = useState(false)
@@ -23,6 +23,20 @@ export default function Profile({ onLogout, onBack, onAddPlace }) {
     bio: 'Sayohat ishqibozi',
     avatar: 'https://picsum.photos/seed/user123/400/400'
   })
+
+  React.useEffect(() => {
+    if (!user) return
+    setUserData((prev) => ({
+      ...prev,
+      name: user.name || prev.name,
+      surname: user.lastName || prev.surname,
+      phone: user.phone_number || prev.phone,
+      region: user.location || prev.region,
+      bio: user.bio || prev.bio,
+      avatar: user.avatar || prev.avatar,
+    }))
+    if (user.role) setRole(user.role)
+  }, [user])
 
   return (
     <div className="w-full max-w-5xl mx-auto px-4 pt-4 md:pt-8">

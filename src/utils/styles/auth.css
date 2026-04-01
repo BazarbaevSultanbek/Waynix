@@ -144,6 +144,29 @@
   background: var(--auth-blue-700);
 }
 
+.auth-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.auth-error {
+  font-size: 10px;
+  font-weight: 700;
+  color: #f87171;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.auth-info {
+  font-size: 10px;
+  font-weight: 700;
+  color: #93c5fd;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
 .auth-primary-icon {
   width: 14px;
   height: 14px;
